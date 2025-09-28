@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { graphql } from "./gql";
 
-export const LIST_LEMMAS = gql`
+export const LIST_LEMMAS = graphql(`
   query ListLemmas {
     lemmata {
       Title
@@ -8,4 +8,4 @@ export const LIST_LEMMAS = gql`
       documentId
     }
   }
-`;
+`);
