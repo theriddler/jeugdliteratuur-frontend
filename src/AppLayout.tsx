@@ -15,7 +15,7 @@ export const AppLayout = () => {
               Jeugd Literatuur
             </Link>
           </NavbarBrand>
-          <Nav className="me-auto" navbar>
+          <Nav className="me-auto flex-row gap-3" navbar>
             {data?.levels?.map((l) => (
               <NavItem>
                 <Link to={`/groep/${l?.documentId}`}>
