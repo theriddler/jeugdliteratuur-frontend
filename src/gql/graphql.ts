@@ -227,7 +227,8 @@ export type JsonFilterInput = {
 
 export type Lemma = {
   __typename?: 'Lemma';
-  Details?: Maybe<Scalars['String']['output']>;
+  Data?: Maybe<Scalars['JSON']['output']>;
+  Description?: Maybe<Scalars['String']['output']>;
   PDF?: Maybe<UploadFile>;
   Title?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -244,7 +245,8 @@ export type LemmaEntityResponseCollection = {
 };
 
 export type LemmaFiltersInput = {
-  Details?: InputMaybe<StringFilterInput>;
+  Data?: InputMaybe<JsonFilterInput>;
+  Description?: InputMaybe<StringFilterInput>;
   Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<LemmaFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
@@ -257,7 +259,8 @@ export type LemmaFiltersInput = {
 };
 
 export type LemmaInput = {
-  Details?: InputMaybe<Scalars['String']['input']>;
+  Data?: InputMaybe<Scalars['JSON']['input']>;
+  Description?: InputMaybe<Scalars['String']['input']>;
   PDF?: InputMaybe<Scalars['ID']['input']>;
   Title?: InputMaybe<Scalars['String']['input']>;
   level?: InputMaybe<Scalars['ID']['input']>;
@@ -1144,7 +1147,7 @@ export type LemmasByLevelQueryVariables = Exact<{
 }>;
 
 
-export type LemmasByLevelQuery = { __typename?: 'Query', lemmata: Array<{ __typename?: 'Lemma', Title?: string | null, Details?: string | null, documentId: string } | null> };
+export type LemmasByLevelQuery = { __typename?: 'Query', lemmata: Array<{ __typename?: 'Lemma', Title?: string | null, Description?: string | null, Data?: any | null, documentId: string } | null> };
 
 export type LevelsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1157,6 +1160,6 @@ export type IntroductionQueryVariables = Exact<{ [key: string]: never; }>;
 export type IntroductionQuery = { __typename?: 'Query', introduction?: { __typename?: 'Introduction', Text?: string | null } | null };
 
 
-export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Details"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
+export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Description"}},{"kind":"Field","name":{"kind":"Name","value":"Data"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
 export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Description"}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;
 export const IntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Text"}}]}}]}}]} as unknown as DocumentNode<IntroductionQuery, IntroductionQueryVariables>;

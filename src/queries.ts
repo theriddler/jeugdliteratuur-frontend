@@ -4,7 +4,8 @@ export const LEMMAS_BY_LEVEL = graphql(`
   query LemmasByLevel($filters: LemmaFiltersInput) {
     lemmata(filters: $filters) {
       Title
-      Details
+      Description
+      Data
       documentId
     }
   }
