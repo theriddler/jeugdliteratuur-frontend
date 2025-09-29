@@ -9,7 +9,7 @@ export const AppLayout = () => {
   return (
     <main>
       <div>
-        <Navbar>
+        <Navbar color='dark'>
           <NavbarBrand>
             <Link to='/'>
               Jeugd Literatuur
@@ -26,7 +26,7 @@ export const AppLayout = () => {
           </Nav>
         </Navbar>
       </div>
-      <Container>
+      <Container className="mt-3">
         <Outlet />
       </Container>
     </main>

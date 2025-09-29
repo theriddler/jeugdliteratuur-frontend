@@ -1,3 +1,8 @@
+nav * {
+  color: white !important;
+  text-decoration: none !important;
+}
+
 a {
   text-decoration: none;
   color: black;
