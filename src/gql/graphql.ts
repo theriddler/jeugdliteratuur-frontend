@@ -1151,6 +1151,12 @@ export type LevelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type LevelsQuery = { __typename?: 'Query', levels: Array<{ __typename?: 'Level', documentId: string, Title?: string | null, Description?: string | null } | null> };
 
+export type IntroductionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IntroductionQuery = { __typename?: 'Query', introduction?: { __typename?: 'Introduction', Text?: string | null } | null };
+
 
 export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Details"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
 export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Description"}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;
+export const IntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Text"}}]}}]}}]} as unknown as DocumentNode<IntroductionQuery, IntroductionQueryVariables>;

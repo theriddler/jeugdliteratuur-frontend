@@ -16,10 +16,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n": typeof types.LemmasByLevelDocument,
     "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n": typeof types.LevelsDocument,
+    "\n  query Introduction {\n    introduction {\n      Text\n    }\n  }\n": typeof types.IntroductionDocument,
 };
 const documents: Documents = {
     "\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n": types.LemmasByLevelDocument,
     "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n": types.LevelsDocument,
+    "\n  query Introduction {\n    introduction {\n      Text\n    }\n  }\n": types.IntroductionDocument,
 };
 
 /**
@@ -44,6 +46,10 @@ export function graphql(source: "\n  query LemmasByLevel($filters: LemmaFiltersI
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n"): (typeof documents)["\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Introduction {\n    introduction {\n      Text\n    }\n  }\n"): (typeof documents)["\n  query Introduction {\n    introduction {\n      Text\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

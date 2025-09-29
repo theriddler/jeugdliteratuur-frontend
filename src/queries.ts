@@ -19,3 +19,11 @@ export const LEVELS = graphql(`
     }
   }
 `)
+
+export const INTRODUCTION = graphql(`
+  query Introduction {
+    introduction {
+      Text
+    }
+  }
+`)
