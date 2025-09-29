@@ -232,6 +232,7 @@ export type Lemma = {
   Title?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   documentId: Scalars['ID']['output'];
+  level?: Maybe<Level>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -248,6 +249,7 @@ export type LemmaFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<LemmaFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
+  level?: InputMaybe<LevelFiltersInput>;
   not?: InputMaybe<LemmaFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<LemmaFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -258,6 +260,7 @@ export type LemmaInput = {
   Details?: InputMaybe<Scalars['String']['input']>;
   PDF?: InputMaybe<Scalars['ID']['input']>;
   Title?: InputMaybe<Scalars['String']['input']>;
+  level?: InputMaybe<Scalars['ID']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -272,21 +275,21 @@ export type Level = {
   Title?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   documentId: Scalars['ID']['output'];
-  lemmas: Array<Maybe<Lemma>>;
-  lemmas_connection?: Maybe<LemmaRelationResponseCollection>;
+  lemmata: Array<Maybe<Lemma>>;
+  lemmata_connection?: Maybe<LemmaRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type LevelLemmasArgs = {
+export type LevelLemmataArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-export type LevelLemmas_ConnectionArgs = {
+export type LevelLemmata_ConnectionArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -304,7 +307,7 @@ export type LevelFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<LevelFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
-  lemmas?: InputMaybe<LemmaFiltersInput>;
+  lemmata?: InputMaybe<LemmaFiltersInput>;
   not?: InputMaybe<LevelFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<LevelFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -314,7 +317,7 @@ export type LevelFiltersInput = {
 export type LevelInput = {
   Description?: InputMaybe<Scalars['String']['input']>;
   Title?: InputMaybe<Scalars['String']['input']>;
-  lemmas?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  lemmata?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -1136,10 +1139,18 @@ export type UsersPermissionsUserRelationResponseCollection = {
   nodes: Array<UsersPermissionsUser>;
 };
 
-export type ListLemmasQueryVariables = Exact<{ [key: string]: never; }>;
+export type LemmasByLevelQueryVariables = Exact<{
+  filters?: InputMaybe<LemmaFiltersInput>;
+}>;
 
 
-export type ListLemmasQuery = { __typename?: 'Query', lemmata: Array<{ __typename?: 'Lemma', Title?: string | null, Details?: string | null, documentId: string } | null> };
+export type LemmasByLevelQuery = { __typename?: 'Query', lemmata: Array<{ __typename?: 'Lemma', Title?: string | null, Details?: string | null, documentId: string } | null> };
+
+export type LevelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const ListLemmasDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ListLemmas"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Details"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}}]}}]}}]} as unknown as DocumentNode<ListLemmasQuery, ListLemmasQueryVariables>;
+export type LevelsQuery = { __typename?: 'Query', levels: Array<{ __typename?: 'Level', documentId: string, Title?: string | null, Description?: string | null } | null> };
+
+
+export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Details"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
+export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Description"}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;

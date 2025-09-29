@@ -14,10 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n  query ListLemmas {\n    lemmata {\n      Title\n      Details\n      documentId\n    }\n  }\n": typeof types.ListLemmasDocument,
+    "\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n": typeof types.LemmasByLevelDocument,
+    "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n": typeof types.LevelsDocument,
 };
 const documents: Documents = {
-    "\n  query ListLemmas {\n    lemmata {\n      Title\n      Details\n      documentId\n    }\n  }\n": types.ListLemmasDocument,
+    "\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n": types.LemmasByLevelDocument,
+    "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n": types.LevelsDocument,
 };
 
 /**
@@ -37,7 +39,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query ListLemmas {\n    lemmata {\n      Title\n      Details\n      documentId\n    }\n  }\n"): (typeof documents)["\n  query ListLemmas {\n    lemmata {\n      Title\n      Details\n      documentId\n    }\n  }\n"];
+export function graphql(source: "\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n"): (typeof documents)["\n  query LemmasByLevel($filters: LemmaFiltersInput) {\n    lemmata(filters: $filters) {\n      Title\n      Details\n      documentId\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n"): (typeof documents)["\n  query Levels {\n    levels {\n      documentId\n      Title\n      Description\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -1,7 +1,10 @@
+import { useQuery } from "@apollo/client";
 import { Link, Outlet } from "react-router";
-import { Container, Nav, Navbar, NavbarBrand, NavItem, NavLink } from "reactstrap";
+import { Container, Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
+import { LEVELS } from "./queries";
 
 export const AppLayout = () => {
+  const { data } = useQuery(LEVELS);
 
   return (
     <main>
@@ -13,9 +16,13 @@ export const AppLayout = () => {
             </Link>
           </NavbarBrand>
           <Nav className="me-auto" navbar>
-            <NavItem>
-              <NavLink href="/lemmas/">Lemmas</NavLink>
-            </NavItem>
+            {data?.levels?.map((l) => (
+              <NavItem>
+                <Link to={`/groep/${l?.documentId}`}>
+                  {l?.Title}
+                </Link>
+              </NavItem>
+            ))}
           </Nav>
         </Navbar>
       </div>
