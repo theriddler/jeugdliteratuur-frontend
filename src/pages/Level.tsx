@@ -10,7 +10,7 @@ export const Level = () => {
   const { data, loading } = useQuery(LEMMAS_BY_LEVEL, {
     variables: {
       filters: {
-        level: {
+        niveau: {
           documentId: {
             eq: levelId
           }

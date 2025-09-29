@@ -13,8 +13,6 @@ export const Lemma = () => {
     }
   });
 
-  console.log(data?.lemma?.Data)
-
   return (
     <div>
       {loading && (
@@ -25,16 +23,18 @@ export const Lemma = () => {
       <Row>
         <Col xs={12}>
           <div>
-            <h4>{data?.lemma?.Title}</h4>
+            <h4>{data?.lemma?.titel}</h4>
           </div>
-          <div>
-            {data?.lemma?.Description}
-          </div>
+          {data?.lemma?.beschrijving && (
+            <div>
+              {data?.lemma?.beschrijving}
+            </div>
+          )}
         </Col>
         <Col xs={12}>
           <div>
-            {data?.lemma?.Data && (
-              <BlocksRenderer content={data?.lemma?.Data} />
+            {data?.lemma?.hetVerhaal && (
+              <BlocksRenderer content={data?.lemma?.hetVerhaal} />
             )}
           </div>
         </Col>

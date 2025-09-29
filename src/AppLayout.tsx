@@ -19,7 +19,7 @@ export const AppLayout = () => {
             {data?.levels?.map((l) => (
               <NavItem>
                 <Link to={`/groep/${l?.documentId}`}>
-                  {l?.Title}
+                  {l?.title}
                 </Link>
               </NavItem>
             ))}

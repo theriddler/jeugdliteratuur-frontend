@@ -3,17 +3,17 @@ import { Lemma } from "../gql/graphql";
 import { Link } from "react-router";
 
 export const LemmaOverview = (props: {
-  lemma: Lemma | null
+  lemma: Omit<Partial<Lemma>, 'afbeelding'> | null
 }) => {
 
   return (
     <Card>
       <CardHeader>
-        {props.lemma?.Title}
+        {props.lemma?.titel}
       </CardHeader>
       <CardBody>
         <div>
-          {props.lemma?.Description}
+          {props.lemma?.beschrijving}
         </div>
         <div>
           <Link to={`/lemma/${props.lemma?.documentId}`}>
