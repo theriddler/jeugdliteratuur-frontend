@@ -1,5 +1,15 @@
 import { graphql } from "./gql";
 
+export const LEMMA = graphql(`
+  query Lemma($documentId: ID!) {
+    lemma(documentId: $documentId) {
+      Title
+      Description
+      Data
+    }
+  }
+`);
+
 export const LEMMAS_BY_LEVEL = graphql(`
   query LemmasByLevel($filters: LemmaFiltersInput) {
     lemmata(filters: $filters) {
