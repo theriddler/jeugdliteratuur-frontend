@@ -11,7 +11,9 @@ export const Homepage = () => {
       <Col>
         <div>
           <h5>Homepage</h5>
-          <BlocksRenderer content={data?.introduction?.Data} />
+          {data?.introduction?.Data && (
+            <BlocksRenderer content={data?.introduction?.Data} />
+          )}
         </div>
       </Col>
     </Row>
