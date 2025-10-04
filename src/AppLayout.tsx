@@ -1,34 +1,37 @@
-import { useQuery } from "@apollo/client";
-import { Link, Outlet } from "react-router";
-import { Container, Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
-import { LEVELS } from "./queries";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 
 export const AppLayout = () => {
-  const { data } = useQuery(LEVELS);
+  const [ isSidebarOpen, setSidebarOpen ] = useState(false);
+  const location = useLocation();
+
+  // Close sidebar on route change on mobile
+  useEffect(() => {
+    if (isSidebarOpen) {
+      setSidebarOpen(false);
+    }
+  }, [ isSidebarOpen, location ]);
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
-    <main>
-      <div>
-        <Navbar color='dark'>
-          <NavbarBrand>
-            <Link to='/'>
-              Jeugd Literatuur
-            </Link>
-          </NavbarBrand>
-          <Nav className="me-auto flex-row gap-3" navbar>
-            {data?.levels?.map((l) => (
-              <NavItem>
-                <Link to={`/groep/${l?.documentId}`}>
-                  {l?.title}
-                </Link>
-              </NavItem>
-            ))}
-          </Nav>
-        </Navbar>
+    <div className="app-layout">
+      {/* Mobile-only Overlay */}
+      <div
+        className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`}
+        onClick={toggleSidebar}
+      ></div>
+      <div className={`sidebar-wrapper ${isSidebarOpen ? 'open' : ''}`}>
+        <Sidebar />
       </div>
-      <Container className="mt-3">
-        <Outlet />
-      </Container>
-    </main>
-  )
-}
+      <div className="main-content">
+        <Header />
+        <main className="content-area">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+};

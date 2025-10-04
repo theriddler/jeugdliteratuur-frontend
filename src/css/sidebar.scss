@@ -1,0 +1,38 @@
+/* --- Sidebar Styles --- */
+.sidebar {
+  // width: 200px;
+  white-space: nowrap;
+  height: 100vh;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.sidebar-nav-group-header{
+  color: var(--text-light);
+  padding: 0 0.5rem;
+  font-weight: 600;
+}

@@ -1,13 +1,14 @@
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import './App.css';
+import './css/App.scss';
+import './css/sidebar.scss';
 import { AppLayout } from "./AppLayout";
 import { Level } from "./pages/Level";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: "https://renowned-chocolate-b2365884fe.strapiapp.com/graphql" }),
+  link: new HttpLink({ uri: "https://localhost:0/graphql" }),
   cache: new InMemoryCache(),
 });
 
