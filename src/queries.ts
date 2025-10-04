@@ -1,59 +1,81 @@
 import { graphql } from "./gql";
 
 export const LEMMA = graphql(`
-  query Lemma($documentId: ID!) {
-    lemma(documentId: $documentId) {
-      documentId
-      titel
-      beschrijving
-      auteurVoornaam
-      auterAchternaam
-      jaar
-      afbeelding {
-        name
-        width
-        height
-        provider
-        provider_metadata
-        url
-      }
-      hetVerhaal
-      motieven
-      doelgroep
-      analyse
-      lessuggesties
-      kerndoelen
-      extra_data
-      bronnen
-      opstaptitels {
-        opstaptitels {
-          documentId
+  query Lemma($id: ID!) {
+    lemma(id: $id) {
+      data {
+        id
+        attributes{
           titel
-          beschrijving
-          auteurVoornaam
-          auterAchternaam
+          de_kern
+          auteur_voornaam
+          auter_achternaam
           jaar
+          afbeelding {
+            data{
+              id
+              attributes{
+                name
+                width
+                height
+                provider
+                provider_metadata
+                url
+              }
+            }
+          }
+          het_verhaal
+          motieven
+          doelgroep
+          analyse
+          lessuggesties
+          kerndoelen
+          bronnen
+          opstaptitels {
+            data{
+              id
+              attributes{
+                titel
+                de_kern
+                auteur_voornaam
+                auter_achternaam
+                jaar
+              }
+            }
+          }
+          opstaptitels_extern
+          verder_lezens {
+            data{
+              id
+              attributes{
+                titel
+                de_kern
+                auteur_voornaam
+                auter_achternaam
+                jaar
+              }
+            }
+          }
+          verder_lezen_extern
+          niveau {
+            data{
+              id
+              attributes{
+                titel
+                beschrijving
+              }
+            }
+          }
+          tags {
+            data{
+              id
+              attributes{
+                titel
+                beschrijving
+              }
+            }
+          }
         }
-      }
-      opstaptitels_extern
-      verder_lezen {
-        documentId
-        titel
-        beschrijving
-        auteurVoornaam
-        auterAchternaam
-        jaar
-      }
-      verder_lezen_extern
-      niveau {
-        title
-        documentId
-        description
-      }
-      tags {
-        documentId
-        titel
-        beschrijving
       }
     }
   }
@@ -62,19 +84,28 @@ export const LEMMA = graphql(`
 export const LEMMAS_BY_LEVEL = graphql(`
   query LemmasByLevel($filters: LemmaFiltersInput) {
     lemmata(filters: $filters) {
-      documentId
-      titel
-      beschrijving
-      auteurVoornaam
-      auterAchternaam
-      jaar
-      afbeelding {
-        name
-        width
-        height
-        provider
-        provider_metadata
-        url
+      data{
+        id
+        attributes{
+          titel
+          de_kern
+          auteur_voornaam
+          auter_achternaam
+          jaar
+          afbeelding {
+            data{
+              id
+              attributes{
+                name
+                width
+                height
+                provider
+                provider_metadata
+                url
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -82,18 +113,27 @@ export const LEMMAS_BY_LEVEL = graphql(`
 
 export const LEVELS = graphql(`
   query Levels {
-    levels {
-      documentId
-      title
-      description
+    niveaus {
+      data{
+        id
+        attributes{
+          titel
+          beschrijving
+        }
+      }
     }
   }
 `)
 
 export const INTRODUCTION = graphql(`
   query Introduction {
-    introduction {
-      Data
+    inleiding {
+      data{
+        id
+        attributes{
+          tekst
+        }
+      }
     }
   }
 `)

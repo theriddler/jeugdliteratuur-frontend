@@ -14,8 +14,8 @@ const Sidebar = () => {
       <nav className="sidebar-nav">
         {/* {data?.levels.map((level) => (
           <NavLink
-            key={level?.documentId}
-            to={`/groep/${level?.documentId}`}
+            key={level?.id}
+            to={`/groep/${level?.id}`}
             className="sidebar-app-nav-link"
           >
             {level?.title}

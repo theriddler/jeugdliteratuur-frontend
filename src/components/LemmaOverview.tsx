@@ -1,26 +1,29 @@
 import { Link } from "react-router";
 import { Card, CardBody } from "reactstrap";
-import { Lemma } from "../gql/graphql";
+import { LemmaEntity } from "../gql/graphql";
 
 export const LemmaOverview = (props: {
-  lemma: Omit<Partial<Lemma>, 'afbeelding'> | null
+  lemma: LemmaEntity | undefined
 }) => {
+
+  if (!props.lemma) return null;
+  const { id, attributes } = props.lemma;
 
   return (
     <Card>
       <CardBody>
         <div className="fw-bold">
-          {props.lemma?.titel} ({props.lemma?.jaar})
+          {attributes?.titel} ({attributes?.jaar})
         </div>
         <div className="text-secondary">
-          {props.lemma?.auteurVoornaam} {props.lemma?.auterAchternaam}
+          {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
         </div>
         <hr />
         <div>
-          {props.lemma?.beschrijving}
+          {attributes?.de_kern}
         </div>
         <div className="mt-3">
-          <Link to={`/lemma/${props.lemma?.documentId}`}>
+          <Link to={`/lemma/${id}`}>
             View
           </Link>
         </div>

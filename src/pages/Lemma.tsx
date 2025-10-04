@@ -9,9 +9,13 @@ export const Lemma = () => {
 
   const { data, loading } = useQuery(LEMMA, {
     variables: {
-      documentId: lemmaId ?? ''
+      id: lemmaId ?? ''
     }
   });
+
+  if (!data?.lemma?.data) return null;
+
+  const { attributes } = data.lemma.data;
 
   return (
     <div>
@@ -25,62 +29,62 @@ export const Lemma = () => {
           <div className="lemma-header">
             <div className="d-flex gap-3 align-items-end">
               <div>
-                <h4>{data?.lemma?.titel} ({data?.lemma?.jaar})</h4>
+                <h4>{attributes?.titel} ({attributes?.jaar})</h4>
               </div>
               <div className="text-secondary">
-                {data?.lemma?.auteurVoornaam} {data?.lemma?.auterAchternaam}
+                {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
               </div>
             </div>
             <div className="mt-3">
-              {data?.lemma?.beschrijving}
+              {attributes?.de_kern}
             </div>
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Motieven</h5>
-            {data?.lemma?.motieven && (
-              <BlocksRenderer content={data?.lemma?.motieven} />
+            {attributes?.motieven && (
+              <BlocksRenderer content={attributes?.motieven} />
             )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Doelgroep</h5>
-            {data?.lemma?.doelgroep && (
-              <BlocksRenderer content={data?.lemma?.doelgroep} />
+            {attributes?.doelgroep && (
+              <BlocksRenderer content={attributes?.doelgroep} />
             )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Het verhaal</h5>
-            {data?.lemma?.hetVerhaal && (
-              <BlocksRenderer content={data?.lemma?.hetVerhaal} />
+            {attributes?.het_verhaal && (
+              <BlocksRenderer content={attributes?.het_verhaal} />
             )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Analyse en interpretatie</h5>
-            {data?.lemma?.analyse && (
-              <BlocksRenderer content={data?.lemma?.analyse} />
+            {attributes?.analyse && (
+              <BlocksRenderer content={attributes?.analyse} />
             )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Didactische vragen en lessuggesties</h5>
-            {data?.lemma?.lessuggesties && (
-              <BlocksRenderer content={data?.lemma?.lessuggesties} />
+            {attributes?.lessuggesties && (
+              <BlocksRenderer content={attributes?.lessuggesties} />
             )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Kerndoelen Nederlands</h5>
-            {data?.lemma?.kerndoelen && (
-              <BlocksRenderer content={data?.lemma?.kerndoelen} />
+            {attributes?.kerndoelen && (
+              <BlocksRenderer content={attributes?.kerndoelen} />
             )}
           </div>
         </Col>

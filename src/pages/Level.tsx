@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Col, Row, Spinner } from "reactstrap";
 import { LEMMAS_BY_LEVEL } from "../queries";
 import { LemmaOverview } from "../components/LemmaOverview";
+import { LemmaEntity } from "../gql/graphql";
 
 export const Level = () => {
   const { levelId } = useParams();
@@ -11,7 +12,7 @@ export const Level = () => {
     variables: {
       filters: {
         niveau: {
-          documentId: {
+          id: {
             eq: levelId
           }
         }
@@ -27,9 +28,9 @@ export const Level = () => {
         </div>
       )}
       <Row>
-        {data?.lemmata?.map(l => (
+        {data?.lemmata?.data?.map(l => (
           <Col xs={12} md={4}>
-            <LemmaOverview lemma={l} />
+            <LemmaOverview lemma={l as LemmaEntity} />
           </Col>
         ))}
       </Row>

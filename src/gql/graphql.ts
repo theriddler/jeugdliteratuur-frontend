@@ -18,6 +18,8 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: { input: any; output: any; }
 };
 
 export type BooleanFilterInput = {
@@ -70,11 +72,6 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-export type DeleteMutationResponse = {
-  __typename?: 'DeleteMutationResponse';
-  documentId: Scalars['ID']['output'];
-};
-
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']['input']>;
   caption?: InputMaybe<Scalars['String']['input']>;
@@ -106,33 +103,41 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = I18NLocale | Introduction | Lemma | Level | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Tag | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = I18NLocale | Inleiding | Lemma | Niveau | OverHetProject | Samenwerken | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
   code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type I18NLocaleEntity = {
+  __typename?: 'I18NLocaleEntity';
+  attributes?: Maybe<I18NLocale>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type I18NLocaleEntityResponse = {
+  __typename?: 'I18NLocaleEntityResponse';
+  data?: Maybe<I18NLocaleEntity>;
 };
 
 export type I18NLocaleEntityResponseCollection = {
   __typename?: 'I18NLocaleEntityResponseCollection';
-  nodes: Array<I18NLocale>;
-  pageInfo: Pagination;
+  data: Array<I18NLocaleEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type I18NLocaleFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<I18NLocaleFiltersInput>>>;
   code?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<I18NLocaleFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<I18NLocaleFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
@@ -161,6 +166,30 @@ export type IdFilterInput = {
   startsWith?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type Inleiding = {
+  __typename?: 'Inleiding';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  tekst?: Maybe<Scalars['JSON']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InleidingEntity = {
+  __typename?: 'InleidingEntity';
+  attributes?: Maybe<Inleiding>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type InleidingEntityResponse = {
+  __typename?: 'InleidingEntityResponse';
+  data?: Maybe<InleidingEntity>;
+};
+
+export type InleidingInput = {
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  tekst?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type IntFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
@@ -184,20 +213,6 @@ export type IntFilterInput = {
   null?: InputMaybe<Scalars['Boolean']['input']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   startsWith?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export type Introduction = {
-  __typename?: 'Introduction';
-  Data?: Maybe<Scalars['JSON']['output']>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type IntroductionInput = {
-  Data?: InputMaybe<Scalars['JSON']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type JsonFilterInput = {
@@ -227,46 +242,35 @@ export type JsonFilterInput = {
 
 export type Lemma = {
   __typename?: 'Lemma';
-  afbeelding?: Maybe<UploadFile>;
+  afbeelding?: Maybe<UploadFileEntityResponse>;
   analyse?: Maybe<Scalars['JSON']['output']>;
-  auterAchternaam?: Maybe<Scalars['String']['output']>;
-  auteurVoornaam?: Maybe<Scalars['String']['output']>;
-  beschrijving?: Maybe<Scalars['String']['output']>;
+  auter_achternaam?: Maybe<Scalars['String']['output']>;
+  auteur_voornaam?: Maybe<Scalars['String']['output']>;
   bronnen?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
+  de_kern?: Maybe<Scalars['JSON']['output']>;
   doelgroep?: Maybe<Scalars['JSON']['output']>;
-  extra_data?: Maybe<Scalars['JSON']['output']>;
-  hetVerhaal?: Maybe<Scalars['JSON']['output']>;
+  het_verhaal?: Maybe<Scalars['JSON']['output']>;
   jaar?: Maybe<Scalars['String']['output']>;
   kerndoelen?: Maybe<Scalars['JSON']['output']>;
   lessuggesties?: Maybe<Scalars['JSON']['output']>;
   motieven?: Maybe<Scalars['JSON']['output']>;
-  niveau?: Maybe<Level>;
-  opstaptitels: Array<Maybe<Lemma>>;
-  opstaptitels_connection?: Maybe<LemmaRelationResponseCollection>;
+  niveau?: Maybe<NiveauEntityResponse>;
+  opstaptitels?: Maybe<LemmaRelationResponseCollection>;
   opstaptitels_extern?: Maybe<Scalars['JSON']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  tags: Array<Maybe<Tag>>;
-  tags_connection?: Maybe<TagRelationResponseCollection>;
+  tags?: Maybe<TagRelationResponseCollection>;
   titel?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  verder_lezen: Array<Maybe<Lemma>>;
-  verder_lezen_connection?: Maybe<LemmaRelationResponseCollection>;
   verder_lezen_extern?: Maybe<Scalars['JSON']['output']>;
+  verder_lezens?: Maybe<LemmaRelationResponseCollection>;
 };
 
 
 export type LemmaOpstaptitelsArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type LemmaOpstaptitels_ConnectionArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -274,53 +278,51 @@ export type LemmaOpstaptitels_ConnectionArgs = {
 export type LemmaTagsArgs = {
   filters?: InputMaybe<TagFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-export type LemmaTags_ConnectionArgs = {
-  filters?: InputMaybe<TagFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type LemmaVerder_LezenArgs = {
+export type LemmaVerder_LezensArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type LemmaEntity = {
+  __typename?: 'LemmaEntity';
+  attributes?: Maybe<Lemma>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
 
-export type LemmaVerder_Lezen_ConnectionArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+export type LemmaEntityResponse = {
+  __typename?: 'LemmaEntityResponse';
+  data?: Maybe<LemmaEntity>;
 };
 
 export type LemmaEntityResponseCollection = {
   __typename?: 'LemmaEntityResponseCollection';
-  nodes: Array<Lemma>;
-  pageInfo: Pagination;
+  data: Array<LemmaEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type LemmaFiltersInput = {
   analyse?: InputMaybe<JsonFilterInput>;
   and?: InputMaybe<Array<InputMaybe<LemmaFiltersInput>>>;
-  auterAchternaam?: InputMaybe<StringFilterInput>;
-  auteurVoornaam?: InputMaybe<StringFilterInput>;
-  beschrijving?: InputMaybe<StringFilterInput>;
+  auter_achternaam?: InputMaybe<StringFilterInput>;
+  auteur_voornaam?: InputMaybe<StringFilterInput>;
   bronnen?: InputMaybe<JsonFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
+  de_kern?: InputMaybe<JsonFilterInput>;
   doelgroep?: InputMaybe<JsonFilterInput>;
-  extra_data?: InputMaybe<JsonFilterInput>;
-  hetVerhaal?: InputMaybe<JsonFilterInput>;
+  het_verhaal?: InputMaybe<JsonFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   jaar?: InputMaybe<StringFilterInput>;
   kerndoelen?: InputMaybe<JsonFilterInput>;
   lessuggesties?: InputMaybe<JsonFilterInput>;
   motieven?: InputMaybe<JsonFilterInput>;
-  niveau?: InputMaybe<LevelFiltersInput>;
+  niveau?: InputMaybe<NiveauFiltersInput>;
   not?: InputMaybe<LemmaFiltersInput>;
   opstaptitels?: InputMaybe<LemmaFiltersInput>;
   opstaptitels_extern?: InputMaybe<JsonFilterInput>;
@@ -329,20 +331,19 @@ export type LemmaFiltersInput = {
   tags?: InputMaybe<TagFiltersInput>;
   titel?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
-  verder_lezen?: InputMaybe<LemmaFiltersInput>;
   verder_lezen_extern?: InputMaybe<JsonFilterInput>;
+  verder_lezens?: InputMaybe<LemmaFiltersInput>;
 };
 
 export type LemmaInput = {
   afbeelding?: InputMaybe<Scalars['ID']['input']>;
   analyse?: InputMaybe<Scalars['JSON']['input']>;
-  auterAchternaam?: InputMaybe<Scalars['String']['input']>;
-  auteurVoornaam?: InputMaybe<Scalars['String']['input']>;
-  beschrijving?: InputMaybe<Scalars['String']['input']>;
+  auter_achternaam?: InputMaybe<Scalars['String']['input']>;
+  auteur_voornaam?: InputMaybe<Scalars['String']['input']>;
   bronnen?: InputMaybe<Scalars['JSON']['input']>;
+  de_kern?: InputMaybe<Scalars['JSON']['input']>;
   doelgroep?: InputMaybe<Scalars['JSON']['input']>;
-  extra_data?: InputMaybe<Scalars['JSON']['input']>;
-  hetVerhaal?: InputMaybe<Scalars['JSON']['input']>;
+  het_verhaal?: InputMaybe<Scalars['JSON']['input']>;
   jaar?: InputMaybe<Scalars['String']['input']>;
   kerndoelen?: InputMaybe<Scalars['JSON']['input']>;
   lessuggesties?: InputMaybe<Scalars['JSON']['input']>;
@@ -353,87 +354,36 @@ export type LemmaInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   titel?: InputMaybe<Scalars['String']['input']>;
-  verder_lezen?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   verder_lezen_extern?: InputMaybe<Scalars['JSON']['input']>;
+  verder_lezens?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
 
 export type LemmaRelationResponseCollection = {
   __typename?: 'LemmaRelationResponseCollection';
-  nodes: Array<Lemma>;
-};
-
-export type Level = {
-  __typename?: 'Level';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  documentId: Scalars['ID']['output'];
-  lemmata: Array<Maybe<Lemma>>;
-  lemmata_connection?: Maybe<LemmaRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type LevelLemmataArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type LevelLemmata_ConnectionArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type LevelEntityResponseCollection = {
-  __typename?: 'LevelEntityResponseCollection';
-  nodes: Array<Level>;
-  pageInfo: Pagination;
-};
-
-export type LevelFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<LevelFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  description?: InputMaybe<StringFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
-  lemmata?: InputMaybe<LemmaFiltersInput>;
-  not?: InputMaybe<LevelFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<LevelFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type LevelInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  lemmata?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  data: Array<LemmaEntity>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
-  createLemma?: Maybe<Lemma>;
-  createLevel?: Maybe<Level>;
-  createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
-  createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
-  createTag?: Maybe<Tag>;
+  createLemma?: Maybe<LemmaEntityResponse>;
+  createNiveau?: Maybe<NiveauEntityResponse>;
+  createTag?: Maybe<TagEntityResponse>;
+  createUploadFile?: Maybe<UploadFileEntityResponse>;
+  createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
-  deleteIntroduction?: Maybe<DeleteMutationResponse>;
-  deleteLemma?: Maybe<DeleteMutationResponse>;
-  deleteLevel?: Maybe<DeleteMutationResponse>;
-  deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
-  deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
-  deleteTag?: Maybe<DeleteMutationResponse>;
-  deleteUploadFile?: Maybe<UploadFile>;
+  deleteInleiding?: Maybe<InleidingEntityResponse>;
+  deleteLemma?: Maybe<LemmaEntityResponse>;
+  deleteNiveau?: Maybe<NiveauEntityResponse>;
+  deleteOverHetProject?: Maybe<OverHetProjectEntityResponse>;
+  deleteSamenwerken?: Maybe<SamenwerkenEntityResponse>;
+  deleteTag?: Maybe<TagEntityResponse>;
+  deleteUploadFile?: Maybe<UploadFileEntityResponse>;
+  deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Delete an existing role */
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Delete an existing user */
@@ -443,21 +393,26 @@ export type Mutation = {
   /** Request a reset password token */
   forgotPassword?: Maybe<UsersPermissionsPasswordPayload>;
   login: UsersPermissionsLoginPayload;
+  multipleUpload: Array<Maybe<UploadFileEntityResponse>>;
   /** Register a user */
   register: UsersPermissionsLoginPayload;
+  removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
-  updateIntroduction?: Maybe<Introduction>;
-  updateLemma?: Maybe<Lemma>;
-  updateLevel?: Maybe<Level>;
-  updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
-  updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
-  updateTag?: Maybe<Tag>;
-  updateUploadFile: UploadFile;
+  updateFileInfo: UploadFileEntityResponse;
+  updateInleiding?: Maybe<InleidingEntityResponse>;
+  updateLemma?: Maybe<LemmaEntityResponse>;
+  updateNiveau?: Maybe<NiveauEntityResponse>;
+  updateOverHetProject?: Maybe<OverHetProjectEntityResponse>;
+  updateSamenwerken?: Maybe<SamenwerkenEntityResponse>;
+  updateTag?: Maybe<TagEntityResponse>;
+  updateUploadFile?: Maybe<UploadFileEntityResponse>;
+  updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Update an existing role */
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  upload: UploadFileEntityResponse;
 };
 
 
@@ -470,31 +425,26 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateLemmaArgs = {
   data: LemmaInput;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
-export type MutationCreateLevelArgs = {
-  data: LevelInput;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type MutationCreateReviewWorkflowsWorkflowArgs = {
-  data: ReviewWorkflowsWorkflowInput;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
-  data: ReviewWorkflowsWorkflowStageInput;
-  status?: InputMaybe<PublicationStatus>;
+export type MutationCreateNiveauArgs = {
+  data: NiveauInput;
 };
 
 
 export type MutationCreateTagArgs = {
   data: TagInput;
-  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateUploadFileArgs = {
+  data: UploadFileInput;
+};
+
+
+export type MutationCreateUploadFolderArgs = {
+  data: UploadFolderInput;
 };
 
 
@@ -509,31 +459,26 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 
 export type MutationDeleteLemmaArgs = {
-  documentId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
 };
 
 
-export type MutationDeleteLevelArgs = {
-  documentId: Scalars['ID']['input'];
-};
-
-
-export type MutationDeleteReviewWorkflowsWorkflowArgs = {
-  documentId: Scalars['ID']['input'];
-};
-
-
-export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
-  documentId: Scalars['ID']['input'];
+export type MutationDeleteNiveauArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteTagArgs = {
-  documentId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteUploadFileArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteUploadFolderArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -563,8 +508,21 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationMultipleUploadArgs = {
+  field?: InputMaybe<Scalars['String']['input']>;
+  files: Array<InputMaybe<Scalars['Upload']['input']>>;
+  ref?: InputMaybe<Scalars['String']['input']>;
+  refId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
 export type MutationRegisterArgs = {
   input: UsersPermissionsRegisterInput;
+};
+
+
+export type MutationRemoveFileArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -575,50 +533,54 @@ export type MutationResetPasswordArgs = {
 };
 
 
-export type MutationUpdateIntroductionArgs = {
-  data: IntroductionInput;
-  status?: InputMaybe<PublicationStatus>;
+export type MutationUpdateFileInfoArgs = {
+  id: Scalars['ID']['input'];
+  info?: InputMaybe<FileInfoInput>;
+};
+
+
+export type MutationUpdateInleidingArgs = {
+  data: InleidingInput;
 };
 
 
 export type MutationUpdateLemmaArgs = {
   data: LemmaInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id: Scalars['ID']['input'];
 };
 
 
-export type MutationUpdateLevelArgs = {
-  data: LevelInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+export type MutationUpdateNiveauArgs = {
+  data: NiveauInput;
+  id: Scalars['ID']['input'];
 };
 
 
-export type MutationUpdateReviewWorkflowsWorkflowArgs = {
-  data: ReviewWorkflowsWorkflowInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+export type MutationUpdateOverHetProjectArgs = {
+  data: OverHetProjectInput;
 };
 
 
-export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
-  data: ReviewWorkflowsWorkflowStageInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+export type MutationUpdateSamenwerkenArgs = {
+  data: SamenwerkenInput;
 };
 
 
 export type MutationUpdateTagArgs = {
   data: TagInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateUploadFileArgs = {
+  data: UploadFileInput;
   id: Scalars['ID']['input'];
-  info?: InputMaybe<FileInfoInput>;
+};
+
+
+export type MutationUpdateUploadFolderArgs = {
+  data: UploadFolderInput;
+  id: Scalars['ID']['input'];
 };
 
 
@@ -631,6 +593,94 @@ export type MutationUpdateUsersPermissionsRoleArgs = {
 export type MutationUpdateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationUploadArgs = {
+  field?: InputMaybe<Scalars['String']['input']>;
+  file: Scalars['Upload']['input'];
+  info?: InputMaybe<FileInfoInput>;
+  ref?: InputMaybe<Scalars['String']['input']>;
+  refId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type Niveau = {
+  __typename?: 'Niveau';
+  beschrijving?: Maybe<Scalars['JSON']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  lemmas?: Maybe<LemmaRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  titel?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type NiveauLemmasArgs = {
+  filters?: InputMaybe<LemmaFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type NiveauEntity = {
+  __typename?: 'NiveauEntity';
+  attributes?: Maybe<Niveau>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type NiveauEntityResponse = {
+  __typename?: 'NiveauEntityResponse';
+  data?: Maybe<NiveauEntity>;
+};
+
+export type NiveauEntityResponseCollection = {
+  __typename?: 'NiveauEntityResponseCollection';
+  data: Array<NiveauEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type NiveauFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<NiveauFiltersInput>>>;
+  beschrijving?: InputMaybe<JsonFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  lemmas?: InputMaybe<LemmaFiltersInput>;
+  not?: InputMaybe<NiveauFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<NiveauFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  titel?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type NiveauInput = {
+  beschrijving?: InputMaybe<Scalars['JSON']['input']>;
+  lemmas?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  titel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OverHetProject = {
+  __typename?: 'OverHetProject';
+  Tekst?: Maybe<Scalars['JSON']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type OverHetProjectEntity = {
+  __typename?: 'OverHetProjectEntity';
+  attributes?: Maybe<OverHetProject>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type OverHetProjectEntityResponse = {
+  __typename?: 'OverHetProjectEntityResponse';
+  data?: Maybe<OverHetProjectEntity>;
+};
+
+export type OverHetProjectInput = {
+  Tekst?: InputMaybe<Scalars['JSON']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type Pagination = {
@@ -648,48 +698,38 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export enum PublicationStatus {
-  Draft = 'DRAFT',
-  Published = 'PUBLISHED'
+export enum PublicationState {
+  Live = 'LIVE',
+  Preview = 'PREVIEW'
 }
 
 export type Query = {
   __typename?: 'Query';
-  i18NLocale?: Maybe<I18NLocale>;
-  i18NLocales: Array<Maybe<I18NLocale>>;
-  i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
-  introduction?: Maybe<Introduction>;
-  lemma?: Maybe<Lemma>;
-  lemmata: Array<Maybe<Lemma>>;
-  lemmata_connection?: Maybe<LemmaEntityResponseCollection>;
-  level?: Maybe<Level>;
-  levels: Array<Maybe<Level>>;
-  levels_connection?: Maybe<LevelEntityResponseCollection>;
+  i18NLocale?: Maybe<I18NLocaleEntityResponse>;
+  i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
+  inleiding?: Maybe<InleidingEntityResponse>;
+  lemma?: Maybe<LemmaEntityResponse>;
+  lemmata?: Maybe<LemmaEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
-  reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
-  reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
-  reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
-  reviewWorkflowsWorkflowStages_connection?: Maybe<ReviewWorkflowsWorkflowStageEntityResponseCollection>;
-  reviewWorkflowsWorkflows: Array<Maybe<ReviewWorkflowsWorkflow>>;
-  reviewWorkflowsWorkflows_connection?: Maybe<ReviewWorkflowsWorkflowEntityResponseCollection>;
-  tag?: Maybe<Tag>;
-  tags: Array<Maybe<Tag>>;
-  tags_connection?: Maybe<TagEntityResponseCollection>;
-  uploadFile?: Maybe<UploadFile>;
-  uploadFiles: Array<Maybe<UploadFile>>;
-  uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
-  usersPermissionsRole?: Maybe<UsersPermissionsRole>;
-  usersPermissionsRoles: Array<Maybe<UsersPermissionsRole>>;
-  usersPermissionsRoles_connection?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
-  usersPermissionsUser?: Maybe<UsersPermissionsUser>;
-  usersPermissionsUsers: Array<Maybe<UsersPermissionsUser>>;
-  usersPermissionsUsers_connection?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+  niveau?: Maybe<NiveauEntityResponse>;
+  niveaus?: Maybe<NiveauEntityResponseCollection>;
+  overHetProject?: Maybe<OverHetProjectEntityResponse>;
+  samenwerken?: Maybe<SamenwerkenEntityResponse>;
+  tag?: Maybe<TagEntityResponse>;
+  tags?: Maybe<TagEntityResponseCollection>;
+  uploadFile?: Maybe<UploadFileEntityResponse>;
+  uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
+  uploadFolder?: Maybe<UploadFolderEntityResponse>;
+  uploadFolders?: Maybe<UploadFolderEntityResponseCollection>;
+  usersPermissionsRole?: Maybe<UsersPermissionsRoleEntityResponse>;
+  usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
+  usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
+  usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
 };
 
 
 export type QueryI18NLocaleArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -697,136 +737,65 @@ export type QueryI18NLocalesArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
-export type QueryI18NLocales_ConnectionArgs = {
-  filters?: InputMaybe<I18NLocaleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryIntroductionArgs = {
-  status?: InputMaybe<PublicationStatus>;
+export type QueryInleidingArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryLemmaArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type QueryLemmataArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
-export type QueryLemmata_ConnectionArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
+export type QueryNiveauArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryNiveausArgs = {
+  filters?: InputMaybe<NiveauFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
-export type QueryLevelArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+export type QueryOverHetProjectArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
-export type QueryLevelsArgs = {
-  filters?: InputMaybe<LevelFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryLevels_ConnectionArgs = {
-  filters?: InputMaybe<LevelFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflowArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflowStageArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflowStagesArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflowStages_ConnectionArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflowsArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryReviewWorkflowsWorkflows_ConnectionArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
+export type QuerySamenwerkenArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryTagArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type QueryTagsArgs = {
   filters?: InputMaybe<TagFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryTags_ConnectionArgs = {
-  filters?: InputMaybe<TagFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
 export type QueryUploadFileArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -834,21 +803,23 @@ export type QueryUploadFilesArgs = {
   filters?: InputMaybe<UploadFileFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
-export type QueryUploadFiles_ConnectionArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>;
+export type QueryUploadFolderArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryUploadFoldersArgs = {
+  filters?: InputMaybe<UploadFolderFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
 export type QueryUsersPermissionsRoleArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -856,21 +827,11 @@ export type QueryUsersPermissionsRolesArgs = {
   filters?: InputMaybe<UsersPermissionsRoleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryUsersPermissionsRoles_ConnectionArgs = {
-  filters?: InputMaybe<UsersPermissionsRoleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
 
 export type QueryUsersPermissionsUserArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -878,112 +839,35 @@ export type QueryUsersPermissionsUsersArgs = {
   filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
 };
 
-
-export type QueryUsersPermissionsUsers_ConnectionArgs = {
-  filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
+export type ResponseCollectionMeta = {
+  __typename?: 'ResponseCollectionMeta';
+  pagination: Pagination;
 };
 
-export type ReviewWorkflowsWorkflow = {
-  __typename?: 'ReviewWorkflowsWorkflow';
-  contentTypes: Scalars['JSON']['output'];
+export type Samenwerken = {
+  __typename?: 'Samenwerken';
+  Tekst?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  stageRequiredToPublish?: Maybe<ReviewWorkflowsWorkflowStage>;
-  stages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
-  stages_connection?: Maybe<ReviewWorkflowsWorkflowStageRelationResponseCollection>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type ReviewWorkflowsWorkflowStagesArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type ReviewWorkflowsWorkflowStages_ConnectionArgs = {
-  filters?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type ReviewWorkflowsWorkflowEntityResponseCollection = {
-  __typename?: 'ReviewWorkflowsWorkflowEntityResponseCollection';
-  nodes: Array<ReviewWorkflowsWorkflow>;
-  pageInfo: Pagination;
-};
-
-export type ReviewWorkflowsWorkflowFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ReviewWorkflowsWorkflowFiltersInput>>>;
-  contentTypes?: InputMaybe<JsonFilterInput>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
-  name?: InputMaybe<StringFilterInput>;
-  not?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ReviewWorkflowsWorkflowFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  stageRequiredToPublish?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  stages?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type ReviewWorkflowsWorkflowInput = {
-  contentTypes?: InputMaybe<Scalars['JSON']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  stageRequiredToPublish?: InputMaybe<Scalars['ID']['input']>;
-  stages?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-};
-
-export type ReviewWorkflowsWorkflowStage = {
-  __typename?: 'ReviewWorkflowsWorkflowStage';
-  color?: Maybe<Scalars['String']['output']>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  workflow?: Maybe<ReviewWorkflowsWorkflow>;
 };
 
-export type ReviewWorkflowsWorkflowStageEntityResponseCollection = {
-  __typename?: 'ReviewWorkflowsWorkflowStageEntityResponseCollection';
-  nodes: Array<ReviewWorkflowsWorkflowStage>;
-  pageInfo: Pagination;
+export type SamenwerkenEntity = {
+  __typename?: 'SamenwerkenEntity';
+  attributes?: Maybe<Samenwerken>;
+  id?: Maybe<Scalars['ID']['output']>;
 };
 
-export type ReviewWorkflowsWorkflowStageFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>>>;
-  color?: InputMaybe<StringFilterInput>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
-  name?: InputMaybe<StringFilterInput>;
-  not?: InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ReviewWorkflowsWorkflowStageFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-  workflow?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
+export type SamenwerkenEntityResponse = {
+  __typename?: 'SamenwerkenEntityResponse';
+  data?: Maybe<SamenwerkenEntity>;
 };
 
-export type ReviewWorkflowsWorkflowStageInput = {
-  color?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+export type SamenwerkenInput = {
+  Tekst?: InputMaybe<Scalars['JSON']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  workflow?: InputMaybe<Scalars['ID']['input']>;
-};
-
-export type ReviewWorkflowsWorkflowStageRelationResponseCollection = {
-  __typename?: 'ReviewWorkflowsWorkflowStageRelationResponseCollection';
-  nodes: Array<ReviewWorkflowsWorkflowStage>;
 };
 
 export type StringFilterInput = {
@@ -1013,11 +897,9 @@ export type StringFilterInput = {
 
 export type Tag = {
   __typename?: 'Tag';
-  beschrijving?: Maybe<Scalars['String']['output']>;
+  beschrijving?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  lemmas: Array<Maybe<Lemma>>;
-  lemmas_connection?: Maybe<LemmaRelationResponseCollection>;
+  lemmas?: Maybe<LemmaRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   titel?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1027,27 +909,32 @@ export type Tag = {
 export type TagLemmasArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type TagEntity = {
+  __typename?: 'TagEntity';
+  attributes?: Maybe<Tag>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
 
-export type TagLemmas_ConnectionArgs = {
-  filters?: InputMaybe<LemmaFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+export type TagEntityResponse = {
+  __typename?: 'TagEntityResponse';
+  data?: Maybe<TagEntity>;
 };
 
 export type TagEntityResponseCollection = {
   __typename?: 'TagEntityResponseCollection';
-  nodes: Array<Tag>;
-  pageInfo: Pagination;
+  data: Array<TagEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type TagFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<TagFiltersInput>>>;
-  beschrijving?: InputMaybe<StringFilterInput>;
+  beschrijving?: InputMaybe<JsonFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   lemmas?: InputMaybe<LemmaFiltersInput>;
   not?: InputMaybe<TagFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<TagFiltersInput>>>;
@@ -1057,7 +944,7 @@ export type TagFiltersInput = {
 };
 
 export type TagInput = {
-  beschrijving?: InputMaybe<Scalars['String']['input']>;
+  beschrijving?: InputMaybe<Scalars['JSON']['input']>;
   lemmas?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   titel?: InputMaybe<Scalars['String']['input']>;
@@ -1065,7 +952,7 @@ export type TagInput = {
 
 export type TagRelationResponseCollection = {
   __typename?: 'TagRelationResponseCollection';
-  nodes: Array<Tag>;
+  data: Array<TagEntity>;
 };
 
 export type UploadFile = {
@@ -1073,7 +960,6 @@ export type UploadFile = {
   alternativeText?: Maybe<Scalars['String']['output']>;
   caption?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
   ext?: Maybe<Scalars['String']['output']>;
   formats?: Maybe<Scalars['JSON']['output']>;
   hash: Scalars['String']['output'];
@@ -1083,7 +969,6 @@ export type UploadFile = {
   previewUrl?: Maybe<Scalars['String']['output']>;
   provider: Scalars['String']['output'];
   provider_metadata?: Maybe<Scalars['JSON']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   related?: Maybe<Array<Maybe<GenericMorph>>>;
   size: Scalars['Float']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1091,10 +976,21 @@ export type UploadFile = {
   width?: Maybe<Scalars['Int']['output']>;
 };
 
+export type UploadFileEntity = {
+  __typename?: 'UploadFileEntity';
+  attributes?: Maybe<UploadFile>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type UploadFileEntityResponse = {
+  __typename?: 'UploadFileEntityResponse';
+  data?: Maybe<UploadFileEntity>;
+};
+
 export type UploadFileEntityResponseCollection = {
   __typename?: 'UploadFileEntityResponseCollection';
-  nodes: Array<UploadFile>;
-  pageInfo: Pagination;
+  data: Array<UploadFileEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type UploadFileFiltersInput = {
@@ -1102,11 +998,13 @@ export type UploadFileFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
   caption?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
   ext?: InputMaybe<StringFilterInput>;
+  folder?: InputMaybe<UploadFolderFiltersInput>;
+  folderPath?: InputMaybe<StringFilterInput>;
   formats?: InputMaybe<JsonFilterInput>;
   hash?: InputMaybe<StringFilterInput>;
   height?: InputMaybe<IntFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   mime?: InputMaybe<StringFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<UploadFileFiltersInput>;
@@ -1114,11 +1012,106 @@ export type UploadFileFiltersInput = {
   previewUrl?: InputMaybe<StringFilterInput>;
   provider?: InputMaybe<StringFilterInput>;
   provider_metadata?: InputMaybe<JsonFilterInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   size?: InputMaybe<FloatFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   url?: InputMaybe<StringFilterInput>;
   width?: InputMaybe<IntFilterInput>;
+};
+
+export type UploadFileInput = {
+  alternativeText?: InputMaybe<Scalars['String']['input']>;
+  caption?: InputMaybe<Scalars['String']['input']>;
+  ext?: InputMaybe<Scalars['String']['input']>;
+  folder?: InputMaybe<Scalars['ID']['input']>;
+  folderPath?: InputMaybe<Scalars['String']['input']>;
+  formats?: InputMaybe<Scalars['JSON']['input']>;
+  hash?: InputMaybe<Scalars['String']['input']>;
+  height?: InputMaybe<Scalars['Int']['input']>;
+  mime?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  previewUrl?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  provider_metadata?: InputMaybe<Scalars['JSON']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  width?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type UploadFileRelationResponseCollection = {
+  __typename?: 'UploadFileRelationResponseCollection';
+  data: Array<UploadFileEntity>;
+};
+
+export type UploadFolder = {
+  __typename?: 'UploadFolder';
+  children?: Maybe<UploadFolderRelationResponseCollection>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  files?: Maybe<UploadFileRelationResponseCollection>;
+  name: Scalars['String']['output'];
+  parent?: Maybe<UploadFolderEntityResponse>;
+  path: Scalars['String']['output'];
+  pathId: Scalars['Int']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type UploadFolderChildrenArgs = {
+  filters?: InputMaybe<UploadFolderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UploadFolderFilesArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type UploadFolderEntity = {
+  __typename?: 'UploadFolderEntity';
+  attributes?: Maybe<UploadFolder>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type UploadFolderEntityResponse = {
+  __typename?: 'UploadFolderEntityResponse';
+  data?: Maybe<UploadFolderEntity>;
+};
+
+export type UploadFolderEntityResponseCollection = {
+  __typename?: 'UploadFolderEntityResponseCollection';
+  data: Array<UploadFolderEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type UploadFolderFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<UploadFolderFiltersInput>>>;
+  children?: InputMaybe<UploadFolderFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  files?: InputMaybe<UploadFileFiltersInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<UploadFolderFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UploadFolderFiltersInput>>>;
+  parent?: InputMaybe<UploadFolderFiltersInput>;
+  path?: InputMaybe<StringFilterInput>;
+  pathId?: InputMaybe<IntFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type UploadFolderInput = {
+  children?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  files?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  pathId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type UploadFolderRelationResponseCollection = {
+  __typename?: 'UploadFolderRelationResponseCollection';
+  data: Array<UploadFolderEntity>;
 };
 
 export type UsersPermissionsCreateRolePayload = {
@@ -1147,7 +1140,6 @@ export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
   blocked?: Maybe<Scalars['Boolean']['output']>;
   confirmed?: Maybe<Scalars['Boolean']['output']>;
-  documentId: Scalars['ID']['output'];
   email?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   role?: Maybe<UsersPermissionsMeRole>;
@@ -1171,27 +1163,30 @@ export type UsersPermissionsPermission = {
   __typename?: 'UsersPermissionsPermission';
   action: Scalars['String']['output'];
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  role?: Maybe<UsersPermissionsRole>;
+  role?: Maybe<UsersPermissionsRoleEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UsersPermissionsPermissionEntity = {
+  __typename?: 'UsersPermissionsPermissionEntity';
+  attributes?: Maybe<UsersPermissionsPermission>;
+  id?: Maybe<Scalars['ID']['output']>;
 };
 
 export type UsersPermissionsPermissionFiltersInput = {
   action?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<UsersPermissionsPermissionFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<UsersPermissionsPermissionFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   role?: InputMaybe<UsersPermissionsRoleFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type UsersPermissionsPermissionRelationResponseCollection = {
   __typename?: 'UsersPermissionsPermissionRelationResponseCollection';
-  nodes: Array<UsersPermissionsPermission>;
+  data: Array<UsersPermissionsPermissionEntity>;
 };
 
 export type UsersPermissionsRegisterInput = {
@@ -1204,26 +1199,15 @@ export type UsersPermissionsRole = {
   __typename?: 'UsersPermissionsRole';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  documentId: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  permissions: Array<Maybe<UsersPermissionsPermission>>;
-  permissions_connection?: Maybe<UsersPermissionsPermissionRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  permissions?: Maybe<UsersPermissionsPermissionRelationResponseCollection>;
   type?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  users: Array<Maybe<UsersPermissionsUser>>;
-  users_connection?: Maybe<UsersPermissionsUserRelationResponseCollection>;
+  users?: Maybe<UsersPermissionsUserRelationResponseCollection>;
 };
 
 
 export type UsersPermissionsRolePermissionsArgs = {
-  filters?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type UsersPermissionsRolePermissions_ConnectionArgs = {
   filters?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1236,29 +1220,32 @@ export type UsersPermissionsRoleUsersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type UsersPermissionsRoleEntity = {
+  __typename?: 'UsersPermissionsRoleEntity';
+  attributes?: Maybe<UsersPermissionsRole>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
 
-export type UsersPermissionsRoleUsers_ConnectionArgs = {
-  filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+export type UsersPermissionsRoleEntityResponse = {
+  __typename?: 'UsersPermissionsRoleEntityResponse';
+  data?: Maybe<UsersPermissionsRoleEntity>;
 };
 
 export type UsersPermissionsRoleEntityResponseCollection = {
   __typename?: 'UsersPermissionsRoleEntityResponseCollection';
-  nodes: Array<UsersPermissionsRole>;
-  pageInfo: Pagination;
+  data: Array<UsersPermissionsRoleEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type UsersPermissionsRoleFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<UsersPermissionsRoleFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<UsersPermissionsRoleFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<UsersPermissionsRoleFiltersInput>>>;
   permissions?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
   type?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   users?: InputMaybe<UsersPermissionsUserFiltersInput>;
@@ -1268,7 +1255,6 @@ export type UsersPermissionsRoleInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
   users?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
@@ -1283,37 +1269,43 @@ export type UsersPermissionsUser = {
   blocked?: Maybe<Scalars['Boolean']['output']>;
   confirmed?: Maybe<Scalars['Boolean']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
   email: Scalars['String']['output'];
   provider?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  role?: Maybe<UsersPermissionsRole>;
+  role?: Maybe<UsersPermissionsRoleEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   username: Scalars['String']['output'];
 };
 
+export type UsersPermissionsUserEntity = {
+  __typename?: 'UsersPermissionsUserEntity';
+  attributes?: Maybe<UsersPermissionsUser>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
 export type UsersPermissionsUserEntityResponse = {
   __typename?: 'UsersPermissionsUserEntityResponse';
-  data?: Maybe<UsersPermissionsUser>;
+  data?: Maybe<UsersPermissionsUserEntity>;
 };
 
 export type UsersPermissionsUserEntityResponseCollection = {
   __typename?: 'UsersPermissionsUserEntityResponseCollection';
-  nodes: Array<UsersPermissionsUser>;
-  pageInfo: Pagination;
+  data: Array<UsersPermissionsUserEntity>;
+  meta: ResponseCollectionMeta;
 };
 
 export type UsersPermissionsUserFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<UsersPermissionsUserFiltersInput>>>;
   blocked?: InputMaybe<BooleanFilterInput>;
+  confirmationToken?: InputMaybe<StringFilterInput>;
   confirmed?: InputMaybe<BooleanFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
   email?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<UsersPermissionsUserFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<UsersPermissionsUserFiltersInput>>>;
+  password?: InputMaybe<StringFilterInput>;
   provider?: InputMaybe<StringFilterInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  resetPasswordToken?: InputMaybe<StringFilterInput>;
   role?: InputMaybe<UsersPermissionsRoleFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   username?: InputMaybe<StringFilterInput>;
@@ -1321,46 +1313,47 @@ export type UsersPermissionsUserFiltersInput = {
 
 export type UsersPermissionsUserInput = {
   blocked?: InputMaybe<Scalars['Boolean']['input']>;
+  confirmationToken?: InputMaybe<Scalars['String']['input']>;
   confirmed?: InputMaybe<Scalars['Boolean']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  resetPasswordToken?: InputMaybe<Scalars['String']['input']>;
   role?: InputMaybe<Scalars['ID']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UsersPermissionsUserRelationResponseCollection = {
   __typename?: 'UsersPermissionsUserRelationResponseCollection';
-  nodes: Array<UsersPermissionsUser>;
+  data: Array<UsersPermissionsUserEntity>;
 };
 
 export type LemmaQueryVariables = Exact<{
-  documentId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
 }>;
 
 
-export type LemmaQuery = { __typename?: 'Query', lemma?: { __typename?: 'Lemma', documentId: string, titel?: string | null, beschrijving?: string | null, auteurVoornaam?: string | null, auterAchternaam?: string | null, jaar?: string | null, hetVerhaal?: any | null, motieven?: any | null, doelgroep?: any | null, analyse?: any | null, lessuggesties?: any | null, kerndoelen?: any | null, extra_data?: any | null, bronnen?: any | null, opstaptitels_extern?: any | null, verder_lezen_extern?: any | null, afbeelding?: { __typename?: 'UploadFile', name: string, width?: number | null, height?: number | null, provider: string, provider_metadata?: any | null, url: string } | null, opstaptitels: Array<{ __typename?: 'Lemma', opstaptitels: Array<{ __typename?: 'Lemma', documentId: string, titel?: string | null, beschrijving?: string | null, auteurVoornaam?: string | null, auterAchternaam?: string | null, jaar?: string | null } | null> } | null>, verder_lezen: Array<{ __typename?: 'Lemma', documentId: string, titel?: string | null, beschrijving?: string | null, auteurVoornaam?: string | null, auterAchternaam?: string | null, jaar?: string | null } | null>, niveau?: { __typename?: 'Level', title?: string | null, documentId: string, description?: string | null } | null, tags: Array<{ __typename?: 'Tag', documentId: string, titel?: string | null, beschrijving?: string | null } | null> } | null };
+export type LemmaQuery = { __typename?: 'Query', lemma?: { __typename?: 'LemmaEntityResponse', data?: { __typename?: 'LemmaEntity', id?: string | null, attributes?: { __typename?: 'Lemma', titel?: string | null, de_kern?: any | null, auteur_voornaam?: string | null, auter_achternaam?: string | null, jaar?: string | null, het_verhaal?: any | null, motieven?: any | null, doelgroep?: any | null, analyse?: any | null, lessuggesties?: any | null, kerndoelen?: any | null, bronnen?: any | null, opstaptitels_extern?: any | null, verder_lezen_extern?: any | null, afbeelding?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, width?: number | null, height?: number | null, provider: string, provider_metadata?: any | null, url: string } | null } | null } | null, opstaptitels?: { __typename?: 'LemmaRelationResponseCollection', data: Array<{ __typename?: 'LemmaEntity', id?: string | null, attributes?: { __typename?: 'Lemma', titel?: string | null, de_kern?: any | null, auteur_voornaam?: string | null, auter_achternaam?: string | null, jaar?: string | null } | null }> } | null, verder_lezens?: { __typename?: 'LemmaRelationResponseCollection', data: Array<{ __typename?: 'LemmaEntity', id?: string | null, attributes?: { __typename?: 'Lemma', titel?: string | null, de_kern?: any | null, auteur_voornaam?: string | null, auter_achternaam?: string | null, jaar?: string | null } | null }> } | null, niveau?: { __typename?: 'NiveauEntityResponse', data?: { __typename?: 'NiveauEntity', id?: string | null, attributes?: { __typename?: 'Niveau', titel?: string | null, beschrijving?: any | null } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', id?: string | null, attributes?: { __typename?: 'Tag', titel?: string | null, beschrijving?: any | null } | null }> } | null } | null } | null } | null };
 
 export type LemmasByLevelQueryVariables = Exact<{
   filters?: InputMaybe<LemmaFiltersInput>;
 }>;
 
 
-export type LemmasByLevelQuery = { __typename?: 'Query', lemmata: Array<{ __typename?: 'Lemma', documentId: string, titel?: string | null, beschrijving?: string | null, auteurVoornaam?: string | null, auterAchternaam?: string | null, jaar?: string | null, afbeelding?: { __typename?: 'UploadFile', name: string, width?: number | null, height?: number | null, provider: string, provider_metadata?: any | null, url: string } | null } | null> };
+export type LemmasByLevelQuery = { __typename?: 'Query', lemmata?: { __typename?: 'LemmaEntityResponseCollection', data: Array<{ __typename?: 'LemmaEntity', id?: string | null, attributes?: { __typename?: 'Lemma', titel?: string | null, de_kern?: any | null, auteur_voornaam?: string | null, auter_achternaam?: string | null, jaar?: string | null, afbeelding?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, width?: number | null, height?: number | null, provider: string, provider_metadata?: any | null, url: string } | null } | null } | null } | null }> } | null };
 
 export type LevelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LevelsQuery = { __typename?: 'Query', levels: Array<{ __typename?: 'Level', documentId: string, title?: string | null, description?: string | null } | null> };
+export type LevelsQuery = { __typename?: 'Query', niveaus?: { __typename?: 'NiveauEntityResponseCollection', data: Array<{ __typename?: 'NiveauEntity', id?: string | null, attributes?: { __typename?: 'Niveau', titel?: string | null, beschrijving?: any | null } | null }> } | null };
 
 export type IntroductionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IntroductionQuery = { __typename?: 'Query', introduction?: { __typename?: 'Introduction', Data?: any | null } | null };
+export type IntroductionQuery = { __typename?: 'Query', inleiding?: { __typename?: 'InleidingEntityResponse', data?: { __typename?: 'InleidingEntity', id?: string | null, attributes?: { __typename?: 'Inleiding', tekst?: any | null } | null } | null } | null };
 
 
-export const LemmaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Lemma"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"documentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemma"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"documentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"documentId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}},{"kind":"Field","name":{"kind":"Name","value":"auteurVoornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auterAchternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"provider_metadata"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hetVerhaal"}},{"kind":"Field","name":{"kind":"Name","value":"motieven"}},{"kind":"Field","name":{"kind":"Name","value":"doelgroep"}},{"kind":"Field","name":{"kind":"Name","value":"analyse"}},{"kind":"Field","name":{"kind":"Name","value":"lessuggesties"}},{"kind":"Field","name":{"kind":"Name","value":"kerndoelen"}},{"kind":"Field","name":{"kind":"Name","value":"extra_data"}},{"kind":"Field","name":{"kind":"Name","value":"bronnen"}},{"kind":"Field","name":{"kind":"Name","value":"opstaptitels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"opstaptitels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}},{"kind":"Field","name":{"kind":"Name","value":"auteurVoornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auterAchternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"opstaptitels_extern"}},{"kind":"Field","name":{"kind":"Name","value":"verder_lezen"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}},{"kind":"Field","name":{"kind":"Name","value":"auteurVoornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auterAchternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"verder_lezen_extern"}},{"kind":"Field","name":{"kind":"Name","value":"niveau"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}}]}}]}}]}}]} as unknown as DocumentNode<LemmaQuery, LemmaQueryVariables>;
-export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}},{"kind":"Field","name":{"kind":"Name","value":"auteurVoornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auterAchternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"provider_metadata"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
-export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;
-export const IntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Data"}}]}}]}}]} as unknown as DocumentNode<IntroductionQuery, IntroductionQueryVariables>;
+export const LemmaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Lemma"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemma"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"de_kern"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"provider_metadata"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"het_verhaal"}},{"kind":"Field","name":{"kind":"Name","value":"motieven"}},{"kind":"Field","name":{"kind":"Name","value":"doelgroep"}},{"kind":"Field","name":{"kind":"Name","value":"analyse"}},{"kind":"Field","name":{"kind":"Name","value":"lessuggesties"}},{"kind":"Field","name":{"kind":"Name","value":"kerndoelen"}},{"kind":"Field","name":{"kind":"Name","value":"bronnen"}},{"kind":"Field","name":{"kind":"Name","value":"opstaptitels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"de_kern"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"opstaptitels_extern"}},{"kind":"Field","name":{"kind":"Name","value":"verder_lezens"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"de_kern"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"verder_lezen_extern"}},{"kind":"Field","name":{"kind":"Name","value":"niveau"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LemmaQuery, LemmaQueryVariables>;
+export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"de_kern"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"provider_metadata"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
+export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"niveaus"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}}]}}]}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;
+export const IntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"inleiding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<IntroductionQuery, IntroductionQueryVariables>;
