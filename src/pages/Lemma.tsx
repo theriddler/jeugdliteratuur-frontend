@@ -36,7 +36,9 @@ export const Lemma = () => {
               </div>
             </div>
             <div className="mt-3">
-              {attributes?.de_kern}
+              {attributes?.de_kern && (
+                <BlocksRenderer content={attributes?.de_kern} />
+              )}
             </div>
           </div>
         </Col>

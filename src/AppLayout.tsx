@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import { Container } from "reactstrap";
 
 export const AppLayout = () => {
   const [ isSidebarOpen, setSidebarOpen ] = useState(false);
@@ -29,7 +30,9 @@ export const AppLayout = () => {
       <div className="main-content">
         <Header />
         <main className="content-area">
-          <Outlet />
+          <Container>
+            <Outlet />
+          </Container>
         </main>
       </div>
     </div>

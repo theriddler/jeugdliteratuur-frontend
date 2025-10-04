@@ -1,8 +1,12 @@
 import { NavLink } from "react-router";
 import logo from '../assets/logo.png'
+import { useQuery } from "@apollo/client";
+import { LEVELS } from "../queries";
 
 const Sidebar = () => {
-  // const { data } = useQuery(LEVELS);
+  const { data } = useQuery(LEVELS);
+  const levels = data?.niveaus?.data
+  console.log(data)
 
   return (
     <aside className="sidebar">
@@ -12,22 +16,16 @@ const Sidebar = () => {
         </NavLink>
       </div>
       <nav className="sidebar-nav">
-        {/* {data?.levels.map((level) => (
+        <div className="sidebar-nav-group-header">Lemmas</div>
+        {levels?.map((level) => (
           <NavLink
             key={level?.id}
             to={`/groep/${level?.id}`}
-            className="sidebar-app-nav-link"
+            className="app-nav-link"
           >
-            {level?.title}
+            {level?.attributes?.titel}
           </NavLink>
-        ))} */}
-        <div className="sidebar-nav-group-header">Lemmas</div>
-        <NavLink to='/' className="app-nav-link">Groep 1</NavLink>
-        <NavLink to='/' className="app-nav-link">Groep 2</NavLink>
-        <NavLink to='/' className="app-nav-link">Groep 3</NavLink>
-        <NavLink to='/' className="app-nav-link">Groep 4</NavLink>
-        <NavLink to='/' className="app-nav-link">Groep 5</NavLink>
-        <NavLink to='/' className="app-nav-link">Groep 6</NavLink>
+        ))}
       </nav>
     </aside>
   );

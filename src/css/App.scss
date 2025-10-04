@@ -168,3 +168,26 @@ h5{
 .lemma-section {
   margin: 16px 0;
 }
+
+.image-wrapper {
+  /* Set a fixed height and a responsive width */
+    width: 100%; /* or a fixed value like 300px, depending on your layout */
+    height: 200px; /* **This is the consistent height for all images** */
+
+    /* Crucial: Hides the parts of the image that extend beyond these dimensions */
+    overflow: hidden;
+}
+
+/* 2. Style the IMAGE inside the wrapper */
+.image-wrapper img {
+    /* Make the image take up 100% of the wrapper's space */
+    width: 100%;
+    height: 100%;
+
+    /* The magic property:
+       - It maintains the image's aspect ratio.
+       - It ensures the wrapper is fully covered.
+       - It crops the excess of the wider/taller images.
+    */
+    object-fit: cover;
+}
