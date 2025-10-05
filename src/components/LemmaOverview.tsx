@@ -34,8 +34,8 @@ export const LemmaOverview = (props: {
         <hr />
         <div className="d-flex justify-content-between">
           <div>
-            {attributes?.de_kern && (
-              <BlocksRenderer content={attributes?.de_kern} />
+            {attributes?.korte_intro && (
+              <BlocksRenderer content={attributes?.korte_intro} />
             )}
           </div>
         </div>

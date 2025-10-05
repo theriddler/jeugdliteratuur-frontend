@@ -7,6 +7,7 @@ export const LEMMA = graphql(`
         id
         attributes{
           titel
+          korte_intro
           de_kern
           auteur_voornaam
           auter_achternaam
@@ -36,7 +37,7 @@ export const LEMMA = graphql(`
               id
               attributes{
                 titel
-                de_kern
+                korte_intro
                 auteur_voornaam
                 auter_achternaam
                 jaar
@@ -49,7 +50,7 @@ export const LEMMA = graphql(`
               id
               attributes{
                 titel
-                de_kern
+                korte_intro
                 auteur_voornaam
                 auter_achternaam
                 jaar
@@ -88,7 +89,7 @@ export const LEMMAS_BY_LEVEL = graphql(`
         id
         attributes{
           titel
-          de_kern
+          korte_intro
           auteur_voornaam
           auter_achternaam
           jaar
