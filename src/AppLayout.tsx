@@ -30,7 +30,7 @@ export const AppLayout = () => {
       <div className="main-content">
         <Header />
         <main className="content-area">
-          <Container className="mt-3">
+          <Container className="p-3">
             <Outlet />
           </Container>
         </main>
