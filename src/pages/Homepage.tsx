@@ -21,6 +21,10 @@ export const Homepage = () => {
               {tekst && (
                 <BlocksRenderer content={tekst} />
               )}
+              <div className="mt-3 d-flex gap-3 justify-content-end">
+                <Link to='/colofon'>Over het project</Link>
+                <Link to='/colofon'>Colofon</Link>
+              </div>
             </CardBody>
           </Card>
         </Col>
