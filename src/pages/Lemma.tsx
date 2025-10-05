@@ -99,22 +99,31 @@ export const Lemma = () => {
         )}
         <Col xs={12}>
           <div className="lemma-section">
-            <h5>Thematische tags</h5>
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
             <h5>⁠Opstaptitels</h5>
+            {attributes?.opstaptitels_extern && (
+              <BlocksRenderer content={attributes?.opstaptitels_extern} />
+            )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Verder lezen</h5>
+            {attributes?.verder_lezen_extern && (
+              <BlocksRenderer content={attributes?.verder_lezen_extern} />
+            )}
           </div>
         </Col>
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Vindplaatsen en bronnen</h5>
+            {attributes?.bronnen && (
+              <BlocksRenderer content={attributes?.bronnen} />
+            )}
+          </div>
+        </Col>
+        <Col xs={12}>
+          <div className="lemma-section">
+            <h5>Thematische tags</h5>
           </div>
         </Col>
       </Row >
