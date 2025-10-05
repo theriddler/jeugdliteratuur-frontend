@@ -25,18 +25,27 @@ export const Lemma = () => {
       <Row>
         <Col xs={12}>
           <div className="lemma-header">
-            <div className="d-flex gap-3 align-items-end">
+            <div className="d-flex justify-content-between gap-3">
               <div>
-                <h4>{attributes?.titel} ({attributes?.jaar})</h4>
+                <div className="d-flex gap-3 align-items-end">
+                  <div>
+                    <h4>{attributes?.titel} ({attributes?.jaar})</h4>
+                  </div>
+                  <div className="text-secondary">
+                    {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
+                  </div>
+                </div>
+                <div className="mt-3">
+                  {attributes?.de_kern && (
+                    <BlocksRenderer content={attributes?.de_kern} />
+                  )}
+                </div>
               </div>
-              <div className="text-secondary">
-                {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
+              <div>
+                <div className="image-wrapper xl">
+                  <img src={attributes?.afbeelding?.data?.attributes?.url} />
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              {attributes?.de_kern && (
-                <BlocksRenderer content={attributes?.de_kern} />
-              )}
             </div>
           </div>
         </Col>
