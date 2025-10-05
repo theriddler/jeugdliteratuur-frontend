@@ -25,7 +25,7 @@ export const Lemma = () => {
       <Row>
         <Col xs={12}>
           <div className="lemma-header">
-            <div className="d-flex justify-content-between gap-3">
+            <div className="d-flex justify-content-between gap-5">
               <div>
                 <div className="d-flex gap-3 align-items-end">
                   <div>
@@ -49,54 +49,54 @@ export const Lemma = () => {
             </div>
           </div>
         </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Motieven</h5>
-            {attributes?.motieven && (
-              <BlocksRenderer content={attributes?.motieven} />
-            )}
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Doelgroep</h5>
-            {attributes?.doelgroep && (
+        {attributes?.doelgroep && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Doelgroep</h5>
               <BlocksRenderer content={attributes?.doelgroep} />
-            )}
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Het verhaal</h5>
-            {attributes?.het_verhaal && (
+            </div>
+          </Col>
+        )}
+        {attributes?.motieven && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Motieven</h5>
+              <BlocksRenderer content={attributes?.motieven} />
+            </div>
+          </Col>
+        )}
+        {attributes?.het_verhaal && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Het verhaal</h5>
               <BlocksRenderer content={attributes?.het_verhaal} />
-            )}
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Analyse en interpretatie</h5>
-            {attributes?.analyse && (
+            </div>
+          </Col>
+        )}
+        {attributes?.analyse && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Analyse en interpretatie</h5>
               <BlocksRenderer content={attributes?.analyse} />
-            )}
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Didactische vragen en lessuggesties</h5>
-            {attributes?.lessuggesties && (
+            </div>
+          </Col>
+        )}
+        {attributes?.lessuggesties && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Didactische vragen en lessuggesties</h5>
               <BlocksRenderer content={attributes?.lessuggesties} />
-            )}
-          </div>
-        </Col>
-        <Col xs={12}>
-          <div className="lemma-section">
-            <h5>Kerndoelen Nederlands</h5>
-            {attributes?.kerndoelen && (
+            </div>
+          </Col>
+        )}
+        {attributes?.kerndoelen && (
+          <Col xs={12}>
+            <div className="lemma-section">
+              <h5>Kerndoelen Nederlands</h5>
               <BlocksRenderer content={attributes?.kerndoelen} />
-            )}
-          </div>
-        </Col>
+            </div>
+          </Col>
+        )}
         <Col xs={12}>
           <div className="lemma-section">
             <h5>Thematische tags</h5>
@@ -117,7 +117,7 @@ export const Lemma = () => {
             <h5>Vindplaatsen en bronnen</h5>
           </div>
         </Col>
-      </Row>
-    </div>
+      </Row >
+    </div >
   )
 }

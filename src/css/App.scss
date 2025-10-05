@@ -19,7 +19,7 @@ main {
   margin: 0;
   font-family: "Merriweather Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   font-size: 0.8em;
   -webkit-font-smoothing: antialiased;
@@ -167,6 +167,9 @@ h5{
 
 .lemma-section {
   margin: 16px 0;
+  br{
+    display: none;
+  }
 }
 
 .clickable {

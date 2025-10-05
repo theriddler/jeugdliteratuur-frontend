@@ -18,15 +18,15 @@ export const LemmaOverview = (props: {
     <Card className="clickable" onClick={() => navigate(`/lemma/${id}`)}>
       <CardBody>
         <div>
-          <span className="fw-bold">
-            {attributes?.titel} ({attributes?.jaar})
-          </span>
-          <span className="ms-3 text-secondary">
+          <div>
+            <span className="fw-bold">{attributes?.titel}</span>
+            <span className="ms-2">({attributes?.jaar})</span>
+          </div>
+          <div className="text-secondary">
             {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
-          </span>
+          </div>
         </div>
-
-        <div>
+        <div className="mt-3 d-flex justify-content-center">
           <div className="image-wrapper">
             <img src={imageUrl} />
           </div>
