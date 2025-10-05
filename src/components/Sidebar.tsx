@@ -17,7 +17,7 @@ const Sidebar = () => {
     <aside className="sidebar">
       <div className="sidebar-header">
         <NavLink to='/' className="sidebar-brand">
-          <img src={logo} alt='logo' width={64} height={64} />
+          <img src={logo} alt='logo' width={84} height={84} />
         </NavLink>
       </div>
       <nav className="sidebar-nav">
