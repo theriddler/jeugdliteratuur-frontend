@@ -1,14 +1,15 @@
-import { NavLink } from "react-router";
-import logo from '../assets/logo.png'
 import { useQuery } from "@apollo/client";
-import { LEVELS } from "../queries";
 import { useMemo } from "react";
+import { NavLink } from "react-router";
+import logo from '../assets/logo.png';
+import { sortKinderFirst } from "../funcs/sortKinderFirst";
+import { LEVELS } from "../queries";
 
 const Sidebar = () => {
   const { data } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
-    output.sort((a,) => a.attributes?.titel?.includes('Kind') ? 1 : 0)// put kindergarden first
+    output.sort(sortKinderFirst)// put kindergarden first
     return output;
   }, [ data?.niveaus?.data ])
 

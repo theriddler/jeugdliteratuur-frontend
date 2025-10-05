@@ -5,6 +5,7 @@ import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMAS_BY_LEVEL, LEVELS } from "../queries";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link, useNavigate } from "react-router";
+import { sortKinderFirst } from "../funcs/sortKinderFirst";
 
 export const Homepage = () => {
   const { data } = useQuery(INTRODUCTION);
@@ -43,7 +44,7 @@ const HomepageGroupList = () => {
   const { data } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
-    output.sort((a,) => a.attributes?.titel?.includes('Kind') ? 1 : 0)// put kindergarden first
+    output.sort(sortKinderFirst) // put kindergarden first
     return output;
   }, [ data?.niveaus?.data ])
 

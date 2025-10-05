@@ -7,7 +7,6 @@ export const GebruikVanDeLijst = () => {
   const { data } = useQuery(GEBRUIK_VAN_DE_LIJST);
 
   if (!data?.gebruikVanDeLijst?.data?.attributes) return null;
-  console.log(data.gebruikVanDeLijst.data.attributes)
   const { Tekst } = data.gebruikVanDeLijst.data.attributes;
 
   return (
