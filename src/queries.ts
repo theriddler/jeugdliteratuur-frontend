@@ -82,6 +82,20 @@ export const LEMMA = graphql(`
   }
 `);
 
+export const LEVEL = graphql(`
+  query Level($id: ID!){
+    niveau(id: $id){
+      data{
+        id
+        attributes{
+          titel
+          beschrijving
+        }
+      }
+    }
+  }
+`)
+
 export const LEMMAS_BY_LEVEL = graphql(`
   query LemmasByLevel($filters: LemmaFiltersInput) {
     lemmata(filters: $filters) {
