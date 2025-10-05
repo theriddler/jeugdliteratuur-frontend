@@ -10,13 +10,13 @@ const Header = () => {
       </div>
       <div className="d-flex justify-content-end align-items-end gap-3">
         <div className="app-header-link-container">
-          <NavLink to="/" className="app-nav-link">The Project</NavLink>
+          <NavLink to="/" className="app-nav-link">Over het project</NavLink>
         </div>
         <div className="app-header-link-container">
-          <NavLink to="/" className="app-nav-link">About us</NavLink>
+          <NavLink to="/" className="app-nav-link">Samenwerken?</NavLink>
         </div>
         <div className="app-header-link-container">
-          <NavLink to="/" className="app-nav-link">Work with us</NavLink>
+          <NavLink to="/" className="app-nav-link">Colofon</NavLink>
         </div>
       </div>
     </header>

@@ -1,7 +1,8 @@
+@use './App.scss';
+
 /* --- Sidebar Styles --- */
 .sidebar {
-  // width: 200px;
-  white-space: nowrap;
+  width: 200px;
   height: 100vh;
   background-color: var(--primary-color);
   color: var(--text-light);
@@ -12,6 +13,7 @@
 }
 
 .sidebar-header {
+  @extend .header-font;
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
@@ -25,6 +27,7 @@
 }
 
 .sidebar-nav {
+  @extend .header-font;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -33,6 +36,8 @@
 
 .sidebar-nav-group-header{
   color: var(--text-light);
+  font-size: 18px;
+  text-decoration: underline;
   padding: 0 0.5rem;
   font-weight: 600;
 }

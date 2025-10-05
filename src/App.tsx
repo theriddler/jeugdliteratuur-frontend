@@ -7,7 +7,7 @@ import { Level } from "./pages/Level";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
 
-export const STRAPI_BASE_URL = 'http://localhost:1337'
+export const STRAPI_BASE_URL = 'https://perfect-ducks-3ff901f65f.strapiapp.com'
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: `${STRAPI_BASE_URL}/graphql` }),
