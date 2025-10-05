@@ -10,6 +10,10 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease-in-out;
+
+  a{
+    color: white !important;
+  }
 }
 
 .sidebar-header {

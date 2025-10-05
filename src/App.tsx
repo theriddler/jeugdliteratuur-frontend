@@ -1,11 +1,15 @@
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { AppLayout } from "./AppLayout";
 import './css/App.scss';
 import './css/sidebar.scss';
-import { AppLayout } from "./AppLayout";
-import { Level } from "./pages/Level";
+import { Colofon } from "./pages/Colofon";
+import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
+import { Level } from "./pages/Level";
+import { OverHetProject } from "./pages/OverHetProject";
+import { Samenwerken } from "./pages/Samenwerken";
 
 export const STRAPI_BASE_URL = 'https://perfect-ducks-3ff901f65f.strapiapp.com'
 
@@ -22,6 +26,12 @@ function App () {
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Homepage />} />
+
+            <Route path="/over-het-project" element={<OverHetProject />} />
+            <Route path="/samenwerken" element={<Samenwerken />} />
+            <Route path="/colofon" element={<Colofon />} />
+            <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
+
             <Route path="/groep/:levelId" element={<Level />} />
             <Route path="/lemma/:lemmaId" element={<Lemma />} />
           </Route>

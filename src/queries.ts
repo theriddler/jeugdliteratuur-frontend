@@ -132,6 +132,67 @@ export const INTRODUCTION = graphql(`
         id
         attributes{
           tekst
+          foto {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)
+
+export const OVER_HET_PROJECT = graphql(`
+  query OverHetProject {
+    overHetProject {
+      data{
+        id
+        attributes{
+          Tekst
+        }
+      }
+    }
+  }
+`)
+
+export const SAMENWERKEN = graphql(`
+  query Samenwerken {
+    samenwerken {
+      data{
+        id
+        attributes{
+          Tekst
+        }
+      }
+    }
+  }
+`)
+
+export const COLOFON = graphql(`
+  query Colofon {
+    colofon {
+      data{
+        id
+        attributes{
+          tekst
+        }
+      }
+    }
+  }
+`)
+
+
+export const GEBRUIK_VAN_DE_LIJST = graphql(`
+  query GebruikVanDeLijst {
+    gebruikVanDeLijst {
+      data{
+        id
+        attributes{
+          Tekst
         }
       }
     }

@@ -32,6 +32,13 @@ const Sidebar = () => {
             </NavLink>
           ))}
         </div>
+        <div className="sidebar-nav-group-header">Gebruik van de lijst</div>
+        <NavLink
+          to={`/gebruik-van-de-lijst`}
+          className="app-nav-link"
+        >
+          Gebruik van de lijst
+        </NavLink>
       </nav>
     </aside>
   );

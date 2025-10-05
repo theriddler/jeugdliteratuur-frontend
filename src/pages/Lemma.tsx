@@ -20,9 +20,7 @@ export const Lemma = () => {
   return (
     <div>
       {loading && (
-        <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-          <Spinner />
-        </div>
+        <Spinner />
       )}
       <Row>
         <Col xs={12}>
