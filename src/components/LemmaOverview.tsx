@@ -39,9 +39,9 @@ export const LemmaOverview = (props: {
             )}
           </div>
         </div>
-        <div className="mt-3">
+        <div className="mt-1">
           <Link to={`/lemma/${id}`}>
-            View
+            Verder lezen
           </Link>
         </div>
       </CardBody>
