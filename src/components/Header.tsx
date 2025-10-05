@@ -5,7 +5,7 @@ const Header = () => {
     <header className="app-header d-flex justify-content-between align-items-end">
       <div>
         <div className="app-header-brand">
-          Sterboeken
+          STERBOEKEN
         </div>
       </div>
       <div className="d-flex justify-content-end align-items-end gap-3">

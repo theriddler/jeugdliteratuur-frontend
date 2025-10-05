@@ -33,6 +33,14 @@ main {
   font-style: normal;
 }
 
+
+.logo-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
 a{
   color: #5A847B !important;
 }
@@ -68,9 +76,10 @@ a{
 }
 
 .app-header-brand{
-  @extend .header-font;
+  @extend .logo-font;
+  color: var(--secondary-color);
   font-size: 64px;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 64px;
 }
 
