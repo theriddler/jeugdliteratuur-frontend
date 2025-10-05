@@ -1,11 +1,12 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Card, CardBody } from "reactstrap";
 import { LemmaEntity } from "../gql/graphql";
 
 export const LemmaOverview = (props: {
   lemma: LemmaEntity | undefined
 }) => {
+  const navigate = useNavigate();
 
   if (!props.lemma) return null;
   const { id, attributes } = props.lemma;
@@ -14,7 +15,7 @@ export const LemmaOverview = (props: {
   console.log(imageUrl)
 
   return (
-    <Card>
+    <Card className="clickable" onClick={() => navigate(`/lemma/${id}`)}>
       <CardBody>
         <div>
           <span className="fw-bold">
