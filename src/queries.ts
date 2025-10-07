@@ -168,6 +168,14 @@ export const OVER_HET_PROJECT = graphql(`
         id
         attributes{
           Tekst
+          foto {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
         }
       }
     }
