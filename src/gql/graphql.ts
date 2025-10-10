@@ -133,6 +133,7 @@ export type GebruikVanDeLijst = {
   __typename?: 'GebruikVanDeLijst';
   Tekst?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  foto?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -150,6 +151,7 @@ export type GebruikVanDeLijstEntityResponse = {
 
 export type GebruikVanDeLijstInput = {
   Tekst?: InputMaybe<Scalars['JSON']['input']>;
+  foto?: InputMaybe<Scalars['ID']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -311,6 +313,8 @@ export type Lemma = {
   niveau?: Maybe<NiveauEntityResponse>;
   opstaptitels?: Maybe<LemmaRelationResponseCollection>;
   opstaptitels_extern?: Maybe<Scalars['JSON']['output']>;
+  parallel_lezen_extern?: Maybe<Scalars['JSON']['output']>;
+  parallel_lezens?: Maybe<LemmaRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   tags?: Maybe<TagRelationResponseCollection>;
   titel?: Maybe<Scalars['String']['output']>;
@@ -321,6 +325,14 @@ export type Lemma = {
 
 
 export type LemmaOpstaptitelsArgs = {
+  filters?: InputMaybe<LemmaFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type LemmaParallel_LezensArgs = {
   filters?: InputMaybe<LemmaFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
@@ -381,6 +393,8 @@ export type LemmaFiltersInput = {
   opstaptitels?: InputMaybe<LemmaFiltersInput>;
   opstaptitels_extern?: InputMaybe<JsonFilterInput>;
   or?: InputMaybe<Array<InputMaybe<LemmaFiltersInput>>>;
+  parallel_lezen_extern?: InputMaybe<JsonFilterInput>;
+  parallel_lezens?: InputMaybe<LemmaFiltersInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   tags?: InputMaybe<TagFiltersInput>;
   titel?: InputMaybe<StringFilterInput>;
@@ -406,6 +420,8 @@ export type LemmaInput = {
   niveau?: InputMaybe<Scalars['ID']['input']>;
   opstaptitels?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   opstaptitels_extern?: InputMaybe<Scalars['JSON']['input']>;
+  parallel_lezen_extern?: InputMaybe<Scalars['JSON']['input']>;
+  parallel_lezens?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   titel?: InputMaybe<Scalars['String']['input']>;
@@ -732,6 +748,7 @@ export type OverHetProject = {
   __typename?: 'OverHetProject';
   Tekst?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  foto?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -749,6 +766,7 @@ export type OverHetProjectEntityResponse = {
 
 export type OverHetProjectInput = {
   Tekst?: InputMaybe<Scalars['JSON']['input']>;
+  foto?: InputMaybe<Scalars['ID']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -931,6 +949,7 @@ export type Samenwerken = {
   __typename?: 'Samenwerken';
   Tekst?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  foto?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -948,6 +967,7 @@ export type SamenwerkenEntityResponse = {
 
 export type SamenwerkenInput = {
   Tekst?: InputMaybe<Scalars['JSON']['input']>;
+  foto?: InputMaybe<Scalars['ID']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -1443,7 +1463,7 @@ export type IntroductionQuery = { __typename?: 'Query', inleiding?: { __typename
 export type OverHetProjectQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OverHetProjectQuery = { __typename?: 'Query', overHetProject?: { __typename?: 'OverHetProjectEntityResponse', data?: { __typename?: 'OverHetProjectEntity', id?: string | null, attributes?: { __typename?: 'OverHetProject', Tekst?: any | null } | null } | null } | null };
+export type OverHetProjectQuery = { __typename?: 'Query', overHetProject?: { __typename?: 'OverHetProjectEntityResponse', data?: { __typename?: 'OverHetProjectEntity', id?: string | null, attributes?: { __typename?: 'OverHetProject', Tekst?: any | null, foto?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null } | null } | null };
 
 export type SamenwerkenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1466,7 +1486,7 @@ export const LevelDocument = {"kind":"Document","definitions":[{"kind":"Operatio
 export const LemmasByLevelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmasByLevel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LemmaFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"korte_intro"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"provider_metadata"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LemmasByLevelQuery, LemmasByLevelQueryVariables>;
 export const LevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Levels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"niveaus"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"beschrijving"}}]}}]}}]}}]}}]} as unknown as DocumentNode<LevelsQuery, LevelsQueryVariables>;
 export const IntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Introduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"inleiding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<IntroductionQuery, IntroductionQueryVariables>;
-export const OverHetProjectDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OverHetProject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"overHetProject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<OverHetProjectQuery, OverHetProjectQueryVariables>;
+export const OverHetProjectDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OverHetProject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"overHetProject"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<OverHetProjectQuery, OverHetProjectQueryVariables>;
 export const SamenwerkenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Samenwerken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"samenwerken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SamenwerkenQuery, SamenwerkenQueryVariables>;
 export const ColofonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ColofonQuery, ColofonQueryVariables>;
 export const GebruikVanDeLijstDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GebruikVanDeLijstQuery, GebruikVanDeLijstQueryVariables>;
