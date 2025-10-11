@@ -77,3 +77,11 @@
     scale: 1.01;
   }
 }
+
+.print-mode{
+  padding: 0 16px;
+
+  .hide-in-print-mode{
+    display: none;
+  }
+}
