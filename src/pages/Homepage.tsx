@@ -15,7 +15,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <Row>
+      <Row className="app-hero">
         <Col xs={8}>
           {/* <Card>
             <CardBody> */}
