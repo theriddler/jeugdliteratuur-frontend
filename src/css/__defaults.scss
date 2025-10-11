@@ -1,0 +1,76 @@
+$primary-color: #5E2750;
+$secondary-color: #E2A93A;
+$success: #5A847B;
+$link-color: #f4f7fa;
+$light: #FFF9E9;
+$dark: #2C2C2C;
+
+:root {
+  --primary-color: #5E2750; /* gray-700 */
+  --primary-hover: #FFF9E9; /* gray-800 */
+  --secondary-color: #E2A93A;
+  --text-light: #FFF9E9; /* gray-100 */
+  --text-dark: #2C2C2C;
+  --content-bg: #f4f7fa;
+  --border-color: #4a5568;
+  --sidebar-width: 180px;
+  --bs-link-color-rgb: #5A847B;
+}
+
+.app-layout {
+  display: flex;
+  height: 100%;
+  width: 100vw;
+  overflow: scroll;
+}
+
+main {
+  font-family: "Merriweather Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+}
+
+.header-font {
+  font-family: "Literata", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.logo-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+a{
+  color: #5A847B !important;
+  text-decoration: none !important;
+}
+
+h3{
+  @extend .header-font;
+  margin-bottom: 0 !important;
+}
+
+h4{
+  @extend .header-font;
+  margin-bottom: 0 !important;
+}
+
+h5{
+  @extend .header-font;
+  // text-decoration: underline;
+}
+
+// beacuse of issues with strapi block editor
+br{
+  display: none;
+}

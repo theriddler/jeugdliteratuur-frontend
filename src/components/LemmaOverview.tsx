@@ -12,7 +12,6 @@ export const LemmaOverview = (props: {
   const { id, attributes } = props.lemma;
 
   const imageUrl = attributes?.afbeelding?.data?.attributes?.url;
-  console.log(imageUrl)
 
   return (
     <Card className="clickable" onClick={() => navigate(`/lemma/${id}`)}>

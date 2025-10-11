@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useMemo } from "react";
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
+import { Link, useNavigate } from "react-router";
+import { Card, CardBody, Col, Row } from "reactstrap";
+import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMAS_BY_LEVEL, LEVELS } from "../queries";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { Link, useNavigate } from "react-router";
-import { sortKinderFirst } from "../funcs/sortKinderFirst";
 
 export const Homepage = () => {
   const { data } = useQuery(INTRODUCTION);
@@ -17,20 +17,19 @@ export const Homepage = () => {
     <>
       <Row>
         <Col xs={8}>
-          <Card>
-            <CardBody>
-              {tekst && (
-                <BlocksRenderer content={tekst} />
-              )}
-              <div className="mt-3 d-flex gap-3 justify-content-end">
-                <Link to='/colofon'>Over het project</Link>
-                <Link to='/colofon'>Colofon</Link>
-              </div>
-            </CardBody>
-          </Card>
+          {/* <Card>
+            <CardBody> */}
+          {tekst && (
+            <BlocksRenderer content={tekst} />
+          )}
+          <div className="mt-3 d-flex gap-3 justify-content-end">
+            <Link to='/over-het-project'>Over het project</Link>
+          </div>
+          {/* </CardBody>
+          </Card> */}
         </Col>
         <Col xs={4}>
-          <div className="image-wrapper xl">
+          <div className="image-wrapper w-100">
             <img src={foto?.data?.attributes?.url} />
           </div>
         </Col>
@@ -51,7 +50,7 @@ const HomepageGroupList = () => {
   return (
     <Row>
       {levels?.map(l => (
-        <Col xs={12} md={4} className="my-3">
+        <Col xs={12} lg={4} className="my-3">
           <HomepageGroup id={l.id} attributes={l.attributes} />
         </Col>
       ))}
@@ -78,18 +77,19 @@ const HomepageGroup = (props: {
 
   if (!data?.lemmata?.data) return;
   const lemmas = data.lemmata.data;
+  const firstTwoLemmas = lemmas?.slice(0, 2)
 
   return (
     <div>
       <Card>
-        <CardHeader>
-          <Link to={`/groep/${props.id}`}>
-            {props.attributes?.titel}
-          </Link>
-        </CardHeader>
-        <CardBody>
+        <CardBody className="mt-0">
+          <div className="mb-3">
+            <Link to={`/groep/${props.id}`}>
+              {props.attributes?.titel}
+            </Link>
+          </div>
           <div className="d-flex align-items-start">
-            {lemmas.map(l => (
+            {firstTwoLemmas.map(l => (
               <div className="w-50">
                 <div className="image-wrapper xs clickable" onClick={() => navigate(`/lemma/${l.id}`)}>
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />

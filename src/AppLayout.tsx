@@ -1,35 +1,20 @@
-import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router";
+import { useState } from "react";
+import { Outlet } from "react-router";
+import { Container } from "reactstrap";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { Container } from "reactstrap";
 
 export const AppLayout = () => {
   const [ isSidebarOpen, setSidebarOpen ] = useState(false);
-  const location = useLocation();
-
-  // Close sidebar on route change on mobile
-  useEffect(() => {
-    if (isSidebarOpen) {
-      setSidebarOpen(false);
-    }
-  }, [ isSidebarOpen, location ]);
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="app-layout">
-      {/* Mobile-only Overlay */}
-      <div
-        className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`}
-        onClick={toggleSidebar}
-      ></div>
-      <div className={`sidebar-wrapper ${isSidebarOpen ? 'open' : ''}`}>
+    <div>
+      <Header toggleSidebar={toggleSidebar} />
+      <div className={`app-layout ${isSidebarOpen ? 'sidebar-open' : ''}`}>
         <Sidebar />
-      </div>
-      <div className="main-content">
-        <Header />
-        <main className="content-area">
+        <main>
           <Container className="px-4 py-3">
             <Outlet />
           </Container>

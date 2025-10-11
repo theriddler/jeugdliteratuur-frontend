@@ -46,7 +46,7 @@ export const Level = () => {
       </Row>
       <Row className="mt-3">
         {lemmaData?.lemmata?.data?.map(l => (
-          <Col xs={12} md={4}>
+          <Col xs={12} lg={4}>
             <LemmaOverview lemma={l as LemmaEntity} />
           </Col>
         ))}

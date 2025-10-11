@@ -1,7 +1,9 @@
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { AppLayout } from "./AppLayout";
+import './css/__defaults.scss';
 import './css/App.scss';
+import './css/header.scss';
 import './css/sidebar.scss';
 import { Colofon } from "./pages/Colofon";
 import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";

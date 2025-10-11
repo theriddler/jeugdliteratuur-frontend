@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { NavLink } from "react-router";
-import logo from '../assets/logo.png';
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { LEVELS } from "../queries";
 
@@ -14,35 +13,18 @@ const Sidebar = () => {
   }, [ data?.niveaus?.data ])
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <NavLink to='/' className="sidebar-brand">
-          <img src={logo} alt='logo' width={84} height={84} />
-        </NavLink>
-      </div>
+    <aside className={`sidebar`}>
       <nav className="sidebar-nav">
-        <div className="sidebar-nav-group-header">Lemma's</div>
-        <div className="text-end">
+        <div>
           {levels?.map((level) => (
             <NavLink
               key={level?.id}
               to={`/groep/${level?.id}`}
-              className="app-nav-link"
+              className="sidebar-nav-link"
             >
               {level?.attributes?.titel}
             </NavLink>
           ))}
-        </div>
-        <div className="sidebar-nav-group-header">
-          Gebruik
-        </div>
-        <div className="text-end">
-          <NavLink
-            to={`/gebruik-van-de-lijst`}
-            className="app-nav-link"
-          >
-            Didactische achtergrond
-          </NavLink>
         </div>
       </nav>
     </aside>
