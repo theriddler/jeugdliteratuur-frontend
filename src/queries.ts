@@ -1,8 +1,8 @@
 import { graphql } from "./gql";
 
-export const LEMMA = graphql(`
-  query Lemma($id: ID!) {
-    lemma(id: $id) {
+export const LEMMATA = graphql(`
+  query Lemmata {
+    lemmata {
       data {
         id
         attributes{
@@ -73,50 +73,6 @@ export const LEMMA = graphql(`
               attributes{
                 titel
                 beschrijving
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`);
-
-export const LEVEL = graphql(`
-  query Level($id: ID!){
-    niveau(id: $id){
-      data{
-        id
-        attributes{
-          titel
-          beschrijving
-        }
-      }
-    }
-  }
-`)
-
-export const LEMMAS_BY_LEVEL = graphql(`
-  query LemmasByLevel($filters: LemmaFiltersInput) {
-    lemmata(filters: $filters) {
-      data{
-        id
-        attributes{
-          titel
-          korte_intro
-          auteur_voornaam
-          auter_achternaam
-          jaar
-          afbeelding {
-            data{
-              id
-              attributes{
-                name
-                width
-                height
-                provider
-                provider_metadata
-                url
               }
             }
           }

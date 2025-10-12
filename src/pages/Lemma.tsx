@@ -1,20 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 import { Button, Col, Row, Spinner } from "reactstrap";
-import { LEMMA } from "../queries";
+import { LEMMATA } from "../queries";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 export const Lemma = () => {
   const { lemmaId } = useParams();
 
-  const { data, loading } = useQuery(LEMMA, {
-    variables: {
-      id: lemmaId ?? ''
-    }
-  });
+  const { data, loading } = useQuery(LEMMATA);
+  const lemma = useMemo(() => data?.lemmata?.data?.find(l => l.id === lemmaId), [ data?.lemmata?.data, lemmaId ])
 
   // download PDF logic
   const pdfElementRef = useRef<HTMLDivElement | null>(null);
@@ -65,8 +62,8 @@ export const Lemma = () => {
     }
   }
 
-  if (!data?.lemma?.data) return null;
-  const { attributes } = data.lemma.data;
+  if (!lemma) return null;
+  const { attributes } = lemma;
 
   return (
     <div>

@@ -2,13 +2,14 @@ import { useQuery } from "@apollo/client";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router";
-import { Card, CardBody, Col, Row } from "reactstrap";
+import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
-import { INTRODUCTION, LEMMAS_BY_LEVEL, LEVELS } from "../queries";
+import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
+import { Searchbar } from "../components/Searchbar";
 
 export const Homepage = () => {
-  const { data } = useQuery(INTRODUCTION);
+  const { data, loading } = useQuery(INTRODUCTION);
 
   if (!data?.inleiding?.data?.attributes) return null;
   const { tekst, foto } = data.inleiding.data.attributes;
@@ -16,6 +17,7 @@ export const Homepage = () => {
   return (
     <>
       <Row className="app-hero">
+        {loading && <Spinner />}
         <Col xs={8}>
           {/* <Card>
             <CardBody> */}
@@ -34,13 +36,20 @@ export const Homepage = () => {
           </div>
         </Col>
       </Row>
+      <Row>
+        <Col xs={12}>
+          <Searchbar
+            placeholder="Search for lemmas"
+          />
+        </Col>
+      </Row>
       <HomepageGroupList />
     </>
   )
 }
 
 const HomepageGroupList = () => {
-  const { data } = useQuery(LEVELS);
+  const { data, loading } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
     output.sort(sortKinderFirst) // put kindergarden first
@@ -49,6 +58,7 @@ const HomepageGroupList = () => {
 
   return (
     <Row>
+      {loading && <Spinner />}
       {levels?.map(l => (
         <Col xs={12} lg={4} className="my-3">
           <HomepageGroup id={l.id} attributes={l.attributes} />
@@ -63,21 +73,11 @@ const HomepageGroup = (props: {
   attributes: Niveau | undefined | null;
 }) => {
   const navigate = useNavigate();
-  const { data } = useQuery(LEMMAS_BY_LEVEL, {
-    variables: {
-      filters: {
-        niveau: {
-          id: {
-            eq: props.id
-          }
-        }
-      }
-    }
-  });
+  const { data, loading } = useQuery(LEMMATA);
 
-  if (!data?.lemmata?.data) return;
-  const lemmas = data.lemmata.data;
-  const firstTwoLemmas = lemmas?.slice(0, 2)
+  const lemmata = data?.lemmata?.data;
+  const levelLemmas = useMemo(() => lemmata?.filter(l => l.attributes?.niveau?.data?.id === props.id), [ lemmata, props.id ])
+  const firstTwoLemmas = levelLemmas?.slice(0, 2);
 
   return (
     <div>
@@ -88,8 +88,9 @@ const HomepageGroup = (props: {
               {props.attributes?.titel}
             </Link>
           </div>
+          {loading && <Spinner />}
           <div className="d-flex align-items-start">
-            {firstTwoLemmas.map(l => (
+            {firstTwoLemmas?.map(l => (
               <div className="w-50">
                 <div className="image-wrapper xs clickable" onClick={() => navigate(`/lemma/${l.id}`)}>
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />

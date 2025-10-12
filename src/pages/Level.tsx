@@ -1,31 +1,19 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 import { Col, Row, Spinner } from "reactstrap";
-import { LEMMAS_BY_LEVEL, LEVEL } from "../queries";
 import { LemmaOverview } from "../components/LemmaOverview";
 import { LemmaEntity } from "../gql/graphql";
 import { useMemo } from "react";
+import { LEMMATA, LEVELS } from "../queries";
 
 export const Level = () => {
   const { levelId } = useParams();
 
-  const { data: levelData, loading: loadingLevel } = useQuery(LEVEL, {
-    variables: {
-      id: levelId ?? ''
-    }
-  })
+  const { data: levels, loading: loadingLevel } = useQuery(LEVELS);
+  const { data: lemmata, loading: loadingLemmas } = useQuery(LEMMATA);
 
-  const { data: lemmaData, loading: loadingLemmas } = useQuery(LEMMAS_BY_LEVEL, {
-    variables: {
-      filters: {
-        niveau: {
-          id: {
-            eq: levelId
-          }
-        }
-      }
-    }
-  });
+  const level = useMemo(() => levels?.niveaus?.data?.find(l => l.id === levelId), [ levelId, levels?.niveaus?.data ]);
+  const lemmas = useMemo(() => lemmata?.lemmata?.data?.filter(l => l.attributes?.niveau?.data?.id === level?.id), [ lemmata?.lemmata?.data, level?.id ])
 
   const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
@@ -38,14 +26,14 @@ export const Level = () => {
       )}
       <Row>
         <Col xs={12}>
-          <h4>{levelData?.niveau?.data?.attributes?.titel}</h4>
+          <h4>{level?.attributes?.titel}</h4>
           <div>
-            {levelData?.niveau?.data?.attributes?.beschrijving}
+            {level?.attributes?.beschrijving}
           </div>
         </Col>
       </Row>
       <Row className="mt-3">
-        {lemmaData?.lemmata?.data?.map(l => (
+        {lemmas?.map(l => (
           <Col xs={12} lg={4}>
             <LemmaOverview lemma={l as LemmaEntity} />
           </Col>
