@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { IconFileText } from "@tabler/icons-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { useMemo, useRef } from "react";
 import { useParams } from "react-router";
 import { Button, Col, Row, Spinner } from "reactstrap";
 import { LEMMATA } from "../queries";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { useMemo, useRef } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 
 export const Lemma = () => {
   const { lemmaId } = useParams();
@@ -72,7 +73,7 @@ export const Lemma = () => {
       )}
       <div ref={pdfElementRef}>
         <Row>
-          <Col xs={12} lg={9} style={{ borderRight: '1px dashed lightgray' }}>
+          <Col xs={12} lg={8}>
             <div className="lemma-header">
               <div>
                 <div className="d-flex justify-content-between align-items-end">
@@ -84,8 +85,16 @@ export const Lemma = () => {
                       {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
                     </div>
                   </div>
-                  <Button className="hide-in-print-mode" onClick={downloadPDF}>
-                    Download PDF
+                  <Button
+                    outline
+                    size="sm"
+                    className="hide-in-print-mode"
+                    onClick={downloadPDF}
+                  >
+                    <span className="me-2">
+                      <IconFileText />
+                    </span>
+                    <span>Download PDF</span>
                   </Button>
                 </div>
                 <div className="mt-3">
@@ -96,16 +105,16 @@ export const Lemma = () => {
               </div>
             </div>
           </Col>
-          <Col xs={12} lg={3}>
+          <Col xs={12} lg={4}>
             <div className="h-100 d-flex align-items-center justify-content-center">
-              <div className="image-wrapper xl">
+              <div className="image-wrapper lemma-header">
                 <img src={attributes?.afbeelding?.data?.attributes?.url} />
               </div>
             </div>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} lg={9} style={{ borderRight: '1px dashed lightgray' }}>
+          <Col xs={12} lg={8}>
             {attributes?.doelgroep && (
               <div className="lemma-main-section">
                 <h5>Doelgroep</h5>
@@ -149,7 +158,7 @@ export const Lemma = () => {
               )}
             </div>
           </Col>
-          <Col xs={12} lg={3}>
+          <Col xs={12} lg={4}>
             {/* <div className="lemma-side-section">
             <h5>Thematische tags</h5>
           </div> */}

@@ -32,7 +32,7 @@ export const Level = () => {
           </div>
         </Col>
       </Row>
-      <Row className="mt-3">
+      <Row className="mt-3 align-items-stretch">
         {lemmas?.map(l => (
           <Col xs={12} lg={4}>
             <LemmaOverview lemma={l as LemmaEntity} />

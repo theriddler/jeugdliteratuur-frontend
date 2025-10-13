@@ -16,6 +16,11 @@ export const Homepage = () => {
 
   return (
     <>
+      <Row>
+        <Col xs={12}>
+          <Searchbar placeholder="Search for lemmas" />
+        </Col>
+      </Row>
       <Row className="app-hero">
         {loading && <Spinner />}
         <Col xs={8}>
@@ -36,13 +41,6 @@ export const Homepage = () => {
           </div>
         </Col>
       </Row>
-      <Row>
-        <Col xs={12}>
-          <Searchbar
-            placeholder="Search for lemmas"
-          />
-        </Col>
-      </Row>
       <HomepageGroupList />
     </>
   )
@@ -60,7 +58,7 @@ const HomepageGroupList = () => {
     <Row>
       {loading && <Spinner />}
       {levels?.map(l => (
-        <Col xs={12} lg={4} className="my-3">
+        <Col xs={12} lg={4}>
           <HomepageGroup id={l.id} attributes={l.attributes} />
         </Col>
       ))}
@@ -77,7 +75,7 @@ const HomepageGroup = (props: {
 
   const lemmata = data?.lemmata?.data;
   const levelLemmas = useMemo(() => lemmata?.filter(l => l.attributes?.niveau?.data?.id === props.id), [ lemmata, props.id ])
-  const firstTwoLemmas = levelLemmas?.slice(0, 2);
+  const firstThreeLemmas = levelLemmas?.slice(0, 3);
 
   return (
     <div>
@@ -89,10 +87,10 @@ const HomepageGroup = (props: {
             </Link>
           </div>
           {loading && <Spinner />}
-          <div className="d-flex align-items-start">
-            {firstTwoLemmas?.map(l => (
-              <div className="w-50">
-                <div className="image-wrapper xs clickable" onClick={() => navigate(`/lemma/${l.id}`)}>
+          <div className="d-flex gap-2">
+            {firstThreeLemmas?.map(l => (
+              <div>
+                <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/lemma/${l.id}`)}>
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />
                 </div>
                 {/* <div className="text-break">

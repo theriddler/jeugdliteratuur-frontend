@@ -1,0 +1,110 @@
+import { useQuery } from "@apollo/client";
+import { Input } from "reactstrap"
+import { LEMMATA } from "../queries";
+import { useMemo, useState } from "react";
+import { LemmaEntity } from "../gql/graphql";
+import { useNavigate } from "react-router";
+
+export const Searchbar = (props: {
+  placeholder?: string;
+}) => {
+  const { data: lemmas } = useQuery(LEMMATA);
+
+  const [ search, setSearch ] = useState('');
+  const suggestions = useMemo(() => {
+    if (!search) return undefined;
+    return lemmas?.lemmata?.data?.filter(l => (
+      l.attributes?.titel?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
+      || l.attributes?.auteur_voornaam?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
+      || l.attributes?.auter_achternaam?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
+      || l.attributes?.jaar?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
+    ))
+  }, [ lemmas?.lemmata?.data, search ])
+
+  return (
+    <div className="searchbar-container">
+      <Input
+        type="search"
+        placeholder={props.placeholder}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      {suggestions && suggestions.length > 0 && (
+        <div className="searchbar-dropdown">
+          {suggestions.map(l => (
+            <SearchbarLemmaSuggestion
+              l={l as LemmaEntity}
+              search={search}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const SearchbarLemmaSuggestion = (props: {
+  l: LemmaEntity,
+  search: string
+}) => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="searchbar-lemma-suggestion" onClick={() => navigate(`/lemma/${props.l.id}`)}>
+      <div className="image-wrapper fixed xs">
+        <img src={props.l.attributes?.afbeelding?.data?.attributes?.url} />
+      </div>
+      <div>
+        <div className="text-secondary">
+          <span>
+            <HighlightedText
+              text={props.l.attributes?.auteur_voornaam}
+              highlight={props.search}
+            />
+          </span>
+          <span className="ms-1">
+            <HighlightedText
+              text={props.l.attributes?.auter_achternaam}
+              highlight={props.search}
+            />
+          </span>
+        </div>
+        <div className="mt-1">
+          <span>
+            <HighlightedText
+              text={props.l.attributes?.titel}
+              highlight={props.search}
+            />
+          </span>
+          <span className="ms-1">
+            (<HighlightedText
+              text={props.l.attributes?.jaar}
+              highlight={props.search}
+            />)
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const HighlightedText = (props: {
+  text: string | undefined | null,
+  highlight: string
+}) => {
+  if (!props.text) return null;
+  const capturePattern = `(${props.highlight})`
+  const regex = new RegExp(capturePattern, 'gi')
+  const arraySplitOnHighlight = props.text?.split(regex);
+
+  return (
+    <span>
+      {arraySplitOnHighlight?.map((section, i) => (
+        // odd indexes were matches
+        <span className={i % 2 === 1 ? 'fw-bold' : ''}>
+          {section}
+        </span>
+      ))}
+    </span>
+  )
+}

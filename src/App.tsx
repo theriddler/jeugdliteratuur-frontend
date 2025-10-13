@@ -5,6 +5,7 @@ import './css/__defaults.scss';
 import './css/App.scss';
 import './css/header.scss';
 import './css/sidebar.scss';
+import './css/searchbar.scss';
 import { Colofon } from "./pages/Colofon";
 import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";
 import { Homepage } from "./pages/Homepage";
