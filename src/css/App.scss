@@ -23,6 +23,10 @@
   border-radius: 32px;
   padding: 16px;
   margin: 16px 0;
+
+  [class^="col-"], [class*=" col-"] {
+    margin: 0 !important;
+  }
 }
 
 .lemma-header{
@@ -45,6 +49,10 @@
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
+
+  &.hero-img {
+    height: 100%;
+  }
 
   &.level-group {
     width: 100px;

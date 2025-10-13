@@ -41,7 +41,7 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
         <Col xs={12} lg={4}>
-          <div className="h-100 d-flex align-items-center justify-content-end">
+          <div className="mt-3 h-100 d-flex align-items-center justify-content-end">
             <div className="image-wrapper lemma-header">
               <img src={attributes?.afbeelding?.data?.attributes?.url} />
             </div>

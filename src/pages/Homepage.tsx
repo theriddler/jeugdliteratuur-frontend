@@ -39,11 +39,12 @@ export const Homepage = () => {
           </Card> */}
         </Col>
         <Col xs={4}>
-          <div className="image-wrapper w-100">
+          <div className="image-wrapper hero-img">
             <img src={foto?.data?.attributes?.url} />
           </div>
         </Col>
       </Row>
+      <div className="mt-4" />
       <HomepageGroupList />
     </>
   )
