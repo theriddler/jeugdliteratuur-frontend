@@ -105,3 +105,15 @@
     display: none;
   }
 }
+
+.download-pdf-link {
+  outline: 1px solid var(--secondary-color);
+  border-radius: 16px;
+  color: var(--text-dark) !important;
+  padding: 8px;
+  width: 100%;
+  transition: all 0.3s;
+  &:hover{
+    background-color: var(--secondary-color);
+  }
+}
