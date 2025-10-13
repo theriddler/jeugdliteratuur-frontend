@@ -71,6 +71,10 @@ h5{
 }
 
 // beacuse of issues with strapi block editor
-br{
+br {
   display: none;
+}
+
+ul br{
+  display: block;
 }
