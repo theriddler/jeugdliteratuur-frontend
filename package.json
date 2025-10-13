@@ -19,6 +19,7 @@
     "aws-amplify": "^6.6.6",
     "bootstrap": "^5.3.8",
     "graphql": "^15.10.1",
+    "jspdf": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pdf-html": "^2.1.3",
