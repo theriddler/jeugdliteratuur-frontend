@@ -15,7 +15,7 @@ const Header = (props: {
             <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemmas</span>
           </div>
           <div className="app-header-link-container">
-            <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Didactische achtergrond</NavLink>
+            <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik</NavLink>
           </div>
         </Col>
         <Col xs={4} className='mb-0 d-flex justify-content-center'>

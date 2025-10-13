@@ -27,7 +27,7 @@ export const LemmaDocumentReact = (props: {
                   </div>
                 </div>
                 <div>
-                  <PDFDownloadLink className="hide-in-pdf download-pdf-link" document={<LemmaDocument lemma={props.lemma as LemmaEntity} />}>
+                  <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma as LemmaEntity} />}>
                     Download PDF
                   </PDFDownloadLink>
                 </div>

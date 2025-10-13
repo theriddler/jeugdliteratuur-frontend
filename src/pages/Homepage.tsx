@@ -17,8 +17,11 @@ export const Homepage = () => {
   return (
     <>
       <Row>
-        <Col xs={12}>
-          <Searchbar placeholder="Search for lemmas" />
+        <Col xs={8}>
+          <h3>Welkom</h3>
+        </Col>
+        <Col xs={4}>
+          <Searchbar placeholder="Zoeken" />
         </Col>
       </Row>
       <Row className="app-hero">
@@ -30,7 +33,7 @@ export const Homepage = () => {
             <BlocksRenderer content={tekst} />
           )}
           <div className="mt-3 d-flex gap-3 justify-content-end">
-            <Link to='/over-het-project'>Over het project</Link>
+            <Link className="pretty-button" to='/over-het-project'>Over het project</Link>
           </div>
           {/* </CardBody>
           </Card> */}
