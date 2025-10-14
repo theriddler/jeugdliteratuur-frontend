@@ -2,7 +2,7 @@ import { graphql } from "./gql";
 
 export const LEMMATA = graphql(`
   query Lemmata {
-    lemmata {
+    lemmata(pagination: {page: 1, pageSize: 500}) {
       data {
         id
         attributes{
