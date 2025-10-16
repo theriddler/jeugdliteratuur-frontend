@@ -54,7 +54,7 @@ export const LemmaDocumentReact = (props: {
                 <div>Haal het bij de bibliotheek.</div>
               </div>
               <div>
-                <a className="pretty-button library-orange">
+                <a className="pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
                   De Jeugdbibliotheek
                 </a>
               </div>
