@@ -11,6 +11,8 @@ export const LEMMATA = graphql(`
           de_kern
           auteur_voornaam
           auter_achternaam
+          auteur_2_voornaam
+          auter_2_achternaam
           jaar
           afbeelding {
             data{
@@ -58,6 +60,7 @@ export const LEMMATA = graphql(`
             }
           }
           verder_lezen_extern
+          voorlezen
           niveau {
             data{
               id
