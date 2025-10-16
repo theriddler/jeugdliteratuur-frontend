@@ -15,7 +15,7 @@ export const LemmaDocumentReact = (props: {
     <div>
       <Row>
         <Col xs={12} lg={8}>
-          <div className="lemma-header">
+          <div className="lemma-header-section">
             <div>
               <div className="d-flex justify-content-between align-items-end">
                 <div className="d-flex gap-3 align-items-end">
@@ -44,9 +44,20 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
         <Col xs={12} lg={4}>
-          <div className="mt-3 h-100 d-flex align-items-center justify-content-end">
-            <div className="image-wrapper lemma-header">
-              <img src={attributes?.afbeelding?.data?.attributes?.url} />
+          <div>
+            <div className="mt-3 h-100 d-flex flex-column justify-content-center align-items-end gap-3">
+              <div className="image-wrapper lemma-header">
+                <img src={attributes?.afbeelding?.data?.attributes?.url} />
+              </div>
+              <div>
+                <div>Aan de slag met dit boek?</div>
+                <div>Haal het bij de bibliotheek.</div>
+              </div>
+              <div>
+                <a className="pretty-button library-orange">
+                  De Jeugdbibliotheek
+                </a>
+              </div>
             </div>
           </div>
         </Col>

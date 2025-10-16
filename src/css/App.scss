@@ -29,7 +29,7 @@
   }
 }
 
-.lemma-header{
+.lemma-header-section{
   margin: 8px 0 16px 0;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .lemma-side-section {
-  margin: 32px 0;
+  margin-bottom: 32px 0;
 }
 
 .clickable {
@@ -117,12 +117,22 @@
 
 .pretty-button {
   cursor: pointer;
-  outline: 1px solid var(--secondary-color);
+  display: block;
   border-radius: 16px;
+  outline: 1px solid var(--secondary-color);
   color: var(--text-dark) !important;
   padding: 8px;
   transition: all 0.3s;
   &:hover{
     background-color: var(--secondary-color);
+  }
+
+  &.library-orange{
+    color: #F4893E !important;
+    outline-color: #F4893E;
+    &:hover{
+      color: white !important;
+      background-color: #F4893E !important;
+    }
   }
 }
