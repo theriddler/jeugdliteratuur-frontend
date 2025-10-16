@@ -114,18 +114,24 @@ export const LemmaDocumentReact = (props: {
           {/* <div className="lemma-side-section">
             <h5>Thematische tags</h5>
           </div> */}
-          <div className="lemma-side-section">
-            <h5>⁠Opstaptitels</h5>
-            {attributes?.opstaptitels_extern && (
+          {attributes?.opstaptitels_extern && (
+            <div className="lemma-side-section">
+              <h5>⁠Opstaptitels</h5>
               <BlocksRenderer content={attributes?.opstaptitels_extern} />
-            )}
-          </div>
-          <div className="lemma-side-section">
-            <h5>Verder lezen</h5>
-            {attributes?.verder_lezen_extern && (
+            </div>
+          )}
+          {attributes?.verder_lezen_extern && (
+            <div className="lemma-side-section">
+              <h5>Verder lezen</h5>
               <BlocksRenderer content={attributes?.verder_lezen_extern} />
-            )}
-          </div>
+            </div>
+          )}
+          {attributes?.parallel_lezen_extern && (
+            <div className="lemma-side-section">
+              <h5>Parallel lezen</h5>
+              <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+            </div>
+          )}
         </Col>
       </Row >
     </div >
