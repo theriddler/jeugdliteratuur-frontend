@@ -114,27 +114,56 @@ export const LemmaDocumentReact = (props: {
           {/* <div className="lemma-side-section">
             <h5>Thematische tags</h5>
           </div> */}
-          {attributes?.opstaptitels_extern && (
+          {(attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern && (
             <div className="lemma-side-section">
               <h5>⁠Opstaptitels</h5>
-              <BlocksRenderer content={attributes?.opstaptitels_extern} />
+              {attributes?.opstaptitels?.data.map(l => (
+                <LemmaInternalLink l={l} />
+              ))}
+              {attributes?.opstaptitels_extern && (
+                <BlocksRenderer content={attributes?.opstaptitels_extern} />
+              )}
             </div>
           )}
-          {attributes?.verder_lezen_extern && (
+          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
             <div className="lemma-side-section">
               <h5>Verder lezen</h5>
-              <BlocksRenderer content={attributes?.verder_lezen_extern} />
+              {attributes?.verder_lezens?.data.map(l => (
+                <LemmaInternalLink l={l} />
+              ))}
+              {attributes?.verder_lezen_extern && (
+                <BlocksRenderer content={attributes?.verder_lezen_extern} />
+              )}
             </div>
           )}
-          {attributes?.parallel_lezen_extern && (
+          {(attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern && (
             <div className="lemma-side-section">
               <h5>Parallel lezen</h5>
-              <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+              {attributes?.parallel_lezens?.data.map(l => (
+                <LemmaInternalLink l={l} />
+              ))}
+              {attributes?.parallel_lezen_extern && (
+                <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+              )}
             </div>
           )}
         </Col>
       </Row >
     </div >
+  )
+}
+
+const LemmaInternalLink = (props: { l: LemmaEntity }) => {
+  const { attributes } = props.l;
+
+  return (
+    <div className="d-flex gap-3">
+      <div>
+        <div className="image-wrapper xs">
+          <img src={attributes?.afbeelding?.data?.attributes?.url} />
+        </div>
+      </div>
+    </div>
   )
 }
 
