@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { Input } from "reactstrap"
-import { LEMMATA } from "../queries";
 import { useMemo, useState } from "react";
-import { LemmaEntity } from "../gql/graphql";
 import { useNavigate } from "react-router";
+import { Input } from "reactstrap";
+import { LemmataQueryLemma } from "../queries";
+import { LEMMATA } from "../queries";
 
 export const Searchbar = (props: {
   placeholder?: string;
@@ -33,7 +33,7 @@ export const Searchbar = (props: {
         <div className="searchbar-dropdown">
           {suggestions.map(l => (
             <SearchbarLemmaSuggestion
-              l={l as LemmaEntity}
+              l={l}
               search={search}
             />
           ))}
@@ -44,7 +44,7 @@ export const Searchbar = (props: {
 }
 
 const SearchbarLemmaSuggestion = (props: {
-  l: LemmaEntity,
+  l: LemmataQueryLemma,
   search: string
 }) => {
   const navigate = useNavigate();

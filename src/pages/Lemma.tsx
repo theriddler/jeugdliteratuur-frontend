@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import { useParams } from "react-router";
 import { Spinner } from "reactstrap";
 import { LemmaDocumentReact } from "../components/LemmaDocument";
-import { LemmaEntity } from "../gql/graphql";
 import { LEMMATA } from "../queries";
 
 export const Lemma = () => {
@@ -11,6 +10,7 @@ export const Lemma = () => {
 
   const { data, loading } = useQuery(LEMMATA);
   const lemma = useMemo(() => data?.lemmata?.data?.find(l => l.id === lemmaId), [ data?.lemmata?.data, lemmaId ])
+  if (!lemma) return null;
 
   return (
     <div>
@@ -19,7 +19,7 @@ export const Lemma = () => {
           <Spinner />
         </div>
       )}
-      <LemmaDocumentReact lemma={lemma as LemmaEntity} />
+      <LemmaDocumentReact lemma={lemma} />
     </div >
   )
 }

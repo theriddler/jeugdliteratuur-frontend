@@ -1,4 +1,7 @@
 import { graphql } from "./gql";
+import { LemmataQuery } from "./gql/graphql";
+
+export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 
 export const LEMMATA = graphql(`
   query Lemmata {

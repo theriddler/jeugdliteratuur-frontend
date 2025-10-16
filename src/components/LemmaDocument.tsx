@@ -3,10 +3,10 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
 import { Col, Row } from "reactstrap";
-import { LemmaEntity } from "../gql/graphql";
+import { LemmataQueryLemma } from "../queries";
 
 export const LemmaDocumentReact = (props: {
-  lemma: LemmaEntity | undefined
+  lemma: LemmataQueryLemma
 }) => {
   if (!props.lemma) return null;
   const { attributes } = props.lemma;
@@ -30,7 +30,7 @@ export const LemmaDocumentReact = (props: {
                   </div>
                 </div>
                 <div>
-                  <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma as LemmaEntity} />}>
+                  <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma} />}>
                     Download PDF
                   </PDFDownloadLink>
                 </div>
@@ -164,7 +164,7 @@ export const LemmaDocumentReact = (props: {
   )
 }
 
-const LemmaInternalLink = (props: { l: LemmaEntity }) => {
+const LemmaInternalLink = (props: { l: LemmataQueryLemma }) => {
   const { attributes } = props.l;
 
   return (
@@ -221,7 +221,7 @@ const UnbreakableView = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const LemmaDocument = (props: {
-  lemma: LemmaEntity | undefined
+  lemma: LemmataQueryLemma
 }) => {
   if (!props.lemma) return null;
   const html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} />)
@@ -244,7 +244,7 @@ export const LemmaDocument = (props: {
 }
 
 const LemmaHTML = (props: {
-  lemma: LemmaEntity
+  lemma: LemmataQueryLemma
 }) => (
   <html>
     <body>

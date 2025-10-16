@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/client";
+import { useMemo } from "react";
 import { useParams } from "react-router";
 import { Col, Row, Spinner } from "reactstrap";
 import { LemmaOverview } from "../components/LemmaOverview";
-import { LemmaEntity } from "../gql/graphql";
-import { useMemo } from "react";
 import { LEMMATA, LEVELS } from "../queries";
 
 export const Level = () => {
@@ -35,7 +34,7 @@ export const Level = () => {
       <Row className="mt-3 align-items-stretch">
         {lemmas?.map(l => (
           <Col xs={12} lg={4}>
-            <LemmaOverview lemma={l as LemmaEntity} />
+            <LemmaOverview lemma={l} />
           </Col>
         ))}
       </Row>
