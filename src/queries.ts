@@ -60,6 +60,19 @@ export const LEMMATA = graphql(`
             }
           }
           verder_lezen_extern
+          parallel_lezens {
+            data{
+              id
+              attributes{
+                titel
+                korte_intro
+                auteur_voornaam
+                auter_achternaam
+                jaar
+              }
+            }
+          }
+          parallel_lezen_extern
           voorlezen
           niveau {
             data{
