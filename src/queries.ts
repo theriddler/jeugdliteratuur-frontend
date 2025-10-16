@@ -76,7 +76,6 @@ export const LEMMATA = graphql(`
             }
           }
           parallel_lezen_extern
-          voorlezen
           niveau {
             data{
               id
@@ -191,6 +190,19 @@ export const GEBRUIK_VAN_DE_LIJST = graphql(`
         id
         attributes{
           Tekst
+        }
+      }
+    }
+  }
+`)
+
+export const VOORLEZEN = graphql(`
+  query Voorlezen {
+    voorlezen {
+      data{
+        id
+        attributes{
+          tekst
         }
       }
     }
