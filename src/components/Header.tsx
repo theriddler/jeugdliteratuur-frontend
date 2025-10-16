@@ -12,7 +12,7 @@ const Header = (props: {
       <Row>
         <Col xs={4} className="mb-0 d-flex justify-content-start align-items-end gap-1">
           <div className="app-header-link-container">
-            <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemmas</span>
+            <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
           </div>
           <div className="app-header-link-container">
             <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik</NavLink>
