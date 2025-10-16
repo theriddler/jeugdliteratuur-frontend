@@ -23,7 +23,10 @@ export const LemmaDocumentReact = (props: {
                     <h3>{attributes?.titel} ({attributes?.jaar})</h3>
                   </div>
                   <div className="text-secondary">
-                    {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
+                    <span>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</span>
+                    {attributes?.auteur_2_voornaam && (
+                      <span> / {attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</span>
+                    )}
                   </div>
                 </div>
                 <div>
