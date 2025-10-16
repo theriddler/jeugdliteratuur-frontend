@@ -10,7 +10,6 @@ export const Lemma = () => {
 
   const { data, loading } = useQuery(LEMMATA);
   const lemma = useMemo(() => data?.lemmata?.data?.find(l => l.id === lemmaId), [ data?.lemmata?.data, lemmaId ])
-  if (!lemma) return null;
 
   return (
     <div>
