@@ -1,12 +1,13 @@
 import { Document, Page, PDFDownloadLink, View } from "@react-pdf/renderer";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { IconTrendingDown3 } from "@tabler/icons-react";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
 import { Col, Row } from "reactstrap";
 import { LemmataQueryLemma } from "../queries";
 
 export const LemmaDocumentReact = (props: {
-  lemma: LemmataQueryLemma
+  lemma: LemmataQueryLemma | undefined
 }) => {
   if (!props.lemma) return null;
   const { attributes } = props.lemma;
@@ -29,13 +30,13 @@ export const LemmaDocumentReact = (props: {
                     )}
                   </div>
                 </div>
-                <div>
+                <div className="translate-download-pdf-button">
                   <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma} />}>
                     Download PDF
                   </PDFDownloadLink>
                 </div>
               </div>
-              <div className="mt-3">
+              <div className="mt-4">
                 {attributes?.de_kern && (
                   <BlocksRenderer content={attributes?.de_kern} />
                 )}
@@ -44,25 +45,24 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
         <Col xs={12} lg={4}>
-          <div>
-            <div className="mt-3 h-100 d-flex flex-column justify-content-center align-items-end gap-3">
-              <div className="image-wrapper lemma-header">
-                <img src={attributes?.afbeelding?.data?.attributes?.url} />
-              </div>
-              <div>
-                <div>Aan de slag met dit boek?</div>
-                <div>Haal het bij de bibliotheek.</div>
-              </div>
-              <div>
-                <a className="pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+          <div className="lemma-header-section">
+            <div className="d-flex flex-column align-items-end">
+              <div className="d-flex justify-content-end align-items-center gap-2">
+                <div className="align-self-start">Aan de slag met dit boek?</div>
+                <IconTrendingDown3 />
+                <a className="mt-1 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
                   De Jeugdbibliotheek
                 </a>
+              </div>
+
+              <div className="mt-4 image-wrapper lemma-header">
+                <img src={attributes?.afbeelding?.data?.attributes?.url} />
               </div>
             </div>
           </div>
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-3">
         <Col xs={12} lg={8}>
           {attributes?.doelgroep && (
             <section>

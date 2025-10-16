@@ -142,3 +142,10 @@
     }
   }
 }
+
+.translate-download-pdf-button{
+  @media (min-width: 992px) {
+    position: relative;
+    top: 50px;
+  }
+}
