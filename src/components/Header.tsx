@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import { Col, Row } from 'reactstrap';
 import logo from '../assets/logo.png';
+import partner_logo_1 from '../assets/partner_logo_1.jpg';
 
 const Header = (props: {
   toggleSidebar: () => void;
@@ -26,15 +27,22 @@ const Header = (props: {
             </div>
           </div>
         </Col>
-        <Col xs={4} className="mb-0 d-flex justify-content-end align-items-end gap-1">
-          <div className="app-header-link-container">
-            <NavLink to="/over-het-project" className="app-nav-link">Over het project</NavLink>
+        <Col xs={4} className="mb-0 mt-1 d-flex flex-column justify-content-between gap-3">
+          <div className="d-flex justify-content-end gap-1">
+            <div className="image-wrapper partner-logo">
+              <img src={partner_logo_1} />
+            </div>
           </div>
-          <div className="app-header-link-container">
-            <NavLink to="/samenwerken" className="app-nav-link">Samenwerken?</NavLink>
-          </div>
-          <div className="app-header-link-container">
-            <NavLink to="/colofon" className="app-nav-link">Colofon</NavLink>
+          <div className="d-flex justify-content-end gap-1">
+            <div className="app-header-link-container">
+              <NavLink to="/over-het-project" className="app-nav-link">Over het project</NavLink>
+            </div>
+            <div className="app-header-link-container">
+              <NavLink to="/samenwerken" className="app-nav-link">Samenwerken?</NavLink>
+            </div>
+            <div className="app-header-link-container">
+              <NavLink to="/colofon" className="app-nav-link">Colofon</NavLink>
+            </div>
           </div>
         </Col>
       </Row>

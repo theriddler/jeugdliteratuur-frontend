@@ -69,6 +69,12 @@
     width: 200px;
   }
 
+  &.partner-logo{
+    height: 32px;
+    width: 32px;
+    border-radius: 8px;
+  }
+
   &.xs{
     height: 60px;
     &.fixed{width: 35px;}
