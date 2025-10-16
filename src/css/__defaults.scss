@@ -17,6 +17,14 @@ $dark: #2C2C2C;
   --bs-link-color-rgb: #5A847B;
 }
 
+body {
+  background-color: #FBF0D9;
+  background-image: url('../assets/paper-texture.png');
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  background-attachment: fixed;
+}
+
 .app-layout {
   display: flex;
   height: 100%;
@@ -34,7 +42,6 @@ main {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  background-color: var(--text-light);
 }
 
 .header-font {

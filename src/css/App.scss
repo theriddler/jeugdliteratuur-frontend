@@ -19,6 +19,7 @@
 }
 
 .app-hero{
+  background-color: white;
   border: 2px solid var(--secondary-color);
   border-radius: 32px;
   padding: 16px;
@@ -109,7 +110,6 @@
 
   .card-body{
     padding: 8px 16px 16px 16px;
-    background-color: var(--text-light);
   }
 }
 
