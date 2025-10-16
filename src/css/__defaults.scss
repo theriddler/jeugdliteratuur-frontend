@@ -2,14 +2,14 @@ $primary-color: #5E2750;
 $secondary-color: #E2A93A;
 $success: #5A847B;
 $link-color: #f4f7fa;
-$light: #FFF9E9;
+$light: #FDF9F3;
 $dark: #2C2C2C;
 
 :root {
   --primary-color: #5E2750; /* gray-700 */
   --primary-hover: #FFF9E9; /* gray-800 */
   --secondary-color: #E2A93A;
-  --text-light: #FFF9E9; /* gray-100 */
+  --text-light: #FDF9F3; /* gray-100 */
   --text-dark: #2C2C2C;
   --content-bg: #f4f7fa;
   --border-color: #4a5568;
@@ -34,6 +34,7 @@ main {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
+  background-color: var(--text-light);
 }
 
 .header-font {
