@@ -62,7 +62,7 @@ const HomepageGroupList = () => {
     <Row>
       {loading && <Spinner />}
       {levels?.map(l => (
-        <Col xs={12} lg={4}>
+        <Col xs={12} lg={4} key={'homepage_group_list' + l.id}>
           <HomepageGroup id={l.id} attributes={l.attributes} />
         </Col>
       ))}
