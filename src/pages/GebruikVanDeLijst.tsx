@@ -1,33 +1,17 @@
 import { useQuery } from "@apollo/client";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { Card, CardBody, Col, Row } from "reactstrap";
 import { GEBRUIK_VAN_DE_LIJST } from "../queries";
+import { InfoPage } from "../components/InfoPage";
 
 export const GebruikVanDeLijst = () => {
-  const { data } = useQuery(GEBRUIK_VAN_DE_LIJST);
-
-  if (!data?.gebruikVanDeLijst?.data?.attributes) return null;
-  const { Tekst } = data.gebruikVanDeLijst.data.attributes;
+  const { data, loading } = useQuery(GEBRUIK_VAN_DE_LIJST);
+  const gebruikVanDeLijst = data?.gebruikVanDeLijst?.data;
 
   return (
-    <>
-      <Row>
-        <Col xs={12}>
-          <h4 className="mb-3">Gebruik van de lijst</h4>
-          <Card>
-            <CardBody>
-              {Tekst && (
-                <BlocksRenderer content={Tekst} />
-              )}
-            </CardBody>
-          </Card>
-        </Col>
-        {/* <Col xs={4}>
-          <div className="image-wrapper xl">
-            <img src={foto?.data?.attributes?.url} />
-          </div>
-        </Col> */}
-      </Row>
-    </>
+    <InfoPage
+      titel="Gebruik van de lijst"
+      tekst={gebruikVanDeLijst?.attributes?.Tekst}
+      fotoUrl={gebruikVanDeLijst?.attributes?.foto?.data?.attributes?.url}
+      loading={loading}
+    />
   )
 }
