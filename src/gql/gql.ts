@@ -18,9 +18,9 @@ type Documents = {
     "\n  query Levels {\n    niveaus {\n      data{\n        id\n        attributes{\n          titel\n          beschrijving\n        }\n      }\n    }\n  }\n": typeof types.LevelsDocument,
     "\n  query Introduction {\n    inleiding {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.IntroductionDocument,
     "\n  query OverHetProject {\n    overHetProject {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.OverHetProjectDocument,
-    "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n": typeof types.SamenwerkenDocument,
-    "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": typeof types.ColofonDocument,
-    "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n": typeof types.GebruikVanDeLijstDocument,
+    "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.SamenwerkenDocument,
+    "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.ColofonDocument,
+    "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.GebruikVanDeLijstDocument,
     "\n  query Voorlezen {\n    voorlezen {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": typeof types.VoorlezenDocument,
 };
 const documents: Documents = {
@@ -28,9 +28,9 @@ const documents: Documents = {
     "\n  query Levels {\n    niveaus {\n      data{\n        id\n        attributes{\n          titel\n          beschrijving\n        }\n      }\n    }\n  }\n": types.LevelsDocument,
     "\n  query Introduction {\n    inleiding {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.IntroductionDocument,
     "\n  query OverHetProject {\n    overHetProject {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.OverHetProjectDocument,
-    "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n": types.SamenwerkenDocument,
-    "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": types.ColofonDocument,
-    "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n": types.GebruikVanDeLijstDocument,
+    "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.SamenwerkenDocument,
+    "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.ColofonDocument,
+    "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GebruikVanDeLijstDocument,
     "\n  query Voorlezen {\n    voorlezen {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": types.VoorlezenDocument,
 };
 
@@ -67,15 +67,15 @@ export function graphql(source: "\n  query OverHetProject {\n    overHetProject 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Samenwerken {\n    samenwerken {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Colofon {\n    colofon {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

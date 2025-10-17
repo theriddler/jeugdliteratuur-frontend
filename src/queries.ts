@@ -163,6 +163,14 @@ export const SAMENWERKEN = graphql(`
         id
         attributes{
           Tekst
+          foto {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -176,6 +184,14 @@ export const COLOFON = graphql(`
         id
         attributes{
           tekst
+          foto {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -190,6 +206,14 @@ export const GEBRUIK_VAN_DE_LIJST = graphql(`
         id
         attributes{
           Tekst
+          foto {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
         }
       }
     }
