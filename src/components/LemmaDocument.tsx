@@ -4,13 +4,17 @@ import { IconTrendingDown3 } from "@tabler/icons-react";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
 import { Col, Row } from "reactstrap";
+import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmataQueryLemma } from "../queries";
 
 export const LemmaDocumentReact = (props: {
-  lemma: LemmataQueryLemma | undefined
+  lemma: LemmataQueryLemma | undefined,
+  voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => {
-  if (!props.lemma) return null;
+
+  if (!props.lemma || !props.voorlezen) return null;
   const { attributes } = props.lemma;
+  const { attributes: voorlezen } = props.voorlezen
 
   return (
     <div>
@@ -29,12 +33,13 @@ export const LemmaDocumentReact = (props: {
                       <span> / {attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</span>
                     )}
                   </div>
+                  <div className="ms-5">
+                    <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}>
+                      Download PDF
+                    </PDFDownloadLink>
+                  </div>
                 </div>
-                <div className="translate-download-pdf-button">
-                  <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma} />}>
-                    Download PDF
-                  </PDFDownloadLink>
-                </div>
+                {/* <div className="translate-download-pdf-button"> */}
               </div>
               <div className="mt-4">
                 {attributes?.de_kern && (
@@ -46,15 +51,14 @@ export const LemmaDocumentReact = (props: {
         </Col>
         <Col xs={12} lg={4}>
           <div className="lemma-header-section">
-            <div className="d-flex flex-column align-items-end">
-              <div className="d-flex justify-content-end align-items-center gap-2">
-                <div className="align-self-start">Aan de slag met dit boek?</div>
+            <div className="d-flex flex-column align-items-center">
+              <div className="d-flex justify-content-center align-items-center gap-2">
+                <div className="align-self-start" style={{ fontSize: '11px' }}>Aan de slag met dit boek?</div>
                 <IconTrendingDown3 />
-                <a className="mt-1 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
-                  De Jeugdbibliotheek
+                <a className="mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+                  Naar de Jeugdbibliotheek
                 </a>
               </div>
-
               <div className="mt-4 image-wrapper lemma-header">
                 <img src={attributes?.afbeelding?.data?.attributes?.url} />
               </div>
@@ -96,6 +100,54 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
+        </Col>
+        <Col xs={12} lg={4}>
+          {/* <div className="lemma-side-section">
+            <h5>Thematische tags</h5>
+          </div> */}
+          {(attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern && (
+            <section>
+              <div className="lemma-side-section">
+                <h5>⁠Opstaptitels</h5>
+                {attributes?.opstaptitels?.data.map(l => (
+                  <LemmaInternalLink l={l} />
+                ))}
+                {attributes?.opstaptitels_extern && (
+                  <BlocksRenderer content={attributes?.opstaptitels_extern} />
+                )}
+              </div>
+            </section>
+          )}
+          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
+            <section>
+              <div className="lemma-side-section">
+                <h5>Verder lezen</h5>
+                {attributes?.verder_lezens?.data.map(l => (
+                  <LemmaInternalLink l={l} />
+                ))}
+                {attributes?.verder_lezen_extern && (
+                  <BlocksRenderer content={attributes?.verder_lezen_extern} />
+                )}
+              </div>
+            </section>
+          )}
+          {(attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern && (
+            <section>
+              <div className="lemma-side-section">
+                <h5>Parallel lezen</h5>
+                {attributes?.parallel_lezens?.data.map(l => (
+                  <LemmaInternalLink l={l} />
+                ))}
+                {attributes?.parallel_lezen_extern && (
+                  <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+                )}
+              </div>
+            </section>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} lg={8}>
           {attributes?.lessuggesties && (
             <section>
               <div className="lemma-main-section">
@@ -104,6 +156,7 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
+
           {attributes?.kerndoelen && (
             <section>
               <div className="lemma-main-section">
@@ -112,54 +165,28 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
-          <section>
-            <div className="lemma-main-section">
-              <h5>Vindplaatsen en bronnen</h5>
-              {attributes?.bronnen && (
-                <BlocksRenderer content={attributes?.bronnen} />
-              )}
-            </div>
-          </section>
+          {attributes?.bronnen && (
+            <section>
+              <div className="lemma-main-section">
+                <h5>Vindplaatsen en bronnen</h5>
+                {attributes?.bronnen && (
+                  <BlocksRenderer content={attributes?.bronnen} />
+                )}
+              </div>
+            </section>
+          )}
         </Col>
         <Col xs={12} lg={4}>
-          {/* <div className="lemma-side-section">
-            <h5>Thematische tags</h5>
-          </div> */}
-          {(attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern && (
-            <div className="lemma-side-section">
-              <h5>⁠Opstaptitels</h5>
-              {attributes?.opstaptitels?.data.map(l => (
-                <LemmaInternalLink l={l} />
-              ))}
-              {attributes?.opstaptitels_extern && (
-                <BlocksRenderer content={attributes?.opstaptitels_extern} />
-              )}
-            </div>
-          )}
-          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
-            <div className="lemma-side-section">
-              <h5>Verder lezen</h5>
-              {attributes?.verder_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} />
-              ))}
-              {attributes?.verder_lezen_extern && (
-                <BlocksRenderer content={attributes?.verder_lezen_extern} />
-              )}
-            </div>
-          )}
-          {(attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern && (
-            <div className="lemma-side-section">
-              <h5>Parallel lezen</h5>
-              {attributes?.parallel_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} />
-              ))}
-              {attributes?.parallel_lezen_extern && (
-                <BlocksRenderer content={attributes?.parallel_lezen_extern} />
-              )}
-            </div>
+          {voorlezen && (
+            <section>
+              <div className="lemma-side-section">
+                <h5>Voorlezen</h5>
+                <BlocksRenderer content={voorlezen?.tekst} />
+              </div>
+            </section>
           )}
         </Col>
-      </Row >
+      </Row>
     </div >
   )
 }
@@ -221,10 +248,11 @@ const UnbreakableView = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const LemmaDocument = (props: {
-  lemma: LemmataQueryLemma
+  lemma: LemmataQueryLemma,
+  voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => {
   if (!props.lemma) return null;
-  const html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} />)
+  const html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} voorlezen={props.voorlezen} />)
 
   return (
     <Document>
@@ -244,11 +272,12 @@ export const LemmaDocument = (props: {
 }
 
 const LemmaHTML = (props: {
-  lemma: LemmataQueryLemma
+  lemma: LemmataQueryLemma,
+  voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => (
   <html>
     <body>
-      <LemmaDocumentReact lemma={props.lemma} />
+      <LemmaDocumentReact lemma={props.lemma} voorlezen={props.voorlezen} />
     </body>
   </html>
 )
