@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { Col, Row, Spinner } from "reactstrap";
+import { Col, Row } from "reactstrap";
+import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaOverview } from "../components/LemmaOverview";
 import { LEMMATA, LEVELS } from "../queries";
 
@@ -20,7 +21,7 @@ export const Level = () => {
     <div>
       {loading && (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-          <Spinner />
+          <FullPageSpinner />
         </div>
       )}
       <Row>

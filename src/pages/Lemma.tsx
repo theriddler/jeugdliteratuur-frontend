@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { Spinner } from "reactstrap";
+import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaDocumentReact } from "../components/LemmaDocument";
 import { LEMMATA, VOORLEZEN } from "../queries";
 
@@ -19,7 +19,7 @@ export const Lemma = () => {
     <div>
       {loadingLemmata || loadingVoorlezen && (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-          <Spinner />
+          <FullPageSpinner />
         </div>
       )}
       <LemmaDocumentReact lemma={lemma} voorlezen={voorlezen} />
