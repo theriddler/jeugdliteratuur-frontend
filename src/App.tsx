@@ -13,6 +13,7 @@ import { Lemma } from "./pages/Lemma";
 import { Level } from "./pages/Level";
 import { OverHetProject } from "./pages/OverHetProject";
 import { Samenwerken } from "./pages/Samenwerken";
+import { AllLemmas } from "./pages/AllLemmas";
 
 export const STRAPI_BASE_URL = 'https://perfect-ducks-3ff901f65f.strapiapp.com'
 
@@ -34,6 +35,7 @@ function App () {
             <Route path="/samenwerken" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
+            <Route path="/alle-lemmas" element={<AllLemmas />} />
 
             <Route path="/groep/:levelId" element={<Level />} />
             <Route path="/lemma/:lemmaId" element={<Lemma />} />

@@ -86,3 +86,15 @@ br {
 ul br{
   display: block;
 }
+
+table{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+
+  td, th{
+    padding: 4px 16px;
+    border: 1px solid lightgray;
+    background-color: white;
+  }
+}

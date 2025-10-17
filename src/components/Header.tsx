@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
-import { Col, Row } from 'reactstrap';
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, UncontrolledDropdown } from 'reactstrap';
 import logo from '../assets/logo.png';
 import partner_logo_1 from '../assets/partner_logo_1.jpg';
 
@@ -16,7 +16,20 @@ const Header = (props: {
             <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
           </div>
           <div className="app-header-link-container">
-            <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik</NavLink>
+            <UncontrolledDropdown>
+              <DropdownToggle className="app-nav-link">Gebruik</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>
+                  <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink to="/alle-lemmas" className="app-nav-link">Alle lemma's</NavLink>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink to="/" className="app-nav-link">Didactische tips</NavLink>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </div>
         </Col>
         <Col xs={4} className='mb-0 d-flex justify-content-center'>
