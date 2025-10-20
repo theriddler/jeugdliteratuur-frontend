@@ -6,7 +6,7 @@ export const AllLemmas = () => {
     <div>
       <Row>
         <Col xs={12}>
-          <h4>Alle Lemmas</h4>
+          <h4>Lemma's op alfabet</h4>
         </Col>
       </Row>
       <Row>

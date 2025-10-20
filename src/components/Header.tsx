@@ -23,10 +23,10 @@ const Header = (props: {
                   <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink to="/alle-lemmas" className="app-nav-link">Alle lemma's</NavLink>
+                  <NavLink to="/alle-lemmas" className="app-nav-link">Lemma's op alfabet</NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink to="/" className="app-nav-link">Didactische tips</NavLink>
+                  <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -51,7 +51,7 @@ const Header = (props: {
               <NavLink to="/over-het-project" className="app-nav-link">Over het project</NavLink>
             </div>
             <div className="app-header-link-container">
-              <NavLink to="/samenwerken" className="app-nav-link">Samenwerken?</NavLink>
+              <NavLink to="/feedback" className="app-nav-link">Feedback</NavLink>
             </div>
             <div className="app-header-link-container">
               <NavLink to="/colofon" className="app-nav-link">Colofon</NavLink>

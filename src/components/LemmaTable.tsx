@@ -20,8 +20,8 @@ export const LemmaTable = () => {
       <thead>
         <tr>
           {/* <th>Cover</th> */}
-          <th>Aeuter achternaam</th>
-          <th>Aeuter voornaam</th>
+          <th>Auteur achternaam</th>
+          <th>Auteur voornaam</th>
           <th>Titel</th>
           {/* <th>Korte intro</th> */}
         </tr>

@@ -20,7 +20,6 @@ export const FeeedbackForm = () => {
       occupation,
       comment
     });
-    console.log(response)
 
     if (!response.data?.id) {
       alert('Error sending feedback!');
@@ -34,33 +33,30 @@ export const FeeedbackForm = () => {
     <div className="feedback-form-container">
       <Form>
         <FormGroup>
-          <Label for="formEmail">Email</Label>
-          <Input
-            id="formEmail"
-            name="formEmail"
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="formName">Name</Label>
+          <Label for="formName">Naam</Label>
           <Input
             id="formName"
             name="formName"
-            placeholder="Name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="formOccupation">Occupation</Label>
+          <Label for="formEmail">Email</Label>
+          <Input
+            id="formEmail"
+            name="formEmail"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="formOccupation">Functie</Label>
           <Input
             id="formOccupation"
             name="formOccupation"
-            placeholder="Occupation"
             type="text"
             value={occupation}
             onChange={(e) => setOccupation(e.target.value)}
@@ -71,21 +67,19 @@ export const FeeedbackForm = () => {
           <Input
             id="formComment"
             name="formComment"
-            placeholder="Feedback"
             type="textarea"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="formSubmit">Submit</Label>
           <button
             id="formSubmit"
             name="formSubmit"
             className="pretty-button"
             onClick={handleSubmit}
           >
-            Submit
+            Verzenden
           </button>
         </FormGroup>
       </Form>

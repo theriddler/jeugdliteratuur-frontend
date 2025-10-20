@@ -32,7 +32,7 @@ function App () {
             <Route path="/" element={<Homepage />} />
 
             <Route path="/over-het-project" element={<OverHetProject />} />
-            <Route path="/samenwerken" element={<Samenwerken />} />
+            <Route path="/feedback" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
             <Route path="/alle-lemmas" element={<AllLemmas />} />

@@ -3,19 +3,19 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
+import { FullPageSpinner } from "../components/FullPageSpinner";
+import { Searchbar } from "../components/Searchbar";
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
-import { Searchbar } from "../components/Searchbar";
-import { FeeedbackForm } from "../components/FeedbackForm";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
 
-  if (!data?.inleiding?.data?.attributes) return null;
-  const { tekst, foto } = data.inleiding.data.attributes;
+  const inleiding = data?.inleiding?.data;
+  const { tekst, foto } = inleiding?.attributes ?? {};
 
-  return (
+  return loading ? <FullPageSpinner /> : (
     <>
       <Row>
         <Col xs={8}>
@@ -47,11 +47,6 @@ export const Homepage = () => {
       </Row>
       <div className="mt-4" />
       <HomepageGroupList />
-      <Row>
-        <Col xs={12}>
-          <FeeedbackForm />
-        </Col>
-      </Row>
     </>
   )
 }
@@ -96,16 +91,13 @@ const HomepageGroup = (props: {
               {props.attributes?.titel}
             </Link>
           </div>
-          {loading && <Spinner />}
+          {loading && <FullPageSpinner />}
           <div className="d-flex gap-2">
             {firstThreeLemmas?.map(l => (
               <div>
                 <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/lemma/${l.id}`)}>
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />
                 </div>
-                {/* <div className="text-break">
-                  {l.attributes?.titel}
-                </div> */}
               </div>
             ))}
           </div>
