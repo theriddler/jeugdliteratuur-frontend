@@ -118,19 +118,6 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
-          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
-            <section>
-              <div className="lemma-side-section">
-                <h5>Verder lezen</h5>
-                {attributes?.verder_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} />
-                ))}
-                {attributes?.verder_lezen_extern && (
-                  <BlocksRenderer content={attributes?.verder_lezen_extern} />
-                )}
-              </div>
-            </section>
-          )}
           {(attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern && (
             <section>
               <div className="lemma-side-section">
@@ -140,6 +127,19 @@ export const LemmaDocumentReact = (props: {
                 ))}
                 {attributes?.parallel_lezen_extern && (
                   <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+                )}
+              </div>
+            </section>
+          )}
+          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
+            <section>
+              <div className="lemma-side-section">
+                <h5>Verder lezen</h5>
+                {attributes?.verder_lezens?.data.map(l => (
+                  <LemmaInternalLink l={l} />
+                ))}
+                {attributes?.verder_lezen_extern && (
+                  <BlocksRenderer content={attributes?.verder_lezen_extern} />
                 )}
               </div>
             </section>
