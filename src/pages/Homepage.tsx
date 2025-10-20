@@ -7,6 +7,7 @@ import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
 import { Searchbar } from "../components/Searchbar";
+import { FeeedbackForm } from "../components/FeedbackForm";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
@@ -46,6 +47,11 @@ export const Homepage = () => {
       </Row>
       <div className="mt-4" />
       <HomepageGroupList />
+      <Row>
+        <Col xs={12}>
+          <FeeedbackForm />
+        </Col>
+      </Row>
     </>
   )
 }
