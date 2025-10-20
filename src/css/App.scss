@@ -44,6 +44,13 @@
   }
 }
 
+.lemma-container{
+  padding: 16px;
+  border-radius: 16px;
+  background-color: white;
+  border: 1px solid var(--secondary-color);
+}
+
 .lemma-header-section{
   margin: 8px 0 16px 0;
 }
@@ -155,8 +162,10 @@
 
   &.library-orange{
     outline-color: #F4893E;
-    &:hover{
+    background-color: #F4893E !important;
       color: white !important;
+    &:hover{
+      color: black !important;
       background-color: #F4893E !important;
     }
   }

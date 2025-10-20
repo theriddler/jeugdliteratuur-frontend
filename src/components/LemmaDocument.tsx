@@ -17,7 +17,7 @@ export const LemmaDocumentReact = (props: {
   const { attributes: voorlezen } = props.voorlezen
 
   return (
-    <div>
+    <div className="lemma-container">
       <Row>
         <Col xs={12} lg={8}>
           <div className="lemma-header-section">
@@ -45,6 +45,7 @@ export const LemmaDocumentReact = (props: {
                 </div>
                 {/* <div className="translate-download-pdf-button"> */}
               </div>
+              <hr />
               <div className="mt-4">
                 {attributes?.de_kern && (
                   <BlocksRenderer content={attributes?.de_kern} />
@@ -57,9 +58,9 @@ export const LemmaDocumentReact = (props: {
           <div className="lemma-header-section">
             <div className="d-flex flex-column align-items-center">
               <div className="d-flex justify-content-center align-items-center gap-2">
-                <div className="align-self-start" style={{ fontSize: '11px' }}>Aan de slag met dit boek?</div>
+                <div className="align-self-start text-nowrap" style={{ fontSize: '11px' }}>Aan de slag met dit boek?</div>
                 <IconTrendingDown3 />
-                <a className="mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+                <a className="text-nowrap mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
                   Naar de Jeugdbibliotheek
                 </a>
               </div>
