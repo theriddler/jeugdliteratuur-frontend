@@ -27,14 +27,14 @@ export const LemmaDocumentReact = (props: {
                   <div>
                     <h3>{attributes?.titel} ({attributes?.jaar})</h3>
                   </div>
-                  <div className="text-secondary">
-                    <span>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</span>
+                  <div className="text-secondary text-nowrap">
+                    <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
                     {attributes?.auteur_2_voornaam && (
-                      <span> / {attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</span>
+                      <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
                     )}
                   </div>
                   <div className="ms-5">
-                    <PDFDownloadLink className="hide-in-pdf pretty-button" document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}>
+                    <PDFDownloadLink className="hide-in-pdf pretty-button text-nowrap" document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}>
                       Download PDF
                     </PDFDownloadLink>
                   </div>
