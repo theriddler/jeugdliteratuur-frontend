@@ -34,7 +34,11 @@ export const LemmaDocumentReact = (props: {
                     )}
                   </div>
                   <div className="ms-5">
-                    <PDFDownloadLink className="hide-in-pdf pretty-button text-nowrap" document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}>
+                    <PDFDownloadLink
+                      className="hide-in-pdf pretty-button text-nowrap"
+                      fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
+                      document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
+                    >
                       Download PDF
                     </PDFDownloadLink>
                   </div>
