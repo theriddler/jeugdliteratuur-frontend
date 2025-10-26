@@ -46,6 +46,19 @@ export const LEMMATA = graphql(`
                 auteur_voornaam
                 auter_achternaam
                 jaar
+                afbeelding {
+                  data{
+                    id
+                    attributes{
+                      name
+                      width
+                      height
+                      provider
+                      provider_metadata
+                      url
+                    }
+                  }
+                }
               }
             }
           }
@@ -59,6 +72,19 @@ export const LEMMATA = graphql(`
                 auteur_voornaam
                 auter_achternaam
                 jaar
+                afbeelding {
+                  data{
+                    id
+                    attributes{
+                      name
+                      width
+                      height
+                      provider
+                      provider_metadata
+                      url
+                    }
+                  }
+                }
               }
             }
           }
@@ -72,6 +98,19 @@ export const LEMMATA = graphql(`
                 auteur_voornaam
                 auter_achternaam
                 jaar
+                afbeelding {
+                  data{
+                    id
+                    attributes{
+                      name
+                      width
+                      height
+                      provider
+                      provider_metadata
+                      url
+                    }
+                  }
+                }
               }
             }
           }
