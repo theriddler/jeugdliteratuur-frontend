@@ -6,6 +6,7 @@ import { LemmataQueryLemma } from "../queries";
 import { LEMMATA } from "../queries";
 
 export const Searchbar = (props: {
+  closeMobileNav: () => void;
   placeholder?: string;
 }) => {
   const { data: lemmas } = useQuery(LEMMATA);
@@ -28,6 +29,7 @@ export const Searchbar = (props: {
         placeholder={props.placeholder}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onBlur={() => setTimeout(() => setSearch(''), 100)}
       />
       {suggestions && suggestions.length > 0 && (
         <div className="searchbar-dropdown">
@@ -35,6 +37,7 @@ export const Searchbar = (props: {
             <SearchbarLemmaSuggestion
               l={l}
               search={search}
+              closeMobileNav={props.closeMobileNav}
             />
           ))}
         </div>
@@ -45,12 +48,18 @@ export const Searchbar = (props: {
 
 const SearchbarLemmaSuggestion = (props: {
   l: LemmataQueryLemma,
-  search: string
+  search: string,
+  closeMobileNav: () => void;
 }) => {
   const navigate = useNavigate();
 
+  const onClick = () => {
+    navigate(`/lemma/${props.l.id}`);
+    props.closeMobileNav();
+  }
+
   return (
-    <div className="searchbar-lemma-suggestion" onClick={() => navigate(`/lemma/${props.l.id}`)}>
+    <div className="searchbar-lemma-suggestion" onClick={onClick}>
       <div className="image-wrapper fixed xs">
         <img src={props.l.attributes?.afbeelding?.data?.attributes?.url} />
       </div>

@@ -4,6 +4,7 @@ import logo from '../assets/logo.png';
 import partner_logo_1 from '../assets/partner_logo_1.jpg';
 import { IconMenu2 } from "@tabler/icons-react";
 import { useState } from "react";
+import { Searchbar } from "./Searchbar";
 
 const Header = (props: {
   toggleSidebar: () => void;
@@ -40,7 +41,10 @@ const Header = (props: {
           <HeaderLogo />
         </Col>
         <Col xs={4} className="mb-0 mt-1 d-flex flex-column justify-content-between gap-3">
-          <div className="d-flex justify-content-end gap-1">
+          <div className="ps-4 d-flex justify-content-end gap-3">
+            <div>
+              <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
+            </div>
             <div className="image-wrapper partner-logo">
               <img src={partner_logo_1} />
             </div>
@@ -66,11 +70,12 @@ const Header = (props: {
         </button>
       </div>
       <Offcanvas direction="end" isOpen={mobileNavIsOpen} toggle={toggleMobileNav} className="app-mobile-offcanvas">
-        <OffcanvasHeader toggle={toggleMobileNav}>
-          Navigation
+        <OffcanvasHeader toggle={toggleMobileNav} className="text-light">
+          Navigatie
         </OffcanvasHeader>
         <OffcanvasBody>
           <div className="d-flex flex-column gap-3">
+            <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
             <div className="app-mobile-offcanvas-link-container">
               <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
             </div>

@@ -124,7 +124,7 @@ export const LemmaDocumentReact = (props: {
           {/* <div className="lemma-side-section">
             <h5>Thematische tags</h5>
           </div> */}
-          {(attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern && (
+          {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
             <section>
               <div className="lemma-side-section">
                 <h5>⁠Opstaptitels</h5>
@@ -137,7 +137,7 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
-          {(attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern && (
+          {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
             <section>
               <div className="lemma-side-section">
                 <h5>Parallel lezen</h5>
@@ -150,7 +150,7 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
-          {(attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern && (
+          {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
             <section>
               <div className="lemma-side-section">
                 <h5>Verder lezen</h5>
@@ -212,10 +212,12 @@ export const LemmaDocumentReact = (props: {
 
 const LemmaInternalLink = (props: { l: LemmataQueryLemma }) => {
   const { attributes } = props.l;
+  console.log(attributes)
 
   return (
     <div className="d-flex gap-3">
       <div>
+        <div>test</div>
         <div className="image-wrapper xs">
           <img src={attributes?.afbeelding?.data?.attributes?.url} />
         </div>

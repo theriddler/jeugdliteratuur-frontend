@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
 import { FullPageSpinner } from "../components/FullPageSpinner";
-import { Searchbar } from "../components/Searchbar";
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
@@ -18,11 +17,8 @@ export const Homepage = () => {
   return loading ? <FullPageSpinner /> : (
     <>
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <h3>Welkom</h3>
-        </Col>
-        <Col xs={4}>
-          <Searchbar placeholder="Zoeken" />
         </Col>
       </Row>
       <Row className="app-hero">
