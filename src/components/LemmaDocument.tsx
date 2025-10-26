@@ -52,7 +52,7 @@ export const LemmaDocumentReact = (props: {
             </div>
           </div>
         </Col>
-        <Col xs={12} lg={4} className="mb-0">
+        <Col xs={12} lg={4} className="mb-0 pt-4 pt-lg-0">
           <div className="lemma-header-section hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>

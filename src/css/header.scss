@@ -1,3 +1,4 @@
+@use './__defaults.scss';
 @use './App.scss';
 
 .app-header {
@@ -8,10 +9,6 @@
   padding: 0.5rem 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000;
-  color: white;
-  a{
-    color: white !important;
-  }
 }
 
 // .app-header::before {
@@ -41,4 +38,22 @@
 
 .app-header-link-container {
   width: auto;
+  color: var(--text-light) !important;
+  span{color: var(--text-light) !important;}
+  a{color: var(--text-light) !important;}
+}
+
+.app-mobile-offcanvas {
+  background-color: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  .btn-close{
+    color: var(--text-light) !important;
+  }
+}
+
+.app-mobile-offcanvas-link-container{
+  width: auto;
+  color: var(--text-light) !important;
+  a{color: var(--text-light) !important;}
+  span{color: var(--text-light) !important;}
 }
