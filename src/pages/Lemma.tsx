@@ -12,7 +12,6 @@ export const Lemma = () => {
   const lemma = useMemo(() => lemmataData?.lemmata?.data?.find(l => l.id === lemmaId), [ lemmataData?.lemmata?.data, lemmaId ])
 
   const { data: voorlezenData, loading: loadingVoorlezen } = useQuery(VOORLEZEN);
-  console.log(voorlezenData)
   const voorlezen = useMemo(() => voorlezenData?.voorlezen?.data, [ voorlezenData?.voorlezen?.data ])
 
   return (
