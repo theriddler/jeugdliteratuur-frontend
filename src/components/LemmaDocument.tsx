@@ -1,9 +1,9 @@
 import { Document, Page, PDFDownloadLink, View } from "@react-pdf/renderer";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { IconTrendingDown3 } from "@tabler/icons-react";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
 import { Col, Row } from "reactstrap";
+import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmataQueryLemma } from "../queries";
 
@@ -18,55 +18,63 @@ export const LemmaDocumentReact = (props: {
 
   return (
     <div className="lemma-container">
-      <Row>
-        <Col xs={12} lg={8}>
+      <Row className="align-items-center">
+        <Col xs={12} lg={8} className="mb-0">
           <div className="lemma-header-section">
             <div>
-              <div className="d-flex justify-content-between align-items-end">
-                <div className="d-flex gap-3 align-items-end">
-                  <div>
-                    <h3>{attributes?.titel} ({attributes?.jaar})</h3>
-                  </div>
-                  <div className="text-secondary text-nowrap">
-                    <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
-                    {attributes?.auteur_2_voornaam && (
-                      <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
-                    )}
-                  </div>
-                  <div className="ms-5">
-                    <PDFDownloadLink
-                      className="hide-in-pdf pretty-button text-nowrap"
-                      fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
-                      document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
-                    >
-                      Download PDF
-                    </PDFDownloadLink>
-                  </div>
+              <div className="d-flex gap-3 align-items-center">
+                <div>
+                  <h3>{attributes?.titel} ({attributes?.jaar})</h3>
                 </div>
-                {/* <div className="translate-download-pdf-button"> */}
+                <div className="text-secondary text-nowrap">
+                  <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
+                  {attributes?.auteur_2_voornaam && (
+                    <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
+                  )}
+                </div>
+                <div className="ms-3 hide-in-pdf ">
+                  <PDFDownloadLink
+                    className="pretty-button text-nowrap"
+                    fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
+                    document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
+                  >
+                    Download PDF
+                  </PDFDownloadLink>
+                </div>
               </div>
-              <hr />
-              <div className="mt-4">
-                {attributes?.de_kern && (
-                  <BlocksRenderer content={attributes?.de_kern} />
-                )}
-              </div>
+              {/* <div className="translate-download-pdf-button"> */}
             </div>
           </div>
         </Col>
+        <Col xs={12} lg={4} className="mb-0">
+          <div className="lemma-header-section hide-in-pdf">
+            <div className="d-flex justify-content-center align-items-center gap-2">
+              <div className="align-self-start text-nowrap" style={{ fontSize: '11px' }}>
+                <div>Aan de slag met dit boek?</div>
+                <div className="d-flex justify-content-end" style={{ transform: 'rotateX(180deg)' }}>
+                  <img src={arrow} width={42} height={42} />
+                </div>
+              </div>
+              <a className="text-nowrap mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+                Naar de Jeugdbibliotheek
+              </a>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <hr className="my-4" />
+      <Row>
+        <Col xs={12} lg={8}>
+          <div>
+            {attributes?.de_kern && (
+              <BlocksRenderer content={attributes?.de_kern} />
+            )}
+          </div>
+        </Col>
         <Col xs={12} lg={4}>
-          <div className="lemma-header-section">
-            <div className="d-flex flex-column align-items-center">
-              <div className="d-flex justify-content-center align-items-center gap-2">
-                <div className="align-self-start text-nowrap" style={{ fontSize: '11px' }}>Aan de slag met dit boek?</div>
-                <IconTrendingDown3 />
-                <a className="text-nowrap mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
-                  Naar de Jeugdbibliotheek
-                </a>
-              </div>
-              <div className="mt-4 image-wrapper lemma-header">
-                <img src={attributes?.afbeelding?.data?.attributes?.url} />
-              </div>
+          <div className="d-flex justify-content-center">
+            <div className="image-wrapper lemma-header">
+              <img src={attributes?.afbeelding?.data?.attributes?.url} />
             </div>
           </div>
         </Col>
@@ -247,7 +255,7 @@ const stylesheet = {
 
 
 const UnbreakableView = ({ children }: { children: React.ReactNode }) => (
-  <View wrap={false}>
+  <View>
     {children}
   </View>
 );
