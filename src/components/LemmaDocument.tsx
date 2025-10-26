@@ -42,7 +42,6 @@ export const LemmaDocumentReact = (props: {
                   </PDFDownloadLink>
                 </div>
               </div>
-              {/* <div className="translate-download-pdf-button"> */}
             </div>
           </div>
         </Col>
