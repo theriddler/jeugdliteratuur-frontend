@@ -20,6 +20,11 @@ export const LemmaDocumentReact = (props: {
     <div className="lemma-container">
       <Row className="align-items-center">
         <Col xs={12} lg={8} className="mb-0">
+          <div className="only-show-in-pdf pdf-header">
+            <h3>STERBOEKEN</h3>
+            <div>sterboeken.org</div>
+          </div>
+          <hr className="only-show-in-pdf my-4" />
           <div className="lemma-header-section">
             <div>
               <div className="d-flex gap-3 align-items-center">
@@ -33,13 +38,15 @@ export const LemmaDocumentReact = (props: {
                   )}
                 </div>
                 <div className="ms-3">
-                  <PDFDownloadLink
-                    className="pretty-button text-nowrap hide-in-pdf"
-                    fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
-                    document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
-                  >
-                    Download PDF
-                  </PDFDownloadLink>
+                  <div className=" hide-in-pdf">
+                    <PDFDownloadLink
+                      className="pretty-button text-nowrap"
+                      fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
+                      document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
+                    >
+                      Download PDF
+                    </PDFDownloadLink>
+                  </div>
                 </div>
               </div>
             </div>
@@ -61,7 +68,7 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
       </Row>
-      <hr className="my-4" />
+      <hr className="my-4 hide-in-pdf" />
       <Row>
         <Col xs={12} lg={8}>
           <div>
@@ -251,6 +258,14 @@ const stylesheet = {
     display: 'none',
     color: 'transparent',
     opacity: 0
+  },
+  [ '.pdf-header' ]: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    gap: '8px',
+    color: '#E2A93A'
   }
 };
 
