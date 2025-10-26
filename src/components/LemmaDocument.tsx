@@ -1,4 +1,4 @@
-import { Document, Page, PDFDownloadLink, View } from "@react-pdf/renderer";
+import { Document, Page, PDFDownloadLink, StyleSheet, View } from "@react-pdf/renderer";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
@@ -32,9 +32,9 @@ export const LemmaDocumentReact = (props: {
                     <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
                   )}
                 </div>
-                <div className="ms-3 hide-in-pdf ">
+                <div className="ms-3">
                   <PDFDownloadLink
-                    className="pretty-button text-nowrap"
+                    className="pretty-button text-nowrap hide-in-pdf"
                     fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
                     document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
                   >
@@ -49,13 +49,13 @@ export const LemmaDocumentReact = (props: {
         <Col xs={12} lg={4} className="mb-0">
           <div className="lemma-header-section hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
-              <div className="align-self-start text-nowrap" style={{ fontSize: '11px' }}>
+              <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
                 <div>Aan de slag met dit boek?</div>
-                <div className="d-flex justify-content-end" style={{ transform: 'rotateX(180deg)' }}>
-                  <img src={arrow} width={42} height={42} />
+                <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
+                  <img src={arrow} width={42} height={42} className="hide-in-pdf" />
                 </div>
               </div>
-              <a className="text-nowrap mt-2 align-self-end pretty-button library-orange" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+              <a className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf" href="https://www.jeugdbibliotheek.nl/" target="_blank">
                 Naar de Jeugdbibliotheek
               </a>
             </div>
@@ -223,10 +223,10 @@ const LemmaInternalLink = (props: { l: LemmataQueryLemma }) => {
 const stylesheet = {
   body: {
     fontSize: 12,
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingTop: 2,
-    paddingBottom: 2,
+    paddingTop: '0', // 16px is done for top by .header
+    paddingRight: '8px',
+    paddingBottom: '16px',
+    paddingLeft: '8px',
   },
   p: {
     fontSize: 12,
@@ -246,10 +246,12 @@ const stylesheet = {
     marginBottom: 0
   },
   [ '.lemma-main-section' ]: {
-    padding: 2
+    // padding: '4px 0'
   },
   [ '.hide-in-pdf' ]: {
-    color: 'transparent'
+    display: 'none',
+    color: 'transparent',
+    opacity: 0
   }
 };
 
@@ -259,6 +261,11 @@ const UnbreakableView = ({ children }: { children: React.ReactNode }) => (
     {children}
   </View>
 );
+const styles = StyleSheet.create({
+  header: {
+    height: 16 // for fixed header
+  }
+})
 
 export const LemmaDocument = (props: {
   lemma: LemmataQueryLemma,
@@ -270,6 +277,10 @@ export const LemmaDocument = (props: {
   return (
     <Document>
       <Page size='A4'>
+        {/* Fixed header for padding at the top of each page */}
+        <View fixed style={styles.header}>
+
+        </View>
         <Html
           stylesheet={stylesheet}
           renderers={{
@@ -279,6 +290,8 @@ export const LemmaDocument = (props: {
         >
           {html}
         </Html>
+        <View fixed style={styles.header}>
+        </View>
       </Page>
     </Document>
   )
