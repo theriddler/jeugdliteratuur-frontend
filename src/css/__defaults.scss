@@ -87,6 +87,11 @@ ul br{
   display: block;
 }
 
+// make sure that not all uls are messed up
+ul:has(+ ul) {
+  margin-bottom: 0 !important;
+}
+
 table{
   width: 100%;
   border: 1px solid lightgray;
