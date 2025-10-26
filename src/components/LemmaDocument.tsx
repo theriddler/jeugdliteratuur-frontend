@@ -2,6 +2,7 @@ import { Document, Page, PDFDownloadLink, StyleSheet, View } from "@react-pdf/re
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
+import { NavigateFunction } from "react-router";
 import { Col, Row } from "reactstrap";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
@@ -9,7 +10,8 @@ import { LemmataQueryLemma } from "../queries";
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmataQueryLemma | undefined,
-  voorlezen: VoorlezenEntityResponse[ 'data' ]
+  voorlezen: VoorlezenEntityResponse[ 'data' ],
+  navigate: NavigateFunction
 }) => {
 
   if (!props.lemma || !props.voorlezen) return null;
@@ -129,7 +131,7 @@ export const LemmaDocumentReact = (props: {
               <div className="lemma-side-section">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
-                  <LemmaInternalLink l={l} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} />
                 ))}
                 {attributes?.opstaptitels_extern && (
                   <BlocksRenderer content={attributes?.opstaptitels_extern} />
@@ -142,7 +144,7 @@ export const LemmaDocumentReact = (props: {
               <div className="lemma-side-section">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} />
                 ))}
                 {attributes?.parallel_lezen_extern && (
                   <BlocksRenderer content={attributes?.parallel_lezen_extern} />
@@ -155,7 +157,7 @@ export const LemmaDocumentReact = (props: {
               <div className="lemma-side-section">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} />
                 ))}
                 {attributes?.verder_lezen_extern && (
                   <BlocksRenderer content={attributes?.verder_lezen_extern} />
@@ -210,17 +212,25 @@ export const LemmaDocumentReact = (props: {
   )
 }
 
-const LemmaInternalLink = (props: { l: LemmataQueryLemma }) => {
-  const { attributes } = props.l;
-  console.log(attributes)
+const LemmaInternalLink = (props: {
+  l: LemmataQueryLemma,
+  navigate: NavigateFunction
+}) => {
+  const { id, attributes } = props.l;
 
   return (
-    <div className="d-flex gap-3">
+    <div className="lemma-internal-link d-flex gap-3 mx-3 my-2" onClick={() => props.navigate(`/lemma/${id}`)}>
       <div>
-        <div>test</div>
         <div className="image-wrapper xs">
           <img src={attributes?.afbeelding?.data?.attributes?.url} />
         </div>
+      </div>
+      <div className="d-flex flex-column justify-content-center gap-1">
+        <div className="text-secondary">{attributes?.auteur_voornaam} {attributes?.auter_achternaam} </div>
+        {attributes?.auteur_2_voornaam && (
+          <div className="text-secondary">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam} </div>
+        )}
+        <div>{attributes?.titel}</div>
       </div>
     </div>
   )
@@ -319,7 +329,7 @@ const LemmaHTML = (props: {
 }) => (
   <html>
     <body>
-      <LemmaDocumentReact lemma={props.lemma} voorlezen={props.voorlezen} />
+      <LemmaDocumentReact lemma={props.lemma} voorlezen={props.voorlezen} navigate={() => { }} />
     </body>
   </html>
 )

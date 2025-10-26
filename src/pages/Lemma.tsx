@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaDocumentReact } from "../components/LemmaDocument";
 import { LEMMATA, VOORLEZEN } from "../queries";
 
 export const Lemma = () => {
+  const navigate = useNavigate();
   const { lemmaId } = useParams();
 
   const { data: lemmataData, loading: loadingLemmata } = useQuery(LEMMATA);
@@ -21,7 +22,7 @@ export const Lemma = () => {
           <FullPageSpinner />
         </div>
       )}
-      <LemmaDocumentReact lemma={lemma} voorlezen={voorlezen} />
+      <LemmaDocumentReact lemma={lemma} voorlezen={voorlezen} navigate={navigate} />
     </div >
   )
 }

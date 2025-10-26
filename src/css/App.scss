@@ -63,6 +63,17 @@
   margin-bottom: 32px;
 }
 
+.lemma-internal-link{
+  cursor: pointer;
+  border: 1px solid var(--secondary-color);
+  border-radius: 16px;
+  padding: 4px;
+  transition: all 0.2s;
+  &:hover{
+    background-color: var(--secondary-color);
+  }
+}
+
 .clickable {
   cursor: pointer;
 }
