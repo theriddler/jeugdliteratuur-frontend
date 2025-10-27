@@ -76,10 +76,10 @@ const Header = (props: {
         <OffcanvasBody>
           <div className="d-flex flex-column gap-3">
             <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
-            <div className="app-mobile-offcanvas-link-container">
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
             </div>
-            <div className="app-mobile-offcanvas-link-container">
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <UncontrolledDropdown>
                 <DropdownToggle className="app-nav-link w-100 text-start">Gebruik</DropdownToggle>
                 <DropdownMenu>
@@ -95,13 +95,13 @@ const Header = (props: {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </div>
-            <div className="app-mobile-offcanvas-link-container">
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <NavLink to="/over-het-project" className="app-nav-link">Over het project</NavLink>
             </div>
-            <div className="app-mobile-offcanvas-link-container">
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <NavLink to="/feedback" className="app-nav-link">Feedback</NavLink>
             </div>
-            <div className="app-mobile-offcanvas-link-container">
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <NavLink to="/colofon" className="app-nav-link">Colofon</NavLink>
             </div>
           </div>
