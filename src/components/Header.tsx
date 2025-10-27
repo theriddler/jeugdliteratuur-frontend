@@ -63,7 +63,7 @@ const Header = (props: {
         </Col>
       </Row>
       {/* Mobile header */}
-      <div className="px-3 d-flex d-lg-none justify-content-between align-items-center">
+      <div className="d-flex d-lg-none app-header-mobile-container">
         <HeaderLogo />
         <button className="pretty-button" onClick={toggleMobileNav}>
           <IconMenu2 />
