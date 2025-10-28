@@ -23,7 +23,7 @@ export const Homepage = () => {
       </Row>
       <Row className="app-hero">
         {loading && <Spinner />}
-        <Col xs={8}>
+        <Col xs={12} lg={8}>
           {/* <Card>
             <CardBody> */}
           {tekst && (
@@ -35,7 +35,7 @@ export const Homepage = () => {
           {/* </CardBody>
           </Card> */}
         </Col>
-        <Col xs={4}>
+        <Col xs={12} lg={4} className="py-3 py-lg-0">
           <div className="image-wrapper hero-img">
             <img src={foto?.data?.attributes?.url} />
           </div>
