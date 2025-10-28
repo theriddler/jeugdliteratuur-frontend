@@ -134,9 +134,6 @@ export const LemmaDocumentReact = (props: {
         </Col>
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
-          {/* <div className="lemma-side-section">
-            <h5>Thematische tags</h5>
-          </div> */}
           {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
             <section>
               <div className="lemma-side-section">
@@ -184,7 +181,7 @@ export const LemmaDocumentReact = (props: {
           <div className="d-block d-lg-none">
             {voorlezen && (
               <section>
-                <div className="lemma-side-section">
+                <div className="lemma-main-section">
                   <h5>Voorlezen</h5>
                   <BlocksRenderer content={voorlezen?.tekst} />
                 </div>
@@ -211,7 +208,7 @@ export const LemmaDocumentReact = (props: {
           <div className="d-block d-lg-none">
             {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
               <section>
-                <div className="lemma-side-section">
+                <div className="lemma-main-section">
                   <h5>⁠Opstaptitels</h5>
                   {attributes?.opstaptitels?.data.map(l => (
                     <LemmaInternalLink l={l} navigate={props.navigate} />
@@ -224,7 +221,7 @@ export const LemmaDocumentReact = (props: {
             )}
             {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
               <section>
-                <div className="lemma-side-section">
+                <div className="lemma-main-section">
                   <h5>Parallel lezen</h5>
                   {attributes?.parallel_lezens?.data.map(l => (
                     <LemmaInternalLink l={l} navigate={props.navigate} />
@@ -237,7 +234,7 @@ export const LemmaDocumentReact = (props: {
             )}
             {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
               <section>
-                <div className="lemma-side-section">
+                <div className="lemma-main-section">
                   <h5>Verder lezen</h5>
                   {attributes?.verder_lezens?.data.map(l => (
                     <LemmaInternalLink l={l} navigate={props.navigate} />
