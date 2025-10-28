@@ -122,7 +122,8 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
         </Col>
-        <Col xs={12} lg={4}>
+        {/* Only show in Desktop */}
+        <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {/* <div className="lemma-side-section">
             <h5>Thematische tags</h5>
           </div> */}
@@ -169,6 +170,17 @@ export const LemmaDocumentReact = (props: {
       </Row>
       <Row>
         <Col xs={12} lg={8}>
+          {/* Only show in Mobile + PDF */}
+          <div className="d-block d-lg-none">
+            {voorlezen && (
+              <section>
+                <div className="lemma-side-section">
+                  <h5>Voorlezen</h5>
+                  <BlocksRenderer content={voorlezen?.tekst} />
+                </div>
+              </section>
+            )}
+          </div>
           {attributes?.lessuggesties && (
             <section>
               <div className="lemma-main-section">
@@ -177,7 +189,6 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
-
           {attributes?.kerndoelen && (
             <section>
               <div className="lemma-main-section">
@@ -186,6 +197,48 @@ export const LemmaDocumentReact = (props: {
               </div>
             </section>
           )}
+          {/* Only show in Mobile + PDF */}
+          <div className="d-block d-lg-none">
+            {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
+              <section>
+                <div className="lemma-side-section">
+                  <h5>⁠Opstaptitels</h5>
+                  {attributes?.opstaptitels?.data.map(l => (
+                    <LemmaInternalLink l={l} navigate={props.navigate} />
+                  ))}
+                  {attributes?.opstaptitels_extern && (
+                    <BlocksRenderer content={attributes?.opstaptitels_extern} />
+                  )}
+                </div>
+              </section>
+            )}
+            {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
+              <section>
+                <div className="lemma-side-section">
+                  <h5>Parallel lezen</h5>
+                  {attributes?.parallel_lezens?.data.map(l => (
+                    <LemmaInternalLink l={l} navigate={props.navigate} />
+                  ))}
+                  {attributes?.parallel_lezen_extern && (
+                    <BlocksRenderer content={attributes?.parallel_lezen_extern} />
+                  )}
+                </div>
+              </section>
+            )}
+            {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
+              <section>
+                <div className="lemma-side-section">
+                  <h5>Verder lezen</h5>
+                  {attributes?.verder_lezens?.data.map(l => (
+                    <LemmaInternalLink l={l} navigate={props.navigate} />
+                  ))}
+                  {attributes?.verder_lezen_extern && (
+                    <BlocksRenderer content={attributes?.verder_lezen_extern} />
+                  )}
+                </div>
+              </section>
+            )}
+          </div>
           {attributes?.bronnen && (
             <section>
               <div className="lemma-main-section">
@@ -197,7 +250,8 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
         </Col>
-        <Col xs={12} lg={4}>
+        {/* Only show in Desktop */}
+        <Col xs={12} lg={4} className="d-none d-lg-block">
           {voorlezen && (
             <section>
               <div className="lemma-side-section">
