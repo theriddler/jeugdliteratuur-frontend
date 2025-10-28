@@ -54,7 +54,16 @@ export const LemmaDocumentReact = (props: {
             </div>
           </div>
         </Col>
-        <Col xs={12} xl={4} className="mb-0 pt-4 pt-xl-0">
+
+        {/* Only show on Mobile + PDF */}
+        <Col xs={12} lg={4} className="d-block d-lg-none pt-4 py-lg-0">
+          <div className="d-flex justify-content-center">
+            <div className="image-wrapper lemma-header">
+              <img src={attributes?.afbeelding?.data?.attributes?.url} />
+            </div>
+          </div>
+        </Col>
+        <Col xs={12} xl={4} className="mb-0">
           <div className="lemma-header-section hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
@@ -79,7 +88,8 @@ export const LemmaDocumentReact = (props: {
             )}
           </div>
         </Col>
-        <Col xs={12} lg={4}>
+        {/* Only show on Desktop */}
+        <Col xs={12} lg={4} className="d-none d-lg-block">
           <div className="d-flex justify-content-center">
             <div className="image-wrapper lemma-header">
               <img src={attributes?.afbeelding?.data?.attributes?.url} />
