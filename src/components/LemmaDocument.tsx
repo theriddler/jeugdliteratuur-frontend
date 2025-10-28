@@ -21,7 +21,7 @@ export const LemmaDocumentReact = (props: {
   return (
     <div className="lemma-container">
       <Row className="align-items-center">
-        <Col xs={12} lg={8} className="mb-0">
+        <Col xs={12} xl={8} className="mb-0">
           <div className="only-show-in-pdf pdf-header">
             <h3>STERBOEKEN</h3>
             <div>sterboeken.org</div>
@@ -29,7 +29,7 @@ export const LemmaDocumentReact = (props: {
           <hr className="only-show-in-pdf my-4" />
           <div className="lemma-header-section">
             <div>
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-3 align-items-center flex-wrap">
                 <div>
                   <h3>{attributes?.titel} ({attributes?.jaar})</h3>
                 </div>
@@ -54,7 +54,7 @@ export const LemmaDocumentReact = (props: {
             </div>
           </div>
         </Col>
-        <Col xs={12} lg={4} className="mb-0 pt-4 pt-lg-0">
+        <Col xs={12} xl={4} className="mb-0 pt-4 pt-xl-0">
           <div className="lemma-header-section hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
