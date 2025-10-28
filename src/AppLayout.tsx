@@ -15,7 +15,7 @@ export const AppLayout = () => {
       <ScrollToTopSentry />
       <Header toggleSidebar={toggleSidebar} />
       <div className={`app-layout ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-        <Sidebar />
+        <Sidebar setSidebarOpen={setSidebarOpen} />
         <main>
           <Container className="px-4 py-3">
             <Outlet />

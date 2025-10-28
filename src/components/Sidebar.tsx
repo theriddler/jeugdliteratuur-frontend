@@ -4,7 +4,9 @@ import { NavLink } from "react-router";
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { LEVELS } from "../queries";
 
-const Sidebar = () => {
+const Sidebar = (props: {
+  setSidebarOpen: (v: boolean) => void;
+}) => {
   const { data } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
@@ -21,6 +23,7 @@ const Sidebar = () => {
               key={level?.id}
               to={`/groep/${level?.id}`}
               className="sidebar-nav-link"
+              onClick={() => props.setSidebarOpen(false)}
             >
               {level?.attributes?.titel}
             </NavLink>
