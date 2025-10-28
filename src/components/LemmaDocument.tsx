@@ -261,7 +261,7 @@ export const LemmaDocumentReact = (props: {
           )}
         </Col>
         {/* Only show in Desktop */}
-        <Col xs={12} lg={4} className="d-none d-lg-block">
+        <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {voorlezen && (
             <section>
               <div className="lemma-side-section">
