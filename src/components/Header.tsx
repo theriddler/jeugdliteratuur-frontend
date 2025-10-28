@@ -79,17 +79,17 @@ const Header = (props: {
             <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
             </div>
-            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
+            <div className="app-mobile-offcanvas-link-container">
               <UncontrolledDropdown>
                 <DropdownToggle className="app-nav-link w-100 text-start">Gebruik</DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem>
+                  <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/alle-lemmas" className="app-nav-link">Lemma's op alfabet</NavLink>
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
