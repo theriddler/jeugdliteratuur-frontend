@@ -22,37 +22,33 @@ export const LemmaDocumentReact = (props: {
 
   return (
     <div className="lemma-container">
-      <Row className="align-items-center">
+      <Row className="align-items-center lemma-section-container">
         <Col xs={12} xl={8} className="mb-0">
           <div className="only-show-in-pdf pdf-header">
             <h3>STERBOEKEN</h3>
             <div>sterboeken.org</div>
           </div>
           <hr className="only-show-in-pdf my-4" />
-          <div className="lemma-header-section">
+          <div className="d-flex align-items-center flex-wrap">
+            <IconStar className="align-self-start mb-5" color={STERBOEKEN_SECONDARY} />
             <div>
-              <div className="d-flex gap-3 align-items-center flex-wrap">
-                <div>
-                  <IconStar className="mb-5" color={STERBOEKEN_SECONDARY} />
-                  <h3 className="d-inline ms-2">{attributes?.titel} ({attributes?.jaar})</h3>
-                </div>
-                <div className="text-secondary text-nowrap">
-                  <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
-                  {attributes?.auteur_2_voornaam && (
-                    <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
-                  )}
-                </div>
-                <div className="ms-3">
-                  <div className=" hide-in-pdf">
-                    <PDFDownloadLink
-                      className="pretty-button text-nowrap"
-                      fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
-                      document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
-                    >
-                      Download PDF
-                    </PDFDownloadLink>
-                  </div>
-                </div>
+              <h3 className="d-inline ms-2">{attributes?.titel} ({attributes?.jaar})</h3>
+            </div>
+            <div className="ms-3 text-secondary text-nowrap">
+              <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
+              {attributes?.auteur_2_voornaam && (
+                <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
+              )}
+            </div>
+            <div className="ms-5">
+              <div className=" hide-in-pdf">
+                <PDFDownloadLink
+                  className="pretty-button text-nowrap"
+                  fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
+                  document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
+                >
+                  Download PDF
+                </PDFDownloadLink>
               </div>
             </div>
           </div>
@@ -67,7 +63,7 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
         <Col xs={12} xl={4} className="mb-0">
-          <div className="lemma-header-section hide-in-pdf">
+          <div className="hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
                 <div>Aan de slag met dit boek?</div>
@@ -82,8 +78,7 @@ export const LemmaDocumentReact = (props: {
           </div>
         </Col>
       </Row>
-      <hr className="my-4 hide-in-pdf" />
-      <Row>
+      <Row className="lemma-section-container mt-3">
         <Col xs={12} lg={8}>
           <div>
             {attributes?.de_kern && (
@@ -103,7 +98,7 @@ export const LemmaDocumentReact = (props: {
       <Row className="mt-3">
         <Col xs={12} lg={8}>
           {attributes?.doelgroep && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-main-section">
                 <h5>Doelgroep</h5>
                 <BlocksRenderer content={attributes?.doelgroep} />
@@ -111,7 +106,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {attributes?.motieven && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-main-section">
                 <h5>Motieven</h5>
                 <BlocksRenderer content={attributes?.motieven} />
@@ -119,7 +114,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {attributes?.het_verhaal && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-main-section">
                 <h5>Het verhaal</h5>
                 <BlocksRenderer content={attributes?.het_verhaal} />
@@ -127,7 +122,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {attributes?.analyse && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-main-section">
                 <h5>Analyse en interpretatie</h5>
                 <BlocksRenderer content={attributes?.analyse} />
@@ -138,7 +133,7 @@ export const LemmaDocumentReact = (props: {
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-            <section>
+            <section className="lemma-section-container green">
               <div className="lemma-side-section">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
@@ -151,7 +146,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
-            <section>
+            <section className="lemma-section-container green">
               <div className="lemma-side-section">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
@@ -164,7 +159,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
-            <section>
+            <section className="lemma-section-container green">
               <div className="lemma-side-section">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
@@ -178,12 +173,12 @@ export const LemmaDocumentReact = (props: {
           )}
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-0">
         <Col xs={12} lg={8}>
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
             {voorlezen && (
-              <section>
+              <section className="lemma-section-container">
                 <div className="lemma-main-section">
                   <h5>Voorlezen</h5>
                   <BlocksRenderer content={voorlezen?.tekst} />
@@ -192,7 +187,7 @@ export const LemmaDocumentReact = (props: {
             )}
           </div>
           {attributes?.lessuggesties && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-main-section">
                 <h5>Didactische vragen en lessuggesties</h5>
                 <BlocksRenderer content={attributes?.lessuggesties} />
@@ -200,7 +195,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {attributes?.kerndoelen && (
-            <section>
+            <section className="lemma-section-container gray">
               <div className="lemma-main-section">
                 <h5>Kerndoelen Nederlands</h5>
                 <BlocksRenderer content={attributes?.kerndoelen} />
@@ -210,7 +205,7 @@ export const LemmaDocumentReact = (props: {
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
             {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-              <section>
+              <section className="lemma-section-container">
                 <div className="lemma-main-section">
                   <h5>⁠Opstaptitels</h5>
                   {attributes?.opstaptitels?.data.map(l => (
@@ -223,7 +218,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
-              <section>
+              <section className="lemma-section-container">
                 <div className="lemma-main-section">
                   <h5>Parallel lezen</h5>
                   {attributes?.parallel_lezens?.data.map(l => (
@@ -236,7 +231,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
-              <section>
+              <section className="lemma-section-container">
                 <div className="lemma-main-section">
                   <h5>Verder lezen</h5>
                   {attributes?.verder_lezens?.data.map(l => (
@@ -250,7 +245,7 @@ export const LemmaDocumentReact = (props: {
             )}
           </div>
           {attributes?.bronnen && (
-            <section>
+            <section className="lemma-section-container gray">
               <div className="lemma-main-section">
                 <h5>Vindplaatsen en bronnen</h5>
                 {attributes?.bronnen && (
@@ -263,7 +258,7 @@ export const LemmaDocumentReact = (props: {
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {voorlezen && (
-            <section>
+            <section className="lemma-section-container">
               <div className="lemma-side-section">
                 <h5>Voorlezen</h5>
                 <BlocksRenderer content={voorlezen?.tekst} />
