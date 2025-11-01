@@ -3,15 +3,21 @@ import { useMemo } from "react";
 import { LEMMATA, LemmataQueryLemma } from "../queries";
 import { FullPageSpinner } from "./FullPageSpinner";
 import { NavLink } from "react-router";
+import { LemmaSortType } from "../types";
 
-export const LemmaTable = () => {
+export const LemmaTable = (props: {
+  sortType: LemmaSortType
+}) => {
   const { data, loading } = useQuery(LEMMATA);
 
   const sortedLemmas = useMemo(() => {
     const output = [ ...(data?.lemmata?.data ?? []) ];
-    output.sort((a, b) => (a.attributes?.auter_achternaam ?? '')?.localeCompare(b.attributes?.auter_achternaam ?? ''));
+    output.sort((a, b) => props.sortType === LemmaSortType.BY_NAME
+      ? (a.attributes?.auter_achternaam ?? '').localeCompare(b.attributes?.auter_achternaam ?? '')
+      : (a.attributes?.niveau?.data?.attributes?.titel ?? '')?.localeCompare(b.attributes?.niveau?.data?.attributes?.titel ?? '')
+    );
     return output;
-  }, [ data?.lemmata?.data ])
+  }, [ data?.lemmata?.data, props.sortType ])
 
   if (loading) return <FullPageSpinner />
 
@@ -20,8 +26,9 @@ export const LemmaTable = () => {
       <thead>
         <tr>
           {/* <th>Cover</th> */}
-          <th>Auteur achternaam</th>
-          <th>Auteur voornaam</th>
+          <th>Groep</th>
+          <th>Achternaam</th>
+          <th>Voornaam</th>
           <th>Titel</th>
           {/* <th>Korte intro</th> */}
         </tr>
@@ -45,6 +52,9 @@ const LemmaTableRow = (props: {
           <img src={attributes?.afbeelding?.data?.attributes?.url} />
         </div>
       </td> */}
+      <td>
+        {attributes?.niveau?.data?.attributes?.titel}
+      </td>
       <td>
         {attributes?.auter_achternaam}
       </td>
