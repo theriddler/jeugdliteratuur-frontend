@@ -95,12 +95,25 @@ ul:has(+ ul) {
 
 table{
   width: 100%;
-  border: 1px solid lightgray;
+  border: 1px solid var(--secondary-color);
   border-collapse: collapse;
 
   td, th{
+    cursor: pointer;
     padding: 4px 16px;
-    border: 1px solid lightgray;
+    border-top: 0.5px solid var(--secondary-color);
+    // border-bottom: 1px solid var(--secondary-color);
     background-color: white;
+    transition: 0.2s all;
+  }
+
+  tr:hover{
+    td{
+      color: white;
+      background-color: var(--secondary-color);
+      a{
+        color: white !important;
+      }
+    }
   }
 }

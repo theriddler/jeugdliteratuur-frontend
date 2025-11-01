@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { LEMMATA, LemmataQueryLemma } from "../queries";
-import { FullPageSpinner } from "./FullPageSpinner";
-import { NavLink } from "react-router";
 import { LemmaSortType } from "../types";
+import { FullPageSpinner } from "./FullPageSpinner";
 
 export const LemmaTable = (props: {
   sortType: LemmaSortType
@@ -14,7 +15,7 @@ export const LemmaTable = (props: {
     const output = [ ...(data?.lemmata?.data ?? []) ];
     output.sort((a, b) => props.sortType === LemmaSortType.BY_NAME
       ? (a.attributes?.auter_achternaam ?? '').localeCompare(b.attributes?.auter_achternaam ?? '')
-      : (a.attributes?.niveau?.data?.attributes?.titel ?? '')?.localeCompare(b.attributes?.niveau?.data?.attributes?.titel ?? '')
+      : sortNievauWithKinderFirst(a.attributes?.niveau?.data, b.attributes?.niveau?.data)
     );
     return output;
   }, [ data?.lemmata?.data, props.sortType ])
@@ -25,52 +26,70 @@ export const LemmaTable = (props: {
     <table>
       <thead>
         <tr>
-          {/* <th>Cover</th> */}
-          <th>Groep</th>
-          <th>Achternaam</th>
-          <th>Voornaam</th>
+          {props.sortType === LemmaSortType.BY_GROUP && (
+            <>
+              <th>Groep</th>
+              <th>Achternaam</th>
+              <th>Voornaam</th>
+            </>
+          )}
+          {props.sortType === LemmaSortType.BY_NAME && (
+            <>
+              <th>Achternaam</th>
+              <th>Voornaam</th>
+              <th>Groep</th>
+            </>
+          )}
           <th>Titel</th>
-          {/* <th>Korte intro</th> */}
         </tr>
       </thead>
       <tbody>
-        {sortedLemmas?.map(l => <LemmaTableRow l={l} />)}
+        {sortedLemmas?.map(l => <LemmaTableRow l={l} sortType={props.sortType} />)}
       </tbody>
     </table>
   )
 }
 
 const LemmaTableRow = (props: {
-  l: LemmataQueryLemma
+  l: LemmataQueryLemma,
+  sortType: LemmaSortType
 }) => {
+  const navigate = useNavigate();
   const { id, attributes } = props.l;
 
   return (
-    <tr>
-      {/* <td>
-        <div className="image-wrapper xs fixed">
-          <img src={attributes?.afbeelding?.data?.attributes?.url} />
-        </div>
-      </td> */}
-      <td>
-        {attributes?.niveau?.data?.attributes?.titel}
-      </td>
-      <td>
-        {attributes?.auter_achternaam}
-      </td>
-      <td>
-        {attributes?.auteur_voornaam}
-      </td>
+    <tr onClick={() => navigate(`/lemma/${id}`)}>
+      {props.sortType === LemmaSortType.BY_GROUP && (
+        <>
+          <td>
+            {attributes?.niveau?.data?.attributes?.titel}
+          </td>
+          <td>
+            {attributes?.auter_achternaam}
+          </td>
+          <td>
+            {attributes?.auteur_voornaam}
+          </td>
+        </>
+      )}
+      {props.sortType === LemmaSortType.BY_NAME && (
+        <>
+          <td>
+            {attributes?.auter_achternaam}
+          </td>
+          <td>
+            {attributes?.auteur_voornaam}
+          </td>
+          <td>
+            {attributes?.niveau?.data?.attributes?.titel}
+          </td>
+        </>
+      )}
       <td>
         <NavLink to={`/lemma/${id}`}>
           {attributes?.titel}
         </NavLink>
       </td>
-      {/* <td>
-        {attributes?.korte_intro && (
-          <BlocksRenderer content={attributes?.korte_intro} />
-        )}
-      </td> */}
     </tr>
   )
 }

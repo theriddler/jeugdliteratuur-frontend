@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { NavLink } from "react-router";
-import { sortKinderFirst } from "../funcs/sortKinderFirst";
+import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { LEVELS } from "../queries";
 
 const Sidebar = (props: {
@@ -10,7 +10,7 @@ const Sidebar = (props: {
   const { data } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
-    output.sort(sortKinderFirst)// put kindergarden first
+    output.sort(sortNievauWithKinderFirst)// put kindergarden first
     return output;
   }, [ data?.niveaus?.data ])
 

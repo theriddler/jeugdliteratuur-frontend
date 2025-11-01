@@ -28,9 +28,9 @@ export const LemmaDocumentReact = (props: {
             <h3>STERBOEKEN</h3>
             <div>sterboeken.org</div>
           </div>
-          <hr className="only-show-in-pdf my-4" />
+          <hr className="only-show-in-pdf my-3" />
           <div className="d-flex align-items-center flex-wrap">
-            <IconStar className="align-self-start mb-5" color={STERBOEKEN_SECONDARY} />
+            <IconStar className="align-self-start" color={STERBOEKEN_SECONDARY} />
             <div>
               <h3 className="d-inline ms-2">{attributes?.titel} ({attributes?.jaar})</h3>
             </div>
@@ -328,6 +328,8 @@ const stylesheet = {
     // padding: '4px 0'
   },
   [ '.hide-in-pdf' ]: {
+    position: 'fixed',
+    top: 0,
     display: 'none',
     color: 'transparent',
     opacity: 0

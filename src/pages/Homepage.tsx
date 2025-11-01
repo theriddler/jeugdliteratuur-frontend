@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
 import { FullPageSpinner } from "../components/FullPageSpinner";
-import { sortKinderFirst } from "../funcs/sortKinderFirst";
+import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
 import { IconStar } from "@tabler/icons-react";
@@ -53,7 +53,7 @@ const HomepageGroupList = () => {
   const { data, loading } = useQuery(LEVELS);
   const levels = useMemo(() => {
     const output = [ ...(data?.niveaus?.data ?? []) ]
-    output.sort(sortKinderFirst) // put kindergarden first
+    output.sort(sortNievauWithKinderFirst) // put kindergarden first
     return output;
   }, [ data?.niveaus?.data ])
 
