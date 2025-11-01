@@ -2,9 +2,10 @@ import { NavLink, useNavigate } from "react-router";
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
 import logo from '../assets/logo.png';
 import partner_logo_1 from '../assets/partner_logo_1.jpg';
-import { IconMenu2 } from "@tabler/icons-react";
+import { IconMenu2, IconStar } from "@tabler/icons-react";
 import { useState } from "react";
 import { Searchbar } from "./Searchbar";
+import { STERBOEKEN_SECONDARY } from "../App";
 
 const Header = (props: {
   toggleSidebar: () => void;
@@ -18,7 +19,10 @@ const Header = (props: {
       <Row className="d-none d-lg-flex">
         <Col xs={4} className="mb-0 d-flex justify-content-start align-items-end gap-1">
           <div className="app-header-link-container">
-            <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
+            <span className="app-nav-link d-flex align-items-center gap-2 primary-hover" onClick={() => props.toggleSidebar()}>
+              <IconStar className="" color={STERBOEKEN_SECONDARY} height={16} width={16} />
+              <span>Lemma's</span>
+            </span>
           </div>
           <div className="app-header-link-container">
             <UncontrolledDropdown>

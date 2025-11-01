@@ -7,6 +7,8 @@ import { FullPageSpinner } from "../components/FullPageSpinner";
 import { sortKinderFirst } from "../funcs/sortKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
+import { IconStar } from "@tabler/icons-react";
+import { STERBOEKEN_PRIMARY } from "../App";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
@@ -82,7 +84,8 @@ const HomepageGroup = (props: {
     <div>
       <Card>
         <CardBody className="mt-0">
-          <div className="mb-3">
+          <div className="d-flex align-items-center gap-2 mb-3">
+            <IconStar color={STERBOEKEN_PRIMARY} size={16} />
             <Link to={`/groep/${props.id}`}>
               {props.attributes?.titel}
             </Link>

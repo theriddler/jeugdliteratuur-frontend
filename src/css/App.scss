@@ -201,3 +201,8 @@
 .only-show-in-pdf{
   display: none;
 }
+
+.primary-hover:hover{
+  color: var(--primary-color);
+  > *{stroke: var(--primary-color)};
+}

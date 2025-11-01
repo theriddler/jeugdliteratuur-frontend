@@ -7,6 +7,8 @@ import { Col, Row } from "reactstrap";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmataQueryLemma } from "../queries";
+import { IconStar } from "@tabler/icons-react";
+import { STERBOEKEN_SECONDARY } from "../App";
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmataQueryLemma | undefined,
@@ -31,7 +33,8 @@ export const LemmaDocumentReact = (props: {
             <div>
               <div className="d-flex gap-3 align-items-center flex-wrap">
                 <div>
-                  <h3>{attributes?.titel} ({attributes?.jaar})</h3>
+                  <IconStar className="mb-5" color={STERBOEKEN_SECONDARY} />
+                  <h3 className="d-inline ms-2">{attributes?.titel} ({attributes?.jaar})</h3>
                 </div>
                 <div className="text-secondary text-nowrap">
                   <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
@@ -291,7 +294,9 @@ const LemmaInternalLink = (props: {
         {attributes?.auteur_2_voornaam && (
           <div className="text-secondary">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam} </div>
         )}
-        <div>{attributes?.titel}</div>
+        <div>
+          {attributes?.titel}
+        </div>
       </div>
     </div>
   )

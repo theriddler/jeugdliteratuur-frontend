@@ -22,6 +22,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+export const STERBOEKEN_PRIMARY = '#5E2750'
+export const STERBOEKEN_SECONDARY = '#E2A93A'
+
 function App () {
 
   return (
