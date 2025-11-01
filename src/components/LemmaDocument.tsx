@@ -82,7 +82,7 @@ export const LemmaDocumentReact = (props: {
         <Col xs={12} lg={8}>
           <section>
             <div className="lemma-main-section">
-              <h5>De kern</h5>
+              <h5>In het kort</h5>
               {attributes?.de_kern && (
                 <BlocksRenderer content={attributes?.de_kern} />
               )}
