@@ -46,15 +46,16 @@
 
 .lemma-container{
   [class^="col-"]{
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
+  }
+  .row{
+    margin: 0;
   }
 }
 
 .lemma-section-container{
-  // margin: 16px;
+  margin: 16px 0 !important;
   padding: 16px;
-  margin: 16px 0;
   border-radius: 16px;
   background-color: white;
   border: 1px solid var(--secondary-color);

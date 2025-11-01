@@ -30,17 +30,17 @@ export const LemmaDocumentReact = (props: {
           </div>
           <hr className="only-show-in-pdf my-3" />
           <div className="d-flex align-items-center flex-wrap">
-            <IconStar className="align-self-start" color={STERBOEKEN_SECONDARY} />
-            <div>
+            <IconStar className="my-2 align-self-start" color={STERBOEKEN_SECONDARY} />
+            <div className="my-2">
               <h3 className="d-inline ms-2">{attributes?.titel} ({attributes?.jaar})</h3>
             </div>
-            <div className="ms-3 text-secondary text-nowrap">
+            <div className="my-2 ms-3 text-secondary text-nowrap">
               <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
               {attributes?.auteur_2_voornaam && (
                 <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
               )}
             </div>
-            <div className="ms-5">
+            <div className="my-2 ms-5">
               <div className=" hide-in-pdf">
                 <PDFDownloadLink
                   className="pretty-button text-nowrap"
@@ -66,7 +66,7 @@ export const LemmaDocumentReact = (props: {
           <div className="hide-in-pdf">
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
-                <div>Aan de slag met dit boek?</div>
+                <div>Dit boek lenen?</div>
                 <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
                   <img src={arrow} width={42} height={42} className="hide-in-pdf" />
                 </div>
@@ -80,15 +80,18 @@ export const LemmaDocumentReact = (props: {
       </Row>
       <Row className="lemma-section-container mt-3">
         <Col xs={12} lg={8}>
-          <div>
-            {attributes?.de_kern && (
-              <BlocksRenderer content={attributes?.de_kern} />
-            )}
-          </div>
+          <section>
+            <div className="lemma-main-section">
+              <h5>De kern</h5>
+              {attributes?.de_kern && (
+                <BlocksRenderer content={attributes?.de_kern} />
+              )}
+            </div>
+          </section>
         </Col>
         {/* Only show on Desktop */}
         <Col xs={12} lg={4} className="d-none d-lg-block">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-end">
             <div className="image-wrapper lemma-header">
               <img src={attributes?.afbeelding?.data?.attributes?.url} />
             </div>
@@ -178,7 +181,7 @@ export const LemmaDocumentReact = (props: {
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
             {voorlezen && (
-              <section className="lemma-section-container">
+              <section className="lemma-section-container green">
                 <div className="lemma-main-section">
                   <h5>Voorlezen</h5>
                   <BlocksRenderer content={voorlezen?.tekst} />
@@ -258,7 +261,7 @@ export const LemmaDocumentReact = (props: {
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {voorlezen && (
-            <section className="lemma-section-container">
+            <section className="lemma-section-container green">
               <div className="lemma-side-section">
                 <h5>Voorlezen</h5>
                 <BlocksRenderer content={voorlezen?.tekst} />
