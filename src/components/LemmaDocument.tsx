@@ -50,7 +50,10 @@ export const LemmaDocumentReact = (props: {
         <Col xs={12} lg={4} className="d-block d-lg-none pt-4 py-lg-0">
           <div className="d-flex justify-content-center">
             <div className="image-wrapper lemma-header">
-              <img src={attributes?.afbeelding?.data?.attributes?.url} />
+              <img
+                className="ignore-default-lemma-section-container-format"
+                src={attributes?.afbeelding?.data?.attributes?.url}
+              />
             </div>
           </div>
         </Col>
@@ -60,7 +63,7 @@ export const LemmaDocumentReact = (props: {
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
                 <div>Dit boek lenen?</div>
                 <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
-                  <img src={arrow} width={42} height={42} className="hide-in-pdf" />
+                  <img src={arrow} width={42} height={42} className="hide-in-pdf ignore-default-lemma-section-container-format" />
                 </div>
               </div>
               <a className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf" href="https://www.jeugdbibliotheek.nl/" target="_blank">
@@ -99,7 +102,10 @@ export const LemmaDocumentReact = (props: {
         <Col xs={12} lg={4} className="d-none d-lg-block">
           <div className="h-100 d-flex justify-content-end align-items-center">
             <div className="image-wrapper lemma-header">
-              <img src={attributes?.afbeelding?.data?.attributes?.url} />
+              <img
+                className="ignore-default-lemma-section-container-format"
+                src={attributes?.afbeelding?.data?.attributes?.url}
+              />
             </div>
           </div>
         </Col>
@@ -260,7 +266,9 @@ const LemmaInternalLink = (props: {
     <div className="lemma-internal-link d-flex gap-3 m-3" onClick={() => props.navigate(`/lemma/${id}`)}>
       <div>
         <div className="image-wrapper xs">
-          <img src={attributes?.afbeelding?.data?.attributes?.url} />
+          <img
+            src={attributes?.afbeelding?.data?.attributes?.url}
+          />
         </div>
       </div>
       <div className="d-flex flex-column justify-content-center gap-1">
