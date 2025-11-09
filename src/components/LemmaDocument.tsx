@@ -325,7 +325,11 @@ const stylesheet = {
     alignItems: 'flex-end',
     gap: '8px',
     color: '#E2A93A'
-  }
+  },
+  [ 'ul ul' ]: { // for indented lists
+    paddingLeft: 20,
+    margin: 0,
+  },
 };
 
 
