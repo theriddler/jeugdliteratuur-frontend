@@ -51,7 +51,7 @@ export const LemmaDocumentReact = (props: {
           <div className="d-flex justify-content-center">
             <div className="image-wrapper lemma-header">
               <img
-                className="ignore-default-lemma-section-container-format"
+                className="hide-in-pdf ignore-default-lemma-section-container-format"
                 src={attributes?.afbeelding?.data?.attributes?.url}
               />
             </div>
@@ -113,7 +113,7 @@ export const LemmaDocumentReact = (props: {
           <div className="h-100 d-flex justify-content-center align-items-center">
             <div className="image-wrapper lemma-header">
               <img
-                className="ignore-default-lemma-section-container-format"
+                className="hide-in-pdf ignore-default-lemma-section-container-format"
                 src={attributes?.afbeelding?.data?.attributes?.url}
               />
             </div>
@@ -277,6 +277,7 @@ const LemmaInternalLink = (props: {
       <div>
         <div className="image-wrapper xs">
           <img
+            className="hide-in-pdf"
             src={attributes?.afbeelding?.data?.attributes?.url}
           />
         </div>
@@ -320,6 +321,10 @@ const stylesheet = {
   ul: {
     width: '100%',
     marginBottom: 0
+  },
+  img: {
+    width: '100%',
+    height: '200px'
   },
   [ '.hide-in-pdf' ]: {
     position: 'fixed',
