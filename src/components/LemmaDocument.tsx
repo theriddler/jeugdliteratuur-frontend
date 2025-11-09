@@ -84,7 +84,7 @@ export const LemmaDocumentReact = (props: {
                 <div className=" hide-in-pdf">
                   <PDFDownloadLink
                     className="pretty-button text-nowrap"
-                    fileName={`sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
+                    fileName={`Sterboeken_${props.lemma.attributes?.titel}_${props.lemma.attributes?.jaar}`}
                     document={<LemmaDocument lemma={props.lemma} voorlezen={props.voorlezen} />}
                   >
                     Download PDF
@@ -100,7 +100,7 @@ export const LemmaDocumentReact = (props: {
         </Col>
         {/* Only show on Desktop */}
         <Col xs={12} lg={4} className="d-none d-lg-block">
-          <div className="h-100 d-flex justify-content-end align-items-center">
+          <div className="h-100 d-flex justify-content-center align-items-center">
             <div className="image-wrapper lemma-header">
               <img
                 className="ignore-default-lemma-section-container-format"

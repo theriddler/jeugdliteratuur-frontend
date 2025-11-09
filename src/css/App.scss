@@ -32,10 +32,14 @@
   }
 }
 
+[class^="col-"], [class*=" col-"] {
+  margin-bottom: 16px !important;
+}
+
 .app-hero{
   background-color: white;
   border: 2px solid var(--secondary-color);
-  border-radius: 32px;
+  border-radius: var(--border-radius);
   padding: 16px;
   margin: 16px 0;
 
@@ -45,7 +49,7 @@
 }
 
 .lemma-container{
-  [class^="col-"]{
+  [class^="col-"], [class*=" col-"]{
     margin: 0 !important;
   }
   .row{
@@ -56,7 +60,7 @@
 .lemma-section-container{
   margin: 16px 0 !important;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   background-color: white;
   border: 1px solid var(--secondary-color);
 
@@ -76,7 +80,7 @@
 .lemma-internal-link{
   cursor: pointer;
   border: 1px solid var(--secondary-color);
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   padding: 4px;
   transition: all 0.2s;
   &:hover{
@@ -91,7 +95,7 @@
 .image-wrapper {
   width: 100%;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
 
   &.hero-img {
     height: 100%;
@@ -135,10 +139,6 @@
   }
 }
 
-[class^="col-"], [class*=" col-"] {
-  margin-bottom: 16px !important;
-}
-
 .card{
   @extend .header-font;
   a{
@@ -170,7 +170,7 @@
 .pretty-button {
   cursor: pointer;
   display: block;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   outline: 1px solid var(--secondary-color);
   color: var(--text-dark) !important;
   background-color: white;
@@ -195,7 +195,7 @@
 
 .feedback-form-container{
   padding: 16px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   background-color: white;
   border: 2px solid var(--secondary-color);
 
