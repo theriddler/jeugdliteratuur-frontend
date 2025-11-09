@@ -91,11 +91,21 @@ export const LemmaDocumentReact = (props: {
                   </PDFDownloadLink>
                 </div>
               </div>
-
             </div>
             {attributes?.de_kern && (
               <BlocksRenderer content={attributes?.de_kern} />
             )}
+            <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
+              <a className="pretty-button text-nowrap" href="#het-verhaal">
+                Het verhaal
+              </a>
+              <a className="pretty-button text-nowrap" href="#analyse">
+                Analyse en interpretatie
+              </a>
+              <a className="pretty-button text-nowrap" href="#didactische">
+                Didactische vragen en lessuggesties
+              </a>
+            </div>
           </section>
         </Col>
         {/* Only show on Desktop */}
@@ -125,13 +135,13 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {attributes?.het_verhaal && (
-            <section className="lemma-section-container">
+            <section id="het-verhaal" className="lemma-section-container">
               <h5>Het verhaal</h5>
               <BlocksRenderer content={attributes?.het_verhaal} />
             </section>
           )}
           {attributes?.analyse && (
-            <section className="lemma-section-container">
+            <section id="analyse" className="lemma-section-container">
               <h5>Analyse en interpretatie</h5>
               <BlocksRenderer content={attributes?.analyse} />
             </section>
@@ -186,7 +196,7 @@ export const LemmaDocumentReact = (props: {
             )}
           </div>
           {attributes?.lessuggesties && (
-            <section className="lemma-section-container">
+            <section id="didactische" className="lemma-section-container">
               <h5>Didactische vragen en lessuggesties</h5>
               <BlocksRenderer content={attributes?.lessuggesties} />
             </section>

@@ -25,6 +25,7 @@ body {
   background-repeat: repeat;
   background-blend-mode: multiply;
   background-attachment: fixed;
+  [id]{scroll-margin-top: 120px} // account for header in scrolling to id tags
 }
 
 .app-layout {
