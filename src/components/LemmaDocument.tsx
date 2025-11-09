@@ -96,13 +96,13 @@ export const LemmaDocumentReact = (props: {
               <BlocksRenderer content={attributes?.de_kern} />
             )}
             <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
-              <a className="pretty-button text-nowrap" href="#het-verhaal">
+              <a className="hide-in-pdf pretty-button text-nowrap" href="#het-verhaal">
                 Het verhaal
               </a>
-              <a className="pretty-button text-nowrap" href="#analyse">
+              <a className="hide-in-pdf pretty-button text-nowrap" href="#analyse">
                 Analyse en interpretatie
               </a>
-              <a className="pretty-button text-nowrap" href="#didactische">
+              <a className="hide-in-pdf pretty-button text-nowrap" href="#didactische">
                 Didactische vragen en lessuggesties
               </a>
             </div>
