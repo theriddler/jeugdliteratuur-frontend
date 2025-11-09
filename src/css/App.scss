@@ -107,8 +107,11 @@
   }
 
   &.lemma-header{
-    height: 350px;
-    width: 250px;
+    max-height: 400px;
+    margin: 16px;
+    img{
+      object-fit: contain
+    }
   }
 
   &.lemma-overview {
