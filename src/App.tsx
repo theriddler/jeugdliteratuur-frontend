@@ -38,10 +38,10 @@ function App () {
             <Route path="/feedback" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
-            <Route path="/alle-lemmas" element={<AllLemmas />} />
+            <Route path="/alle-teksten" element={<AllLemmas />} />
 
             <Route path="/groep/:levelId" element={<Level />} />
-            <Route path="/lemma/:lemmaId" element={<Lemma />} />
+            <Route path="/teksten/:lemmaId" element={<Lemma />} />
           </Route>
         </Routes>
       </BrowserRouter>

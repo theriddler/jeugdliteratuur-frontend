@@ -94,7 +94,7 @@ const HomepageGroup = (props: {
           <div className="d-flex gap-2">
             {firstThreeLemmas?.map(l => (
               <div>
-                <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/lemma/${l.id}`)}>
+                <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/teksten/${l.id}`)}>
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />
                 </div>
               </div>

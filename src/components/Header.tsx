@@ -1,11 +1,12 @@
-import { NavLink, useNavigate } from "react-router";
-import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
-import logo from '../assets/logo.png';
-import partner_logo_1 from '../assets/partner_logo_1.jpg';
 import { IconMenu2, IconStar } from "@tabler/icons-react";
 import { useState } from "react";
-import { Searchbar } from "./Searchbar";
+import { NavLink, useNavigate } from "react-router";
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
 import { STERBOEKEN_SECONDARY } from "../App";
+import logo from '../assets/logo.png';
+import partner_logo_1 from '../assets/partner_logo_1.jpg';
+import partner_logo_2 from '../assets/partner_logo_2.png';
+import { Searchbar } from "./Searchbar";
 
 const Header = (props: {
   toggleSidebar: () => void;
@@ -21,7 +22,7 @@ const Header = (props: {
           <div className="app-header-link-container">
             <span className="app-nav-link d-flex align-items-center gap-2 primary-hover" onClick={() => props.toggleSidebar()}>
               <IconStar className="" color={STERBOEKEN_SECONDARY} height={16} width={16} />
-              <span>Lemma's</span>
+              <span>Teksten</span>
             </span>
           </div>
           <div className="app-header-link-container">
@@ -32,7 +33,7 @@ const Header = (props: {
                   <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink to="/alle-lemmas" className="app-nav-link">Alle lemma's</NavLink>
+                  <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>
@@ -48,6 +49,9 @@ const Header = (props: {
           <div className="ps-4 d-flex justify-content-end gap-3">
             <div>
               <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
+            </div>
+            <div className="image-wrapper partner-logo">
+              <img src={partner_logo_2} />
             </div>
             <div className="image-wrapper partner-logo">
               <img src={partner_logo_1} />
@@ -81,7 +85,7 @@ const Header = (props: {
           <div className="d-flex flex-column gap-3">
             <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
             <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
-              <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Lemma's</span>
+              <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Teksten</span>
             </div>
             <div className="app-mobile-offcanvas-link-container">
               <UncontrolledDropdown>
@@ -91,7 +95,7 @@ const Header = (props: {
                     <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                   </DropdownItem>
                   <DropdownItem onClick={toggleMobileNav}>
-                    <NavLink to="/alle-lemmas" className="app-nav-link">Alle lemma's</NavLink>
+                    <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                   </DropdownItem>
                   <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>

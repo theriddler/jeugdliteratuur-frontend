@@ -58,7 +58,7 @@ const LemmaTableRow = (props: {
   const { id, attributes } = props.l;
 
   return (
-    <tr onClick={() => navigate(`/lemma/${id}`)}>
+    <tr onClick={() => navigate(`/teksten/${id}`)}>
       {props.sortType === LemmaSortType.BY_GROUP && (
         <>
           <td>
@@ -86,7 +86,7 @@ const LemmaTableRow = (props: {
         </>
       )}
       <td>
-        <NavLink to={`/lemma/${id}`}>
+        <NavLink to={`/teksten/${id}`}>
           {attributes?.titel}
         </NavLink>
       </td>

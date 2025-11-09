@@ -12,7 +12,7 @@ export const AllLemmas = () => {
       <Row>
         <Col xs={12}>
           <div className="d-flex align-items-center gap-4">
-            <h4 className="m-0">Alle lemma's</h4>
+            <h4 className="m-0">Alle teksten</h4>
             <Button
               size="sm"
               outline={sortType !== LemmaSortType.BY_NAME}

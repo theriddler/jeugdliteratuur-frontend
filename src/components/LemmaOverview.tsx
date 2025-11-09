@@ -14,7 +14,7 @@ export const LemmaOverview = (props: {
   const imageUrl = attributes?.afbeelding?.data?.attributes?.url;
 
   return (
-    <Card className="clickable h-100" onClick={() => navigate(`/lemma/${id}`)}>
+    <Card className="clickable h-100" onClick={() => navigate(`/teksten/${id}`)}>
       <CardBody>
         <div className="d-flex flex-column h-100">
           <div>
@@ -42,7 +42,7 @@ export const LemmaOverview = (props: {
             </div>
           </div>
           <div className="flex-grow-1 d-flex align-items-end">
-            <Link to={`/lemma/${id}`}>
+            <Link to={`/teksten/${id}`}>
               Verder lezen
             </Link>
           </div>

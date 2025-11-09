@@ -263,7 +263,7 @@ const LemmaInternalLink = (props: {
   const { id, attributes } = props.l;
 
   return (
-    <div className="lemma-internal-link d-flex gap-3 m-3" onClick={() => props.navigate(`/lemma/${id}`)}>
+    <div className="lemma-internal-link d-flex gap-3 m-3" onClick={() => props.navigate(`/teksten/${id}`)}>
       <div>
         <div className="image-wrapper xs">
           <img

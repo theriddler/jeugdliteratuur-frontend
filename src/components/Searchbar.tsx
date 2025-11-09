@@ -54,7 +54,7 @@ const SearchbarLemmaSuggestion = (props: {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/lemma/${props.l.id}`);
+    navigate(`/teksten/${props.l.id}`);
     props.closeMobileNav();
   }
 
