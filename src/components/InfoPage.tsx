@@ -7,7 +7,8 @@ export const InfoPage = (props: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tekst: any,
   fotoUrl: string | undefined,
-  loading: boolean
+  loading: boolean,
+  fotoReplacement?: React.ReactNode;
 }) => props.loading ? <FullPageSpinner /> : (
   <>
     <Row>
@@ -18,7 +19,7 @@ export const InfoPage = (props: {
       </Col>
     </Row>
     <Row className="align-items-stretch">
-      <Col xs={12} lg={props.fotoUrl ? 8 : 12}>
+      <Col xs={12} lg={props.fotoUrl || props.fotoReplacement ? 8 : 12}>
         <Card className="h-100">
           <CardBody>
             {props.tekst && (
@@ -27,6 +28,11 @@ export const InfoPage = (props: {
           </CardBody>
         </Card>
       </Col>
+      {props.fotoReplacement && (
+        <Col xs={12} lg={4}>
+          {props.fotoReplacement}
+        </Col>
+      )}
       {props.fotoUrl && (
         <Col xs={12} lg={4}>
           <div className="image-wrapper info-page">
