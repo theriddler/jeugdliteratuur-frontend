@@ -1,11 +1,71 @@
 import { graphql } from "./gql";
-import { LemmataQuery } from "./gql/graphql";
+import { LemmaQuery, LemmataQuery } from "./gql/graphql";
 
 export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 
 export const LEMMATA = graphql(`
   query Lemmata {
     lemmata(pagination: {page: 1, pageSize: 500}) {
+      data {
+        id
+        attributes{
+          titel
+          korte_intro
+          de_kern
+          auteur_voornaam
+          auter_achternaam
+          auteur_2_voornaam
+          auter_2_achternaam
+          jaar
+          afbeelding {
+            data{
+              id
+              attributes{
+                name
+                width
+                height
+                provider
+                provider_metadata
+                url
+              }
+            }
+          }
+          het_verhaal
+          motieven
+          doelgroep
+          analyse
+          lessuggesties
+          kerndoelen
+          bronnen
+          niveau {
+            data{
+              id
+              attributes{
+                titel
+                beschrijving
+              }
+            }
+          }
+          tags {
+            data{
+              id
+              attributes{
+                titel
+                beschrijving
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`);
+
+export type LemmaQueryLemma = NonNullable<LemmaQuery[ 'lemma' ]>[ 'data' ];
+
+export const LEMMA = graphql(`
+  query Lemma($id: ID!) {
+    lemma(id: $id) {
       data {
         id
         attributes{
@@ -137,7 +197,7 @@ export const LEMMATA = graphql(`
       }
     }
   }
-`);
+`)
 
 export const LEVELS = graphql(`
   query Levels {

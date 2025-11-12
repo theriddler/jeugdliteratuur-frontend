@@ -8,10 +8,10 @@ import { Col, Row } from "reactstrap";
 import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
-import { LemmataQueryLemma } from "../queries";
+import { LemmaQueryLemma } from "../queries";
 
 export const LemmaDocumentReact = (props: {
-  lemma: LemmataQueryLemma | undefined,
+  lemma: LemmaQueryLemma | undefined,
   voorlezen: VoorlezenEntityResponse[ 'data' ],
   navigate: NavigateFunction
 }) => {
@@ -267,9 +267,10 @@ export const LemmaDocumentReact = (props: {
 }
 
 const LemmaInternalLink = (props: {
-  l: LemmataQueryLemma,
+  l: LemmaQueryLemma,
   navigate: NavigateFunction
 }) => {
+  if (!props.l) return;
   const { id, attributes } = props.l;
 
   return (
@@ -360,7 +361,7 @@ const styles = StyleSheet.create({
 })
 
 export const LemmaDocument = (props: {
-  lemma: LemmataQueryLemma,
+  lemma: LemmaQueryLemma,
   voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => {
   if (!props.lemma) return null;
@@ -390,7 +391,7 @@ export const LemmaDocument = (props: {
 }
 
 const LemmaHTML = (props: {
-  lemma: LemmataQueryLemma,
+  lemma: LemmaQueryLemma,
   voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => (
   <html>
