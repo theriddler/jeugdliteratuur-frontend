@@ -73,7 +73,11 @@ export const LemmaDocumentReact = (props: {
                   <img src={arrow} width={42} height={42} className="hide-in-pdf ignore-default-lemma-section-container-format" />
                 </div>
               </div>
-              <a className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf" href="https://www.jeugdbibliotheek.nl/" target="_blank">
+              <a
+                className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf"
+                href={attributes?.link_naar_jeugdbibliotheek ?? "https://www.jeugdbibliotheek.nl/"}
+                target="_blank"
+              >
                 Naar de Jeugdbibliotheek
               </a>
             </div>
