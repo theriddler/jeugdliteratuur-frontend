@@ -37,10 +37,17 @@ export const LemmaDocumentReact = (props: {
           </div>
           <div className="d-flex gap-2 mt-2">
             <IconStar className="align-self-start" color='transparent' />
-            <div className="text-secondary text-nowrap fs-6">
-              <div>{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
+            <div className="text-secondary text-nowrap">
+              <div className="fs-6">{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
               {attributes?.auteur_2_voornaam && (
-                <div>{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
+                <div className="fs-6">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
+              )}
+              {attributes?.vertaald_door_voornaam && (
+                <div className="fw-lightest">
+                  <em>
+                    Vertaald door {attributes.vertaald_door_voornaam} {attributes.vertaald_door_achternaam}
+                  </em>
+                </div>
               )}
             </div>
           </div>

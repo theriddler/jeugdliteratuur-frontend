@@ -76,7 +76,10 @@ export const LEMMA = graphql(`
           auter_achternaam
           auteur_2_voornaam
           auter_2_achternaam
+          vertaald_door_voornaam
+          vertaald_door_achternaam
           jaar
+          link_naar_jeugdbibliotheek
           afbeelding {
             data{
               id
