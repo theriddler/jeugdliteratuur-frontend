@@ -107,8 +107,9 @@
   }
 
   &.lemma-header{
-    max-height: 400px;
-    margin: 16px;
+    max-width: 250px;
+    height: 100%;
+    // margin: 16px;
     img{
       object-fit: contain
     }
