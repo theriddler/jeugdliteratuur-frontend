@@ -64,7 +64,7 @@
   background-color: white;
   border: 1px solid var(--secondary-color);
 
-  &.green{ border-color: darkgreen;}
+  &.green{ border-color: var(--success-color);}
   &.gray{ border-color: lightgray;}
 
   img:not(.ignore-default-lemma-section-container-format){
@@ -224,4 +224,9 @@
 .primary-hover:hover{
   color: var(--primary-color);
   > *{stroke: var(--primary-color)};
+}
+
+.link{
+  cursor: pointer;
+  @extend a;
 }

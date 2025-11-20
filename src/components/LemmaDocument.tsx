@@ -1,6 +1,7 @@
 import { Document, Page, PDFDownloadLink, StyleSheet, View } from "@react-pdf/renderer";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { IconStar } from "@tabler/icons-react";
+import { useEffect } from "react";
 import ReactDOMServer from 'react-dom/server';
 import Html from "react-pdf-html";
 import { NavigateFunction } from "react-router";
@@ -9,7 +10,6 @@ import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
-import { useEffect } from "react";
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmaQueryLemma | undefined,
@@ -183,7 +183,12 @@ export const LemmaDocumentReact = (props: {
               <h5>Tags</h5>
               <ul>
                 {attributes?.tags?.data.map(t => (
-                  <li>{t.attributes?.titel}</li>
+                  <li>
+                    {/* Cannot do href here */}
+                    <span className="link" onClick={() => props.navigate(`/tag/${t.id}`)}>
+                      {t.attributes?.titel}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </section>

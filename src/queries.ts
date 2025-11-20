@@ -222,6 +222,45 @@ export const LEMMA = graphql(`
   }
 `)
 
+export const TAG = graphql(`
+  query Tag($id: ID!) {
+    tag(id: $id) {
+      data{
+        id
+        attributes{
+          titel
+          beschrijving
+          lemmas{
+            data{
+              id
+              attributes{
+                titel
+                korte_intro
+                auteur_voornaam
+                auter_achternaam
+                jaar
+                afbeelding {
+                  data{
+                    id
+                    attributes{
+                      name
+                      width
+                      height
+                      provider
+                      provider_metadata
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)
+
 export const LEVELS = graphql(`
   query Levels {
     niveaus {
