@@ -12,6 +12,7 @@ export const Level = () => {
 
   const { data: levelData, loading: loadingLevel } = useQuery(LEVELS);
   const { data: lemmataData, loading: loadingLemmas } = useQuery(LEMMATA);
+  const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
   const sortedLevels = useMemo(() => {
     const output = [ ...(levelData?.niveaus?.data ?? []) ]
@@ -22,7 +23,6 @@ export const Level = () => {
   const levelIndex = useMemo(() => sortedLevels?.findIndex(l => l.id === levelId), [ levelId, sortedLevels ]);
   const level = useMemo(() => sortedLevels?.[ levelIndex ], [ levelIndex, sortedLevels ]);
   const lemmas = useMemo(() => lemmataData?.lemmata?.data?.filter(l => l.attributes?.niveau?.data?.id === level?.id), [ lemmataData?.lemmata?.data, level?.id ])
-  const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
   const previousLevel = useMemo(() => {
     if (levelIndex === 0) return undefined;
