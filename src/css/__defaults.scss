@@ -63,7 +63,9 @@ main {
 
 a{
   color: #5A847B !important;
-  text-decoration: none !important;
+  &:hover{
+    color: var(--secondary-color) !important;
+  }
 }
 
 h3{

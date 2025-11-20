@@ -14,7 +14,7 @@ export const LemmaOverview = (props: {
   const imageUrl = attributes?.afbeelding?.data?.attributes?.url;
 
   return (
-    <Card className="clickable h-100" onClick={() => navigate(`/teksten/${id}`)}>
+    <Card className="clickable card-hover h-100" onClick={() => navigate(`/teksten/${id}`)}>
       <CardBody>
         <div className="d-flex flex-column h-100">
           <div>
