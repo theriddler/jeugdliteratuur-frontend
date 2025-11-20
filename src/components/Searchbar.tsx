@@ -1,15 +1,21 @@
-import { useQuery } from "@apollo/client";
-import { useMemo, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { Input } from "reactstrap";
-import { LemmataQueryLemma } from "../queries";
-import { LEMMATA } from "../queries";
+import { Input, Spinner } from "reactstrap";
+import { LEMMATA, LemmataQueryLemma } from "../queries";
 
 export const Searchbar = (props: {
   closeMobileNav: () => void;
   placeholder?: string;
 }) => {
-  const { data: lemmas } = useQuery(LEMMATA);
+  const [ loadSearchTerms, { data: lemmas, called, loading } ] = useLazyQuery(LEMMATA);
+
+  const runQuery = useCallback(async () => {
+    if (called) return;
+    loadSearchTerms();
+  }, [ called, loadSearchTerms ])
+
+  useEffect(() => console.log(lemmas), [ lemmas ])
 
   const [ search, setSearch ] = useState('');
   const suggestions = useMemo(() => {
@@ -30,7 +36,13 @@ export const Searchbar = (props: {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onBlur={() => setTimeout(() => setSearch(''), 100)}
+        onFocus={runQuery}
       />
+      {search && loading && (
+        <div className="searchbar-dropdown bg-white d-flex justify-content-center align-items-center p-3">
+          <Spinner />
+        </div>
+      )}
       {suggestions && suggestions.length > 0 && (
         <div className="searchbar-dropdown">
           {suggestions.map(l => (

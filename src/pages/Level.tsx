@@ -5,13 +5,13 @@ import { Col, Row } from "reactstrap";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaOverview } from "../components/LemmaOverview";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
-import { LEMMATA, LEVELS } from "../queries";
+import { LEMMATA_BY_GROEP, LEVELS } from "../queries";
 
 export const Level = () => {
   const { levelId } = useParams();
 
   const { data: levelData, loading: loadingLevel } = useQuery(LEVELS);
-  const { data: lemmataData, loading: loadingLemmas } = useQuery(LEMMATA);
+  const { data: lemmataData, loading: loadingLemmas } = useQuery(LEMMATA_BY_GROEP, { variables: { niveauId: levelId ?? '' } });
   const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
   const sortedLevels = useMemo(() => {
@@ -22,7 +22,6 @@ export const Level = () => {
 
   const levelIndex = useMemo(() => sortedLevels?.findIndex(l => l.id === levelId), [ levelId, sortedLevels ]);
   const level = useMemo(() => sortedLevels?.[ levelIndex ], [ levelIndex, sortedLevels ]);
-  const lemmas = useMemo(() => lemmataData?.lemmata?.data?.filter(l => l.attributes?.niveau?.data?.id === level?.id), [ lemmataData?.lemmata?.data, level?.id ])
 
   const previousLevel = useMemo(() => {
     if (levelIndex === 0) return undefined;
@@ -61,7 +60,7 @@ export const Level = () => {
         </Col>
       </Row>
       <Row className="mt-3 align-items-stretch">
-        {lemmas?.map(l => (
+        {lemmataData?.lemmata?.data?.map(l => (
           <Col xs={12} lg={4}>
             <LemmaOverview lemma={l} />
           </Col>

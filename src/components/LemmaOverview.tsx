@@ -1,10 +1,10 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody } from "reactstrap";
-import { LemmataQueryLemma } from "../queries";
+import { LemmataByGroepQueryLemma } from "../queries";
 
 export const LemmaOverview = (props: {
-  lemma: LemmataQueryLemma
+  lemma: LemmataByGroepQueryLemma
 }) => {
   const navigate = useNavigate();
 

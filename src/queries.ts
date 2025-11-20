@@ -1,14 +1,21 @@
 import { graphql } from "./gql";
-import { LemmaQuery, LemmataQuery } from "./gql/graphql";
+import { LemmaQuery, LemmataPicturesByGroepQuery, LemmataQuery } from "./gql/graphql";
 
-export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 
-export const LEMMATA_PICTURES_BY_GROEP = graphql(`
+export type LemmataByGroepQueryLemma = NonNullable<LemmataPicturesByGroepQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
+export const LEMMATA_BY_GROEP = graphql(`
   query LemmataPicturesByGroep($niveauId: ID!) {
     lemmata(filters: {niveau: {id: {eq: $niveauId}}}){
       data{
         id
         attributes{
+          titel
+          korte_intro
+          auteur_voornaam
+          auter_achternaam
+          auteur_2_voornaam
+          auter_2_achternaam
+          jaar
           afbeelding {
             data{
               id
@@ -23,6 +30,7 @@ export const LEMMATA_PICTURES_BY_GROEP = graphql(`
   }
 `)
 
+export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 export const LEMMATA = graphql(`
   query Lemmata {
     lemmata(pagination: {page: 1, pageSize: 500}) {
@@ -31,7 +39,6 @@ export const LEMMATA = graphql(`
         attributes{
           titel
           korte_intro
-          de_kern
           auteur_voornaam
           auter_achternaam
           auteur_2_voornaam
@@ -50,13 +57,6 @@ export const LEMMATA = graphql(`
               }
             }
           }
-          het_verhaal
-          motieven
-          doelgroep
-          analyse
-          lessuggesties
-          kerndoelen
-          bronnen
           niveau {
             data{
               id

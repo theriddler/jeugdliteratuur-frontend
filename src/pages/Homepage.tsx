@@ -8,7 +8,7 @@ import { STERBOEKEN_PRIMARY, STERBOEKEN_SECONDARY } from "../App";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { Niveau } from "../gql/graphql";
-import { INTRODUCTION, LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
+import { INTRODUCTION, LEMMATA_BY_GROEP, LEVELS } from "../queries";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
@@ -74,7 +74,7 @@ const HomepageGroup = (props: {
   attributes: Niveau | undefined | null;
 }) => {
   const navigate = useNavigate();
-  const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
+  const { data, loading } = useQuery(LEMMATA_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
   const firstThreeLemmas = [ ...(data?.lemmata?.data ?? []) ]
     ?.sort(() => Math.random() > 0.5 ? 1 : -1)
