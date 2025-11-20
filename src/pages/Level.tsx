@@ -24,7 +24,6 @@ export const Level = () => {
   const lemmas = useMemo(() => lemmataData?.lemmata?.data?.filter(l => l.attributes?.niveau?.data?.id === level?.id), [ lemmataData?.lemmata?.data, level?.id ])
   const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
-  console.log(levelIndex, sortedLevels)
   const previousLevel = useMemo(() => {
     if (levelIndex === 0) return undefined;
     return sortedLevels[ levelIndex - 1 ]
