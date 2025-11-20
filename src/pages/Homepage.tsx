@@ -76,8 +76,9 @@ const HomepageGroup = (props: {
   const navigate = useNavigate();
   const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
-  const lemmata = data?.lemmata?.data;
-  const firstThreeLemmas = lemmata?.slice(0, 3);
+  const firstThreeLemmas = [ ...(data?.lemmata?.data ?? []) ]
+    ?.sort(() => Math.random() > 0.5 ? 1 : -1)
+    ?.slice(0, 3);
 
   return (
     <div>
