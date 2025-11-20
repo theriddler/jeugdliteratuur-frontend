@@ -1,14 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { IconStar } from "@tabler/icons-react";
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
+import { STERBOEKEN_PRIMARY, STERBOEKEN_SECONDARY } from "../App";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { Niveau } from "../gql/graphql";
-import { INTRODUCTION, LEMMATA, LEVELS } from "../queries";
-import { IconStar } from "@tabler/icons-react";
-import { STERBOEKEN_PRIMARY } from "../App";
+import { INTRODUCTION, LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
@@ -74,11 +74,10 @@ const HomepageGroup = (props: {
   attributes: Niveau | undefined | null;
 }) => {
   const navigate = useNavigate();
-  const { data, loading } = useQuery(LEMMATA);
+  const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
   const lemmata = data?.lemmata?.data;
-  const levelLemmas = useMemo(() => lemmata?.filter(l => l.attributes?.niveau?.data?.id === props.id), [ lemmata, props.id ])
-  const firstThreeLemmas = levelLemmas?.slice(0, 3);
+  const firstThreeLemmas = lemmata?.slice(0, 3);
 
   return (
     <div>
@@ -90,8 +89,12 @@ const HomepageGroup = (props: {
               {props.attributes?.titel}
             </Link>
           </div>
-          {loading && <FullPageSpinner />}
           <div className="d-flex gap-2">
+            {loading && [ 1, 2, 3 ].map(() => (
+              <div className="image-wrapper level-group d-flex flex-1 h-100 w-100 align-items-center justify-content-center border-1">
+                <IconStar color={STERBOEKEN_SECONDARY} />
+              </div>
+            ))}
             {firstThreeLemmas?.map(l => (
               <div>
                 <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/teksten/${l.id}`)}>

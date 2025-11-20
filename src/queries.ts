@@ -3,6 +3,26 @@ import { LemmaQuery, LemmataQuery } from "./gql/graphql";
 
 export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 
+export const LEMMATA_PICTURES_BY_GROEP = graphql(`
+  query LemmataPicturesByGroep($niveauId: ID!) {
+    lemmata(filters: {niveau: {id: {eq: $niveauId}}}){
+      data{
+        id
+        attributes{
+          afbeelding {
+            data{
+              id
+              attributes{
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)
+
 export const LEMMATA = graphql(`
   query Lemmata {
     lemmata(pagination: {page: 1, pageSize: 500}) {
