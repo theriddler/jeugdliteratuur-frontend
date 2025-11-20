@@ -9,6 +9,7 @@ import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
+import { useEffect } from "react";
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmaQueryLemma | undefined,
@@ -16,7 +17,24 @@ export const LemmaDocumentReact = (props: {
   navigate: NavigateFunction
 }) => {
 
+  // change all <a> links in fetched lemma to have target = '_blank'
+  useEffect(() => {
+    if (!props.lemma) return;
+
+    const targetDivs = document.getElementsByClassName('lemma-section-container');
+    for (const element of targetDivs) {
+      const links = element.querySelectorAll('a');
+      for (const link of links) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    }
+  }, [ props.lemma ])
+
+  // null check
   if (!props.lemma || !props.voorlezen) return null;
+
+  // transform data
   const { attributes } = props.lemma;
   const { attributes: voorlezen } = props.voorlezen
 
