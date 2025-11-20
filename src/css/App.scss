@@ -153,13 +153,16 @@
 
   // border-color: var(--secondary-color) !important;
   border-width: 0.5px;
-  .card-hover-item:hover{
-    scale: 1.01;
-    transition: all 0.2s;
-  }
 
   .card-body{
     padding: 8px 16px 16px 16px;
+  }
+
+  &.card-hover:hover{
+    cursor: pointer;
+    border-color: var(--secondary-color);
+    scale: 1.01;
+    transition: all 0.2s;
   }
 }
 

@@ -81,14 +81,14 @@ const HomepageGroup = (props: {
     ?.slice(0, 3);
 
   return (
-    <div>
-      <Card>
+    <div onClick={() => navigate(`/groep/${props.id}`)}>
+      <Card className="card-hover">
         <CardBody className="mt-0">
           <div className="d-flex align-items-center gap-2 mb-3">
             <IconStar color={STERBOEKEN_PRIMARY} size={16} />
-            <Link to={`/groep/${props.id}`}>
+            <div>
               {props.attributes?.titel}
-            </Link>
+            </div>
           </div>
           <div className="d-flex gap-2">
             {loading && [ 1, 2, 3 ].map(() => (
@@ -98,7 +98,7 @@ const HomepageGroup = (props: {
             ))}
             {firstThreeLemmas?.map(l => (
               <div>
-                <div className="image-wrapper level-group clickable card-hover-item" onClick={() => navigate(`/teksten/${l.id}`)}>
+                <div className="image-wrapper level-group">
                   <img src={l.attributes?.afbeelding?.data?.attributes?.url} />
                 </div>
               </div>
