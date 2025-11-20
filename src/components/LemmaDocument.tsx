@@ -178,6 +178,17 @@ export const LemmaDocumentReact = (props: {
         </Col>
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
+          {(attributes?.tags?.data?.length ?? 0) > 0 && (
+            <section className="lemma-section-container green">
+              <h5>Tags</h5>
+              <ul>
+                {attributes?.tags?.data.map(t => (
+                  <li>{t.attributes?.titel}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
             <section className="lemma-section-container green">
               <h5>⁠Opstaptitels</h5>
