@@ -2,14 +2,14 @@ import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
-import { LEMMATA, LemmataQueryLemma } from "../queries";
+import { LEMMATA_FOR_ALLE_LEMMAS, LemmataForSearchbarQueryLemma } from "../queries";
 import { LemmaSortType } from "../types";
 import { FullPageSpinner } from "./FullPageSpinner";
 
 export const LemmaTable = (props: {
   sortType: LemmaSortType
 }) => {
-  const { data, loading } = useQuery(LEMMATA);
+  const { data, loading } = useQuery(LEMMATA_FOR_ALLE_LEMMAS);
 
   const sortedLemmas = useMemo(() => {
     const output = [ ...(data?.lemmata?.data ?? []) ];
@@ -51,7 +51,7 @@ export const LemmaTable = (props: {
 }
 
 const LemmaTableRow = (props: {
-  l: LemmataQueryLemma,
+  l: LemmataForSearchbarQueryLemma,
   sortType: LemmaSortType
 }) => {
   const navigate = useNavigate();

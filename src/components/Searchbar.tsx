@@ -2,13 +2,13 @@ import { useLazyQuery } from "@apollo/client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { Input, Spinner } from "reactstrap";
-import { LEMMATA, LemmataQueryLemma } from "../queries";
+import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma } from "../queries";
 
 export const Searchbar = (props: {
   closeMobileNav: () => void;
   placeholder?: string;
 }) => {
-  const [ loadSearchTerms, { data: lemmas, called, loading } ] = useLazyQuery(LEMMATA);
+  const [ loadSearchTerms, { data: lemmas, called, loading } ] = useLazyQuery(LEMMATA_FOR_SEARCHBAR);
 
   const runQuery = useCallback(async () => {
     if (called) return;
@@ -59,7 +59,7 @@ export const Searchbar = (props: {
 }
 
 const SearchbarLemmaSuggestion = (props: {
-  l: LemmataQueryLemma,
+  l: LemmataForSearchbarQueryLemma,
   search: string,
   closeMobileNav: () => void;
 }) => {

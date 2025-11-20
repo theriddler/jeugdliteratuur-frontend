@@ -1,5 +1,5 @@
 import { graphql } from "./gql";
-import { LemmaQuery, LemmataPicturesByGroepQuery, LemmataQuery } from "./gql/graphql";
+import { LemmaQuery, LemmataForAlleLemmasQuery, LemmataForSearchbarQuery, LemmataPicturesByGroepQuery } from "./gql/graphql";
 
 
 export type LemmataByGroepQueryLemma = NonNullable<LemmataPicturesByGroepQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
@@ -30,15 +30,14 @@ export const LEMMATA_BY_GROEP = graphql(`
   }
 `)
 
-export type LemmataQueryLemma = NonNullable<LemmataQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
-export const LEMMATA = graphql(`
-  query Lemmata {
+export type LemmataForSearchbarQueryLemma = NonNullable<LemmataForSearchbarQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
+export const LEMMATA_FOR_SEARCHBAR = graphql(`
+  query LemmataForSearchbar {
     lemmata(pagination: {page: 1, pageSize: 500}) {
       data {
         id
         attributes{
           titel
-          korte_intro
           auteur_voornaam
           auter_achternaam
           auteur_2_voornaam
@@ -48,11 +47,6 @@ export const LEMMATA = graphql(`
             data{
               id
               attributes{
-                name
-                width
-                height
-                provider
-                provider_metadata
                 url
               }
             }
@@ -62,11 +56,37 @@ export const LEMMATA = graphql(`
               id
               attributes{
                 titel
-                beschrijving
               }
             }
           }
           tags {
+            data{
+              id
+              attributes{
+                titel
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`);
+
+export type LemmataForAlleLemmasQueryLemma = NonNullable<LemmataForAlleLemmasQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
+export const LEMMATA_FOR_ALLE_LEMMAS = graphql(`
+  query LemmataForAlleLemmas {
+    lemmata(pagination: {page: 1, pageSize: 500}) {
+      data {
+        id
+        attributes{
+          titel
+          auteur_voornaam
+          auter_achternaam
+          auteur_2_voornaam
+          auter_2_achternaam
+          jaar
+          niveau {
             data{
               id
               attributes{
@@ -82,7 +102,6 @@ export const LEMMATA = graphql(`
 `);
 
 export type LemmaQueryLemma = NonNullable<LemmaQuery[ 'lemma' ]>[ 'data' ];
-
 export const LEMMA = graphql(`
   query Lemma($id: ID!) {
     lemma(id: $id) {
@@ -104,11 +123,6 @@ export const LEMMA = graphql(`
             data{
               id
               attributes{
-                name
-                width
-                height
-                provider
-                provider_metadata
                 url
               }
             }
@@ -133,11 +147,6 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
-                      name
-                      width
-                      height
-                      provider
-                      provider_metadata
                       url
                     }
                   }
@@ -159,11 +168,6 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
-                      name
-                      width
-                      height
-                      provider
-                      provider_metadata
                       url
                     }
                   }
@@ -185,11 +189,6 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
-                      name
-                      width
-                      height
-                      provider
-                      provider_metadata
                       url
                     }
                   }
@@ -243,11 +242,6 @@ export const TAG = graphql(`
                   data{
                     id
                     attributes{
-                      name
-                      width
-                      height
-                      provider
-                      provider_metadata
                       url
                     }
                   }
