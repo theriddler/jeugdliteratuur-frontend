@@ -128,7 +128,11 @@
 
   &.xs{
     height: 60px;
-    &.fixed{width: 35px;}
+    &.fixed{
+      width: 35px;
+      min-width: 35px;
+      max-width: 35px;
+    }
   }
 
   &.info-page{
