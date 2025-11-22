@@ -324,9 +324,9 @@ const LemmaInternalLink = (props: {
   return (
     <div className={"lemma-internal-link d-flex gap-3 m-3"} onClick={() => props.navigate(`/teksten/${id}`)}>
       <div>
-        <div className="image-wrapper xs">
+        <div className="image-wrapper xs fixed">
           <img
-            className="hide-in-pdf"
+            className="hide-in-pdf ignore-default-lemma-section-container-format"
             src={attributes?.afbeelding?.data?.attributes?.url}
           />
         </div>
