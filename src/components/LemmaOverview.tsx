@@ -26,6 +26,12 @@ export const LemmaOverview = (props: {
               <div className="text-secondary">
                 {attributes?.auteur_voornaam} {attributes?.auter_achternaam}
               </div>
+              {attributes?.auteur_2_voornaam && (
+
+                <div className="text-secondary">
+                  {attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}
+                </div>
+              )}
             </div>
             <div className="mt-3 d-flex justify-content-center">
               <div className="image-wrapper lemma-overview">

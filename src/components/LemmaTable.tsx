@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
-import { LEMMATA_FOR_ALLE_LEMMAS, LemmataForSearchbarQueryLemma } from "../queries";
+import { LEMMATA_FOR_ALLE_LEMMAS, LemmataForAlleLemmasQueryLemma } from "../queries";
 import { LemmaSortType } from "../types";
 import { FullPageSpinner } from "./FullPageSpinner";
 
@@ -51,7 +51,7 @@ export const LemmaTable = (props: {
 }
 
 const LemmaTableRow = (props: {
-  l: LemmataForSearchbarQueryLemma,
+  l: LemmataForAlleLemmasQueryLemma,
   sortType: LemmaSortType
 }) => {
   const navigate = useNavigate();
@@ -65,20 +65,48 @@ const LemmaTableRow = (props: {
             {attributes?.niveau?.data?.attributes?.titel}
           </td>
           <td>
-            {attributes?.auter_achternaam}
+            <div>
+              {attributes?.auter_achternaam}
+            </div>
+            {attributes?.auter_2_achternaam && (
+              <div>
+                {attributes?.auter_2_achternaam}
+              </div>
+            )}
           </td>
           <td>
-            {attributes?.auteur_voornaam}
+            <div>
+              {attributes?.auteur_voornaam}
+            </div>
+            {attributes?.auteur_2_voornaam && (
+              <div>
+                {attributes?.auteur_2_voornaam}
+              </div>
+            )}
           </td>
         </>
       )}
       {props.sortType === LemmaSortType.BY_NAME && (
         <>
           <td>
-            {attributes?.auter_achternaam}
+            <div>
+              {attributes?.auter_achternaam}
+            </div>
+            {attributes?.auter_2_achternaam && (
+              <div>
+                {attributes?.auter_2_achternaam}
+              </div>
+            )}
           </td>
           <td>
-            {attributes?.auteur_voornaam}
+            <div>
+              {attributes?.auteur_voornaam}
+            </div>
+            {attributes?.auteur_2_voornaam && (
+              <div>
+                {attributes?.auteur_2_voornaam}
+              </div>
+            )}
           </td>
           <td>
             {attributes?.niveau?.data?.attributes?.titel}

@@ -42,8 +42,8 @@ export const Searchbar = (props: {
         l.attributes?.titel,
         l.attributes?.auteur_voornaam,
         l.attributes?.auter_achternaam,
-        l.attributes?.auteur_voornaam,
-        l.attributes?.auter_achternaam,
+        l.attributes?.auteur_2_voornaam,
+        l.attributes?.auter_2_achternaam,
         l.attributes?.jaar
       ])
     ))
@@ -135,6 +135,22 @@ const SearchbarLemmaSuggestion = (props: {
             />
           </span>
         </div>
+        {props.l.attributes?.auteur_2_voornaam && (
+          <div className="text-secondary">
+            <span>
+              <HighlightedText
+                text={props.l.attributes?.auteur_2_voornaam}
+                highlight={props.search}
+              />
+            </span>
+            <span className="ms-1">
+              <HighlightedText
+                text={props.l.attributes?.auter_2_achternaam}
+                highlight={props.search}
+              />
+            </span>
+          </div>
+        )}
         <div className="mt-1">
           <span>
             <HighlightedText
