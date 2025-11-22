@@ -8,14 +8,20 @@ export const Searchbar = (props: {
   closeMobileNav: () => void;
   placeholder?: string;
 }) => {
+  // lazy load search options
   const [ loadSearchTerms, { data: lemmas, called, loading } ] = useLazyQuery(LEMMATA_FOR_SEARCHBAR);
 
+  // guard to prevent re-running loadSearchTerms
   const runQuery = useCallback(async () => {
     if (called) return;
     loadSearchTerms();
   }, [ called, loadSearchTerms ])
 
-  useEffect(() => console.log(lemmas), [ lemmas ])
+  // runQuery after 5000ms
+  // we also run at the search onFocus if user goes straight to search bar
+  useEffect(() => {
+    setTimeout(runQuery, 5000)
+  }, [ runQuery ])
 
   const [ search, setSearch ] = useState('');
   const suggestions = useMemo(() => {
