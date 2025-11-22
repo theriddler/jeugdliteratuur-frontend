@@ -48,7 +48,7 @@ const Header = (props: {
         <Col xs={4} className="mb-0 mt-1 d-flex flex-column justify-content-between gap-3">
           <div className="ps-4 d-flex justify-content-end gap-3">
             <div>
-              <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
+              <Searchbar placeholder="Zoek een lemma of tag" closeMobileNav={() => setMobileNavIsOpen(false)} />
             </div>
             <div className="image-wrapper partner-logo">
               <img src={partner_logo_2} />
@@ -83,7 +83,7 @@ const Header = (props: {
         </OffcanvasHeader>
         <OffcanvasBody>
           <div className="d-flex flex-column gap-3">
-            <Searchbar placeholder="Zoeken" closeMobileNav={() => setMobileNavIsOpen(false)} />
+            <Searchbar placeholder="Zoek een lemma of tag" closeMobileNav={() => setMobileNavIsOpen(false)} />
             <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <span className="app-nav-link" onClick={() => props.toggleSidebar()}>Teksten</span>
             </div>
