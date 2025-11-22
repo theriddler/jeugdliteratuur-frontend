@@ -5,13 +5,13 @@ import { Col, Row } from "reactstrap";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaOverview } from "../components/LemmaOverview";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
-import { LEMMATA_BY_GROEP, LEVELS } from "../queries";
+import { LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
 
 export const Level = () => {
   const { levelId } = useParams();
 
   const { data: levelData, loading: loadingLevel } = useQuery(LEVELS);
-  const { data: lemmataData, loading: loadingLemmas } = useQuery(LEMMATA_BY_GROEP, { variables: { niveauId: levelId ?? '' } });
+  const { data: lemmataData, loading: loadingLemmas } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: levelId ?? '' } });
   const loading = useMemo(() => loadingLevel || loadingLemmas, [ loadingLemmas, loadingLevel ])
 
   const sortedLevels = useMemo(() => {
