@@ -1,38 +1,68 @@
 import { useLazyQuery } from "@apollo/client";
+import { IconTag } from "@tabler/icons-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { Input, Spinner } from "reactstrap";
-import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma } from "../queries";
+import { STERBOEKEN_SECONDARY } from "../App";
+import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma, TAGS_FOR_SEARCHBAR, TagsForSearchbarQueryTag } from "../queries";
 
 export const Searchbar = (props: {
   closeMobileNav: () => void;
   placeholder?: string;
 }) => {
   // lazy load search options
-  const [ loadSearchTerms, { data: lemmas, called, loading } ] = useLazyQuery(LEMMATA_FOR_SEARCHBAR);
+  const [ loadLemmata, { data: lemmata, called: lemmataCalled, loading: lemmataLoading } ] = useLazyQuery(LEMMATA_FOR_SEARCHBAR);
+  const [ loadTags, { data: tags, called: tagsCalled, loading: tagsLoading } ] = useLazyQuery(TAGS_FOR_SEARCHBAR);
 
-  // guard to prevent re-running loadSearchTerms
+  const called = useMemo(() => lemmataCalled && tagsCalled, [ lemmataCalled, tagsCalled ]);
+  const loading = useMemo(() => lemmataLoading || tagsLoading, [ lemmataLoading, tagsLoading ]);
+
+  // guard to prevent re-running loadLemmata / loadTags
   const runQuery = useCallback(async () => {
     if (called) return;
-    loadSearchTerms();
-  }, [ called, loadSearchTerms ])
+    loadLemmata();
+    loadTags();
+  }, [ called, loadLemmata, loadTags ])
 
   // runQuery after 5000ms
   // we also run at the search onFocus if user goes straight to search bar
   useEffect(() => {
-    setTimeout(runQuery, 5000)
+    const timer = setTimeout(runQuery, 5000);
+    return () => clearTimeout(timer);
   }, [ runQuery ])
 
   const [ search, setSearch ] = useState('');
-  const suggestions = useMemo(() => {
+  const normalizedSearch = useMemo(() => search.toLowerCase(), [ search ]);
+  const searchIncludesData = useCallback((data: (string | undefined | null)[]) => (data?.some(s => s?.toLocaleLowerCase().includes(normalizedSearch))), [ normalizedSearch ])
+
+  const lemmaSuggestions = useMemo(() => {
     if (!search) return undefined;
-    return lemmas?.lemmata?.data?.filter(l => (
-      l.attributes?.titel?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
-      || l.attributes?.auteur_voornaam?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
-      || l.attributes?.auter_achternaam?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
-      || l.attributes?.jaar?.toLocaleLowerCase().includes(search?.toLocaleLowerCase())
+    return lemmata?.lemmata?.data?.filter(l => (
+      searchIncludesData([
+        l.attributes?.titel,
+        l.attributes?.auteur_voornaam,
+        l.attributes?.auter_achternaam,
+        l.attributes?.auteur_voornaam,
+        l.attributes?.auter_achternaam,
+        l.attributes?.jaar
+      ])
     ))
-  }, [ lemmas?.lemmata?.data, search ])
+
+  }, [ lemmata?.lemmata?.data, search, searchIncludesData ])
+
+  const tagSuggestions = useMemo(() => {
+    if (!search) return undefined;
+    return tags?.tags?.data?.filter(t => (
+      searchIncludesData([
+        t.attributes?.titel
+      ])
+    ))
+  }, [ search, searchIncludesData, tags?.tags?.data ])
+
+  const hasSuggestions = useMemo(() => (
+    (lemmaSuggestions && lemmaSuggestions.length > 0)
+    || (tagSuggestions && tagSuggestions.length > 0)
+  ), [ lemmaSuggestions, tagSuggestions ])
 
   return (
     <div className="searchbar-container">
@@ -41,7 +71,7 @@ export const Searchbar = (props: {
         placeholder={props.placeholder}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        onBlur={() => setTimeout(() => setSearch(''), 100)}
+        onBlur={() => setTimeout(() => setSearch(''), 200)}
         onFocus={runQuery}
       />
       {search && loading && (
@@ -49,10 +79,19 @@ export const Searchbar = (props: {
           <Spinner />
         </div>
       )}
-      {suggestions && suggestions.length > 0 && (
+      {hasSuggestions && (
         <div className="searchbar-dropdown">
-          {suggestions.map(l => (
+          {tagSuggestions?.map(t => (
+            <SearchbarTagSuggestion
+              key={t.id}
+              t={t}
+              search={search}
+              closeMobileNav={props.closeMobileNav}
+            />
+          ))}
+          {lemmaSuggestions?.map(l => (
             <SearchbarLemmaSuggestion
+              key={l.id}
               l={l}
               search={search}
               closeMobileNav={props.closeMobileNav}
@@ -113,6 +152,31 @@ const SearchbarLemmaSuggestion = (props: {
       </div>
     </div>
   )
+}
+
+const SearchbarTagSuggestion = (props: {
+  t: TagsForSearchbarQueryTag,
+  search: string,
+  closeMobileNav: () => void;
+}) => {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/tag/${props.t.id}`);
+    props.closeMobileNav();
+  }
+
+  return (
+    <div className="searchbar-lemma-suggestion" onClick={onClick}>
+      <div className="d-flex align-items-center justify-content-center">
+        <IconTag color={STERBOEKEN_SECONDARY} />
+      </div>
+      <div>
+        {props.t.attributes?.titel}
+      </div>
+    </div>
+  )
+
 }
 
 const HighlightedText = (props: {

@@ -1,5 +1,5 @@
 import { graphql } from "./gql";
-import { LemmaQuery, LemmataForAlleLemmasQuery, LemmataForSearchbarQuery, LemmataPicturesByGroepQuery } from "./gql/graphql";
+import { LemmaQuery, LemmataForAlleLemmasQuery, LemmataForSearchbarQuery, LemmataPicturesByGroepQuery, TagsForSearchbarQuery } from "./gql/graphql";
 
 
 export type LemmataByGroepQueryLemma = NonNullable<LemmataPicturesByGroepQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
@@ -51,19 +51,25 @@ export const LEMMATA_FOR_SEARCHBAR = graphql(`
               }
             }
           }
-          tags {
-            data{
-              id
-              attributes{
-                titel
-              }
-            }
-          }
         }
       }
     }
   }
 `);
+
+export type TagsForSearchbarQueryTag = NonNullable<TagsForSearchbarQuery[ 'tags' ]>[ 'data' ][ 0 ];
+export const TAGS_FOR_SEARCHBAR = graphql(`
+  query TagsForSearchbar{
+    tags(pagination: {page: 1, pageSize: 500}){
+      data{
+        id
+        attributes{
+          titel
+        }
+      }
+    }
+  }
+`)
 
 export type LemmataForAlleLemmasQueryLemma = NonNullable<LemmataForAlleLemmasQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 export const LEMMATA_FOR_ALLE_LEMMAS = graphql(`
