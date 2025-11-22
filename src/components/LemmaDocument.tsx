@@ -11,6 +11,8 @@ import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 
+const IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME = 'ignore-open-in-new-page'
+
 export const LemmaDocumentReact = (props: {
   lemma: LemmaQueryLemma | undefined,
   voorlezen: VoorlezenEntityResponse[ 'data' ],
@@ -25,6 +27,7 @@ export const LemmaDocumentReact = (props: {
     for (const element of targetDivs) {
       const links = element.querySelectorAll('a');
       for (const link of links) {
+        if (link.className.includes(IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME)) return; // do not change target if we say not to
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
       }
@@ -125,13 +128,13 @@ export const LemmaDocumentReact = (props: {
               <BlocksRenderer content={attributes?.de_kern} />
             )}
             <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
-              <a className="hide-in-pdf pretty-button text-nowrap" href="#het-verhaal">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#het-verhaal">
                 Het verhaal
               </a>
-              <a className="hide-in-pdf pretty-button text-nowrap" href="#analyse">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#analyse">
                 Analyse en interpretatie
               </a>
-              <a className="hide-in-pdf pretty-button text-nowrap" href="#didactische">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#didactische">
                 Didactische vragen en lessuggesties
               </a>
             </div>
@@ -319,7 +322,7 @@ const LemmaInternalLink = (props: {
   const { id, attributes } = props.l;
 
   return (
-    <div className="lemma-internal-link d-flex gap-3 m-3" onClick={() => props.navigate(`/teksten/${id}`)}>
+    <div className={"lemma-internal-link d-flex gap-3 m-3"} onClick={() => props.navigate(`/teksten/${id}`)}>
       <div>
         <div className="image-wrapper xs">
           <img
