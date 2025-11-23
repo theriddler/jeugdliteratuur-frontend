@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
 import { STERBOEKEN_SECONDARY } from "../App";
-import logo from '../assets/logo.png';
+import logo96 from '../assets/logo-96.png';
 import partner_logo_1 from '../assets/partner_logo_1.jpg';
 import partner_logo_2 from '../assets/partner_logo_2.png';
 import { Searchbar } from "./Searchbar";
@@ -124,7 +124,12 @@ const HeaderLogo = () => {
 
   return (
     <div className="app-header-brand" onClick={() => navigate('/')}>
-      <img src={logo} alt='logo' width={48} height={48} />
+      <img
+        alt='logo'
+        src={logo96}
+        width={48}
+        height={48}
+      />
       <div>
         STERBOEKEN
       </div>
