@@ -90,7 +90,7 @@ const HomepageGroup = (props: {
               {props.attributes?.titel}
             </div>
           </div>
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 justify-content-center">
             {loading && [ 1, 2, 3 ].map(() => (
               <div className="image-wrapper level-group d-flex flex-1 h-100 w-100 align-items-center justify-content-center border-1">
                 <IconStar color={STERBOEKEN_SECONDARY} />
