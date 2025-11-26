@@ -50,12 +50,16 @@ const Header = (props: {
             <div>
               <Searchbar placeholder="Zoek een lemma of tag" closeMobileNav={() => setMobileNavIsOpen(false)} />
             </div>
-            <div className="image-wrapper partner-logo">
-              <img src={partner_logo_2} />
-            </div>
-            <div className="image-wrapper partner-logo">
-              <img src={partner_logo_1} />
-            </div>
+            <a target="_blank" href="https://www.kb.nl/">
+              <div className="image-wrapper partner-logo">
+                <img src={partner_logo_2} />
+              </div>
+            </a>
+            <a target="_blank" href="https://www.lezen.nl/">
+              <div className="image-wrapper partner-logo">
+                <img src={partner_logo_1} />
+              </div>
+            </a>
           </div>
           <div className="d-flex justify-content-end gap-1">
             <div className="app-header-link-container">
