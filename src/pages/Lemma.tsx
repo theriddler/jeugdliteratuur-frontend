@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { FullPageSpinner } from "../components/FullPageSpinner";
-import { LemmaDocumentReact } from "../components/LemmaDocument";
+import { LemmaDocumentReact } from "../components/LemmaDocumentReact";
 import { LEMMA, VOORLEZEN } from "../queries";
 
 export const Lemma = () => {
