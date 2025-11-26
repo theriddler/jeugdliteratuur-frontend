@@ -10,6 +10,7 @@ import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 const IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME = 'ignore-open-in-new-page'
 
@@ -80,7 +81,7 @@ export const LemmaDocumentReact = (props: {
             <div className="image-wrapper lemma-header">
               <img
                 className="hide-in-pdf ignore-default-lemma-section-container-format"
-                src={attributes?.afbeelding?.data?.attributes?.url}
+                src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
               />
             </div>
           </div>
@@ -146,7 +147,7 @@ export const LemmaDocumentReact = (props: {
             <div className="image-wrapper lemma-header">
               <img
                 className="hide-in-pdf ignore-default-lemma-section-container-format"
-                src={attributes?.afbeelding?.data?.attributes?.url}
+                src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
               />
             </div>
           </div>
@@ -327,7 +328,7 @@ const LemmaInternalLink = (props: {
         <div className="image-wrapper xs fixed">
           <img
             className="hide-in-pdf ignore-default-lemma-section-container-format"
-            src={attributes?.afbeelding?.data?.attributes?.url}
+            src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes, 'thumbnail')}
           />
         </div>
       </div>

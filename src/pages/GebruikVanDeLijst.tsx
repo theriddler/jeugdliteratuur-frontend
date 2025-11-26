@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GEBRUIK_VAN_DE_LIJST } from "../queries";
 import { InfoPage } from "../components/InfoPage";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const GebruikVanDeLijst = () => {
   const { data, loading } = useQuery(GEBRUIK_VAN_DE_LIJST);
@@ -10,7 +11,7 @@ export const GebruikVanDeLijst = () => {
     <InfoPage
       titel="Gebruik van de lijst"
       tekst={gebruikVanDeLijst?.attributes?.Tekst}
-      fotoUrl={gebruikVanDeLijst?.attributes?.foto?.data?.attributes?.url}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(gebruikVanDeLijst?.attributes?.foto?.data?.attributes, 'medium')}
       loading={loading}
     />
   )

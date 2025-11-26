@@ -9,6 +9,7 @@ import { FullPageSpinner } from "../components/FullPageSpinner";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { Niveau } from "../gql/graphql";
 import { INTRODUCTION, LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const Homepage = () => {
   const { data, loading } = useQuery(INTRODUCTION);
@@ -39,7 +40,7 @@ export const Homepage = () => {
         </Col>
         <Col xs={12} lg={4} className="py-3 py-lg-0">
           <div className="image-wrapper hero-img">
-            <img src={foto?.data?.attributes?.url} />
+            <img src={getOptimizedPhotoUrlFromPhotoEntry(foto?.data?.attributes, 'medium')} />
           </div>
         </Col>
       </Row>
@@ -99,7 +100,7 @@ const HomepageGroup = (props: {
             {firstThreeLemmas?.map(l => (
               <div>
                 <div className="image-wrapper level-group">
-                  <img src={l.attributes?.afbeelding?.data?.attributes?.url} />
+                  <img src={getOptimizedPhotoUrlFromPhotoEntry(l.attributes?.afbeelding?.data?.attributes)} />
                 </div>
               </div>
             ))}

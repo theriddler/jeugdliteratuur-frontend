@@ -2,6 +2,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody } from "reactstrap";
 import { LemmataByGroepQueryLemma } from "../queries";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const LemmaOverview = (props: {
   lemma: LemmataByGroepQueryLemma
@@ -11,7 +12,7 @@ export const LemmaOverview = (props: {
   if (!props.lemma) return null;
   const { id, attributes } = props.lemma;
 
-  const imageUrl = attributes?.afbeelding?.data?.attributes?.url;
+  const imageUrl = getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes);
 
   return (
     <Card className="clickable card-hover h-100" onClick={() => navigate(`/teksten/${id}`)}>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { Input, Spinner } from "reactstrap";
 import { STERBOEKEN_SECONDARY } from "../App";
 import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma, TAGS_FOR_SEARCHBAR, TagsForSearchbarQueryTag } from "../queries";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const Searchbar = (props: {
   closeMobileNav: () => void;
@@ -118,7 +119,7 @@ const SearchbarLemmaSuggestion = (props: {
   return (
     <div className="searchbar-lemma-suggestion" onClick={onClick}>
       <div className="image-wrapper fixed xs">
-        <img src={props.l.attributes?.afbeelding?.data?.attributes?.url} />
+        <img src={getOptimizedPhotoUrlFromPhotoEntry(props.l.attributes?.afbeelding?.data?.attributes)} />
       </div>
       <div>
         <div className="text-secondary">

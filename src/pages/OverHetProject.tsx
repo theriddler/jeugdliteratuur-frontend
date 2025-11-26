@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { InfoPage } from "../components/InfoPage";
 import { OVER_HET_PROJECT } from "../queries";
+import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const OverHetProject = () => {
   const { data, loading } = useQuery(OVER_HET_PROJECT);
@@ -10,7 +11,7 @@ export const OverHetProject = () => {
     <InfoPage
       titel="Over het project"
       tekst={overHetProject?.attributes?.Tekst}
-      fotoUrl={overHetProject?.attributes?.foto?.data?.attributes?.url}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(overHetProject?.attributes?.foto?.data?.attributes, 'medium')}
       loading={loading}
     />
   )

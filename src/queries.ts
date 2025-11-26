@@ -20,6 +20,7 @@ export const LEMMATA_PICTURES_BY_GROEP = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -47,6 +48,7 @@ export const LEMMATA_FOR_SEARCHBAR = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -121,6 +123,7 @@ export const LEMMA = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -278,6 +281,7 @@ export const INTRODUCTION = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -299,6 +303,7 @@ export const OVER_HET_PROJECT = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -320,6 +325,7 @@ export const SAMENWERKEN = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -341,6 +347,7 @@ export const COLOFON = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
@@ -363,6 +370,7 @@ export const GEBRUIK_VAN_DE_LIJST = graphql(`
             data{
               id
               attributes{
+                formats
                 url
               }
             }
