@@ -1,4 +1,4 @@
-import { View, Page, Document, StyleSheet } from "@react-pdf/renderer";
+import { Document, Image, Page, StyleSheet, View } from "@react-pdf/renderer";
 import ReactDOMServer from "react-dom/server";
 import Html from "react-pdf-html";
 import { VoorlezenEntityResponse } from "../gql/graphql";
@@ -69,6 +69,26 @@ const styles = StyleSheet.create({
   }
 })
 
+// intercepts every <img> tag found in  HTML
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ImageWithCors = ({ element }: any) => {
+  // ignore if we have class "hide-in-pdf"
+  console.log(Object.keys(element?.classList?.[ '_set' ] ?? {}))
+  if (element?.classList?.[ '_set' ]?.has('hide-in-pdf')) return null;
+
+  // get src
+  const src = element?.attrs?.src;
+  if (!src) return null;
+
+  // clean src with new cache hit (to prevent CORS error)
+  const separator = src.includes('?') ? '&' : '?';
+  const corsSrc = `${src}${separator}cors_fix=true`;
+
+  return (
+    <Image src={corsSrc} />
+  );
+};
+
 export const LemmaDocument = (props: {
   lemma: LemmaQueryLemma,
   voorlezen: VoorlezenEntityResponse[ 'data' ]
@@ -76,7 +96,7 @@ export const LemmaDocument = (props: {
   if (!props.lemma) return null;
   let html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} voorlezen={props.voorlezen} />)
 
-  // clean svgs from here
+  // clean svg's from here
   html = html.replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, '');
 
   return (
@@ -90,7 +110,8 @@ export const LemmaDocument = (props: {
           stylesheet={stylesheet}
           renderers={{
             // Map the class name to your custom component
-            'section': UnbreakableView
+            'section': UnbreakableView,
+            'img': ImageWithCors
           }}
         >
           {html}
