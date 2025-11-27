@@ -15,7 +15,6 @@ export const Samenwerken = () => {
         fotoUrl={undefined}
         loading={loading}
         fotoReplacement={<FeeedbackForm />}
-        fotoReplacementTitle="Feedback voor de pilot? Geef het hier door."
       />
     </div>
   )

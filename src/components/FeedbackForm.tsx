@@ -31,6 +31,15 @@ export const FeeedbackForm = () => {
 
   return (
     <div className="feedback-form-container">
+      <div>
+        <h5>
+          Feedback voor de pilot?
+        </h5>
+        <h5>
+          Geef het hier door.
+        </h5>
+      </div>
+      <hr />
       <Form>
         <FormGroup>
           <Label for="formName">Naam</Label>
