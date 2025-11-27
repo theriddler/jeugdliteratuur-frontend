@@ -1,11 +1,11 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { IconStar } from "@tabler/icons-react";
+import { IconStar, IconTag } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { NavigateFunction } from "react-router";
 import { Col, Row } from "reactstrap";
 import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
-import { VoorlezenEntityResponse } from "../gql/graphql";
+import { TagEntity, VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 import { FullPageSpinner } from "./FullPageSpinner";
@@ -214,16 +214,9 @@ export const LemmaDocumentReact = (props: {
           {(attributes?.tags?.data?.length ?? 0) > 0 && (
             <section className="lemma-section-container green">
               <h5>Tags</h5>
-              <ul>
-                {attributes?.tags?.data.map(t => (
-                  <li>
-                    {/* Cannot do href here */}
-                    <span className="link" onClick={() => props.navigate(`/tag/${t.id}`)}>
-                      {t.attributes?.titel}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {attributes?.tags?.data.map(t => (
+                <TagLink t={t} navigate={props.navigate} />
+              ))}
             </section>
           )}
 
@@ -352,7 +345,7 @@ const LemmaInternalLink = (props: {
   const { id, attributes } = props.l;
 
   return (
-    <div className={"lemma-internal-link d-flex gap-3 m-3"} onClick={() => props.navigate(`/teksten/${id}`)}>
+    <div className={"lemma-internal-link d-flex gap-3 my-3"} onClick={() => props.navigate(`/teksten/${id}`)}>
       <div>
         <div className="image-wrapper xs fixed">
           <img
@@ -369,6 +362,25 @@ const LemmaInternalLink = (props: {
         <div>
           {attributes?.titel}
         </div>
+      </div>
+    </div>
+  )
+}
+
+const TagLink = (props: {
+  t: Partial<TagEntity>,
+  navigate: NavigateFunction
+}) => {
+  if (!props.t) return;
+  const { id, attributes } = props.t;
+
+  return (
+    <div className="lemma-internal-link w-100 d-flex align-items-center gap-3 my-2" onClick={() => props.navigate(`/tag/${id}`)}>
+      <div>
+        <IconTag />
+      </div>
+      <div>
+        {attributes?.titel}
       </div>
     </div>
   )
