@@ -280,8 +280,16 @@ export const LemmaDocumentReact = (props: {
           )}
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
+            {(attributes?.tags?.data?.length ?? 0) > 0 && (
+              <section className="lemma-section-container green">
+                <h5>Tags</h5>
+                {attributes?.tags?.data.map(t => (
+                  <TagLink t={t} navigate={props.navigate} />
+                ))}
+              </section>
+            )}
             {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-              <section className="lemma-section-container">
+              <section className="lemma-section green-container">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
                   <LemmaInternalLink l={l} navigate={props.navigate} />
@@ -292,7 +300,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
-              <section className="lemma-section-container">
+              <section className="lemma-section-container green">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
                   <LemmaInternalLink l={l} navigate={props.navigate} />
@@ -303,7 +311,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
-              <section className="lemma-section-container">
+              <section className="lemma-section-container green">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
                   <LemmaInternalLink l={l} navigate={props.navigate} />
