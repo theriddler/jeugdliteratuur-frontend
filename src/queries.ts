@@ -256,6 +256,14 @@ export const TAG = graphql(`
                 auteur_voornaam
                 auter_achternaam
                 jaar
+                niveau {
+                  data{
+                    id
+                    attributes{
+                      titel
+                    }
+                  }
+                }
                 afbeelding {
                   data{
                     id

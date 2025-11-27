@@ -6,6 +6,7 @@ import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaOverview } from "../components/LemmaOverview";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
+import { LemmaEntity } from "../gql/graphql";
 
 export const Level = () => {
   const { levelId } = useParams();
@@ -63,7 +64,7 @@ export const Level = () => {
         <Col xs={12}>
           <div className="lemma-overview-container">
             {lemmataData?.lemmata?.data?.map(l => (
-              <LemmaOverview lemma={l} />
+              <LemmaOverview lemma={l as Partial<LemmaEntity>} />
             ))}
           </div>
         </Col>

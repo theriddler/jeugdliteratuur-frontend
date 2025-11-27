@@ -1,11 +1,12 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Link, useNavigate } from "react-router";
 import { Card, CardBody } from "reactstrap";
-import { LemmataByGroepQueryLemma } from "../queries";
+import { LemmaEntity } from "../gql/graphql";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const LemmaOverview = (props: {
-  lemma: LemmataByGroepQueryLemma
+  lemma: Partial<LemmaEntity>,
+  showGroupBadge?: boolean
 }) => {
   const navigate = useNavigate();
 
@@ -19,6 +20,13 @@ export const LemmaOverview = (props: {
       <CardBody>
         <div className="h-100 lemma-overview">
           <div>
+            {props.showGroupBadge && (
+              <div className="mb-1">
+                <span className="badge bg-primary">
+                  {attributes?.niveau?.data?.attributes?.titel}
+                </span>
+              </div>
+            )}
             <div>
               <div>
                 <span className="fw-bold">{attributes?.titel}</span>
