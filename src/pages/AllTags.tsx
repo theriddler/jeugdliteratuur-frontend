@@ -6,7 +6,7 @@ export const AllTags = () => {
     <div>
       <Row>
         <Col xs={12}>
-          <h4>Alle Tags</h4>
+          <h4>Alle tags</h4>
         </Col>
         <Col xs={12}>
           <TagTable />
