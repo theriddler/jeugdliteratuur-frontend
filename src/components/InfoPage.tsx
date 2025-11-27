@@ -9,14 +9,22 @@ export const InfoPage = (props: {
   fotoUrl: string | undefined,
   loading: boolean,
   fotoReplacement?: React.ReactNode;
+  fotoReplacementTitle?: string
 }) => props.loading ? <FullPageSpinner /> : (
   <>
     <Row>
-      <Col xs={12}>
+      <Col xs={12} lg={props.fotoReplacementTitle ? 8 : 12}>
         <h4 className="mb-3">
           {props.titel}
         </h4>
       </Col>
+      {props.fotoReplacementTitle && (
+        <Col xs={12} lg={4}>
+          <h4 className="mb-3">
+            {props.fotoReplacementTitle}
+          </h4>
+        </Col>
+      )}
     </Row>
     <Row className="align-items-stretch">
       <Col xs={12} lg={props.fotoUrl || props.fotoReplacement ? 8 : 12}>
