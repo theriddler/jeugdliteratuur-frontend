@@ -101,6 +101,20 @@ export const LEMMATA_FOR_ALLE_LEMMAS = graphql(`
   }
 `);
 
+// export const TAGS_FOR_ALLE_TAGS = graphql(`
+//   query TagsForAlleTags {
+//     tags(pagination: {page: 1, pageSize: 500}){
+//       data{
+//         id
+//         attributes{
+//           titel
+
+//         }
+//       }
+//     }
+//   }
+// `)
+
 export type LemmaQueryLemma = NonNullable<LemmaQuery[ 'lemma' ]>[ 'data' ];
 export const LEMMA = graphql(`
   query Lemma($id: ID!) {

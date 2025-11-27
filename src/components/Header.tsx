@@ -36,6 +36,9 @@ const Header = (props: {
                   <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                 </DropdownItem>
                 <DropdownItem>
+                  <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
+                </DropdownItem>
+                <DropdownItem>
                   <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>
                 </DropdownItem>
               </DropdownMenu>
