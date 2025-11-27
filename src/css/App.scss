@@ -234,3 +234,26 @@
   cursor: pointer;
   @extend a;
 }
+
+.lemma-overview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+  gap: 16px;
+}
+
+// pass grid down between card components
+.lemma-overview-container .card,
+.lemma-overview-container .card-body {
+  grid-row: span 4;
+  display: grid;
+  grid-template-rows: subgrid;
+  height: auto !important;
+}
+
+.lemma-overview {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  gap: 32px;
+}

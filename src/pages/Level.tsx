@@ -59,12 +59,14 @@ export const Level = () => {
           </div>
         </Col>
       </Row>
-      <Row className="mt-3 align-items-stretch">
-        {lemmataData?.lemmata?.data?.map(l => (
-          <Col xs={12} lg={4}>
-            <LemmaOverview lemma={l} />
-          </Col>
-        ))}
+      <Row>
+        <Col xs={12}>
+          <div className="lemma-overview-container">
+            {lemmataData?.lemmata?.data?.map(l => (
+              <LemmaOverview lemma={l} />
+            ))}
+          </div>
+        </Col>
       </Row>
       {loading && (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">

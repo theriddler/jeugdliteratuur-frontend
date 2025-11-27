@@ -26,11 +26,13 @@ export const TagPage = () => {
         </Col>
       </Row>
       <Row className="mt-3 align-items-stretch">
-        {attributes.lemmas?.data?.map(l => (
-          <Col xs={12} lg={4}>
-            <LemmaOverview lemma={l} />
-          </Col>
-        ))}
+        <Col xs={12}>
+          <div className="lemma-overview-container">
+            {attributes.lemmas?.data?.map(l => (
+              <LemmaOverview lemma={l} />
+            ))}
+          </div>
+        </Col>
       </Row>
     </div>
   )

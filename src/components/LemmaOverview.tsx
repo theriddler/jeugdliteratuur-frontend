@@ -17,7 +17,7 @@ export const LemmaOverview = (props: {
   return (
     <Card className="clickable card-hover h-100" onClick={() => navigate(`/teksten/${id}`)}>
       <CardBody>
-        <div className="d-flex flex-column h-100">
+        <div className="h-100 lemma-overview">
           <div>
             <div>
               <div>
@@ -34,21 +34,20 @@ export const LemmaOverview = (props: {
                 </div>
               )}
             </div>
-            <div className="mt-3 d-flex justify-content-center">
-              <div className="image-wrapper lemma-overview">
-                <img src={imageUrl} />
-              </div>
-            </div>
-            <hr />
-            <div className="d-flex justify-content-between">
-              <div>
-                {attributes?.korte_intro && (
-                  <BlocksRenderer content={attributes?.korte_intro} />
-                )}
-              </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <div className="image-wrapper lemma-overview">
+              <img src={imageUrl} />
             </div>
           </div>
-          <div className="flex-grow-1 d-flex align-items-end">
+          <div>
+            <div>
+              {attributes?.korte_intro && (
+                <BlocksRenderer content={attributes?.korte_intro} />
+              )}
+            </div>
+          </div>
+          <div>
             <Link to={`/teksten/${id}`}>
               Verder lezen
             </Link>
