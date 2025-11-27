@@ -74,7 +74,10 @@ export const LemmaDocument = (props: {
   voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => {
   if (!props.lemma) return null;
-  const html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} voorlezen={props.voorlezen} />)
+  let html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} voorlezen={props.voorlezen} />)
+
+  // clean svgs from here
+  html = html.replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, '');
 
   return (
     <Document>
