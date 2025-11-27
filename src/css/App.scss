@@ -16,9 +16,9 @@
   font-size: 0.9rem;
   font-weight: 100;
 
-  &:hover,
-  &.current {
-    background-color: var(--secondary-color);
+  &:hover {
+    color: var(--text-light) !important;
+    background-color: var(--secondary-color) !important;
   }
 }
 
