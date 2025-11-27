@@ -9,7 +9,7 @@ export const DidactischeTips = () => {
 
   return (
     <InfoPage
-      titel="Over het project"
+      titel="Didachite tips"
       tekst={didachiteTips?.attributes?.tekst}
       fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(didachiteTips?.attributes?.foto?.data?.attributes, 'medium')}
       loading={loading}
