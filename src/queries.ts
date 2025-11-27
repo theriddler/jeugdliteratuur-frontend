@@ -162,6 +162,7 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
+                      formats
                       url
                     }
                   }
@@ -183,6 +184,7 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
+                      formats
                       url
                     }
                   }
@@ -204,6 +206,7 @@ export const LEMMA = graphql(`
                   data{
                     id
                     attributes{
+                      formats
                       url
                     }
                   }
@@ -257,6 +260,7 @@ export const TAG = graphql(`
                   data{
                     id
                     attributes{
+                      formats
                       url
                     }
                   }
