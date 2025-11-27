@@ -4,11 +4,11 @@
   position: relative;
   overflow: visible;
   font-size: 11px;
+}
 
-  input{
-  font-size: 11px;
-
-  }
+.searchbar-input{
+  font-size: 11px !important;
+  margin-right: 16px !important; // account for font clipping in chrome
 }
 
 .searchbar-dropdown {

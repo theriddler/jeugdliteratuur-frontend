@@ -69,6 +69,7 @@ export const Searchbar = (props: {
     <div className="searchbar-container">
       <Input
         type="search"
+        className="searchbar-input"
         placeholder={props.placeholder}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
