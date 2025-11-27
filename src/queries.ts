@@ -419,3 +419,25 @@ export const VOORLEZEN = graphql(`
     }
   }
 `)
+
+export const DIDACTISCHE_TIPS = graphql(`
+  query DidachiteTips {
+    didachiteTips {
+      data{
+        id
+        attributes{
+          tekst
+          foto {
+            data{
+              id
+              attributes{
+                formats
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)

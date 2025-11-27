@@ -39,7 +39,7 @@ const Header = (props: {
                   <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink to="/" className="app-nav-link" onClick={() => alert('WIP')}>Didactische tips</NavLink>
+                  <NavLink to="/didactische-tips" className="app-nav-link">Didactische tips</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

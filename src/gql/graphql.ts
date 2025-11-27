@@ -98,6 +98,32 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type DidachiteTips = {
+  __typename?: 'DidachiteTips';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  foto?: Maybe<UploadFileEntityResponse>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  tekst?: Maybe<Scalars['JSON']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type DidachiteTipsEntity = {
+  __typename?: 'DidachiteTipsEntity';
+  attributes?: Maybe<DidachiteTips>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type DidachiteTipsEntityResponse = {
+  __typename?: 'DidachiteTipsEntityResponse';
+  data?: Maybe<DidachiteTipsEntity>;
+};
+
+export type DidachiteTipsInput = {
+  foto?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  tekst?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']['input']>;
   caption?: InputMaybe<Scalars['String']['input']>;
@@ -155,7 +181,7 @@ export type GebruikVanDeLijstInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-export type GenericMorph = Colofon | GebruikVanDeLijst | I18NLocale | Inleiding | Lemma | Niveau | OverHetProject | Samenwerken | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Voorlezen;
+export type GenericMorph = Colofon | DidachiteTips | GebruikVanDeLijst | I18NLocale | Inleiding | Lemma | Niveau | OverHetProject | Samenwerken | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Voorlezen;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -463,6 +489,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteColofon?: Maybe<ColofonEntityResponse>;
+  deleteDidachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   deleteGebruikVanDeLijst?: Maybe<GebruikVanDeLijstEntityResponse>;
   deleteInleiding?: Maybe<InleidingEntityResponse>;
   deleteLemma?: Maybe<LemmaEntityResponse>;
@@ -489,6 +516,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateColofon?: Maybe<ColofonEntityResponse>;
+  updateDidachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateGebruikVanDeLijst?: Maybe<GebruikVanDeLijstEntityResponse>;
   updateInleiding?: Maybe<InleidingEntityResponse>;
@@ -627,6 +655,11 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateColofonArgs = {
   data: ColofonInput;
+};
+
+
+export type MutationUpdateDidachiteTipsArgs = {
+  data: DidachiteTipsInput;
 };
 
 
@@ -815,6 +848,7 @@ export enum PublicationState {
 export type Query = {
   __typename?: 'Query';
   colofon?: Maybe<ColofonEntityResponse>;
+  didachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   gebruikVanDeLijst?: Maybe<GebruikVanDeLijstEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
@@ -841,6 +875,11 @@ export type Query = {
 
 
 export type QueryColofonArgs = {
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
+export type QueryDidachiteTipsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
@@ -1552,6 +1591,11 @@ export type VoorlezenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type VoorlezenQuery = { __typename?: 'Query', voorlezen?: { __typename?: 'VoorlezenEntityResponse', data?: { __typename?: 'VoorlezenEntity', id?: string | null, attributes?: { __typename?: 'Voorlezen', tekst?: any | null } | null } | null } | null };
 
+export type DidachiteTipsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DidachiteTipsQuery = { __typename?: 'Query', didachiteTips?: { __typename?: 'DidachiteTipsEntityResponse', data?: { __typename?: 'DidachiteTipsEntity', id?: string | null, attributes?: { __typename?: 'DidachiteTips', tekst?: any | null, foto?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', formats?: any | null, url: string } | null } | null } | null } | null } | null } | null };
+
 
 export const LemmataPicturesByGroepDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmataPicturesByGroep"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"niveauId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"niveau"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"niveauId"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"korte_intro"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_2_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_2_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LemmataPicturesByGroepQuery, LemmataPicturesByGroepQueryVariables>;
 export const LemmataForSearchbarDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LemmataForSearchbar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lemmata"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"500"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titel"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"auteur_2_voornaam"}},{"kind":"Field","name":{"kind":"Name","value":"auter_2_achternaam"}},{"kind":"Field","name":{"kind":"Name","value":"jaar"}},{"kind":"Field","name":{"kind":"Name","value":"afbeelding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LemmataForSearchbarQuery, LemmataForSearchbarQueryVariables>;
@@ -1566,3 +1610,4 @@ export const SamenwerkenDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const ColofonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ColofonQuery, ColofonQueryVariables>;
 export const GebruikVanDeLijstDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GebruikVanDeLijstQuery, GebruikVanDeLijstQueryVariables>;
 export const VoorlezenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Voorlezen"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voorlezen"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<VoorlezenQuery, VoorlezenQueryVariables>;
+export const DidachiteTipsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DidachiteTips"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"didachiteTips"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DidachiteTipsQuery, DidachiteTipsQueryVariables>;

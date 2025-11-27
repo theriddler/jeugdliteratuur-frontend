@@ -4,18 +4,19 @@ import { AppLayout } from "./AppLayout";
 import './css/__defaults.scss';
 import './css/App.scss';
 import './css/header.scss';
-import './css/sidebar.scss';
 import './css/searchbar.scss';
+import './css/sidebar.scss';
+import { AllLemmas } from "./pages/AllLemmas";
+import { AllTags } from "./pages/AllTags";
 import { Colofon } from "./pages/Colofon";
+import { DidactischeTips } from "./pages/DidactischeTips";
 import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
 import { Level } from "./pages/Level";
 import { OverHetProject } from "./pages/OverHetProject";
 import { Samenwerken } from "./pages/Samenwerken";
-import { AllLemmas } from "./pages/AllLemmas";
 import { TagPage } from "./pages/TagPage";
-import { AllTags } from "./pages/AllTags";
 
 export const STRAPI_BASE_URL = 'https://perfect-ducks-3ff901f65f.strapiapp.com'
 
@@ -40,6 +41,8 @@ function App () {
             <Route path="/feedback" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
+            <Route path='/didactische-tips' element={<DidactischeTips />} />
+
             <Route path="/alle-teksten" element={<AllLemmas />} />
             <Route path="/alle-tags" element={<AllTags />} />
 
