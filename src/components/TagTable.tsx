@@ -4,9 +4,10 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { TAGS_FOR_SEARCHBAR } from "../queries";
 import { FullPageSpinner } from "./FullPageSpinner";
+import { TagEntity } from "../gql/graphql";
+import { Col, Row } from "reactstrap";
 
 export const TagTable = () => {
-  const navigate = useNavigate();
 
   const { data: tags, loading } = useQuery(TAGS_FOR_SEARCHBAR);
 
@@ -18,20 +19,44 @@ export const TagTable = () => {
 
   if (loading) return <FullPageSpinner />
 
+  const thirdOfLength = Math.floor(sortedTags.length / 3)
+
   return (
-    <table>
-      <tbody>
-        {sortedTags?.map(t => (
-          <tr onClick={() => navigate(`/tag/${t.id}`)}>
-            <td style={{ width: '50px' }}>
-              <IconTag />
-            </td>
-            <td className="py-2">
-              {t.attributes?.titel}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Row>
+      <Col xs={12} lg={4}>
+        {sortedTags
+          ?.slice(0, thirdOfLength)
+          ?.map(t => <TagEntry t={t} />)
+        }
+      </Col>
+      <Col xs={12} lg={4}>
+        {sortedTags
+          ?.slice(thirdOfLength, 2 * thirdOfLength)
+          ?.map(t => <TagEntry t={t} />)
+        }
+      </Col>
+      <Col xs={12} lg={4}>
+        {sortedTags
+          ?.slice(2 * thirdOfLength, -1)
+          ?.map(t => <TagEntry t={t} />)
+        }
+      </Col>
+    </Row>
+  )
+}
+
+const TagEntry = (props: {
+  t: TagEntity | undefined
+}) => {
+  const navigate = useNavigate();
+  return (
+    <div className="tag-entry" onClick={() => navigate(`/tag/${props.t?.id}`)}>
+      <div>
+        <IconTag />
+      </div>
+      <div>
+        {props.t?.attributes?.titel}
+      </div>
+    </div>
   )
 }

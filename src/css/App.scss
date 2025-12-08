@@ -257,3 +257,26 @@
   grid-template-rows: subgrid;
   gap: 32px;
 }
+
+.tag-entry {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  gap: 8px;
+  padding: 8px 16px;
+  margin: 16px 0;
+
+  width: 100%;
+  height: auto;
+  background-color: white;
+  border-radius: 16px;
+  border: 1px solid var(--secondary-color);
+
+  &:hover{
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all 0.2s;
+  }
+}
