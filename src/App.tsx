@@ -41,7 +41,7 @@ function App () {
             <Route path="/feedback" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
-            <Route path='/didactische-tips' element={<DidactischeTips />} />
+            <Route path='/close-reading' element={<DidactischeTips />} />
 
             <Route path="/alle-teksten" element={<AllLemmas />} />
             <Route path="/alle-tags" element={<AllTags />} />
