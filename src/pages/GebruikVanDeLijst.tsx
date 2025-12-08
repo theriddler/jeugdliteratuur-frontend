@@ -11,7 +11,7 @@ export const GebruikVanDeLijst = () => {
     <InfoPage
       titel="Gebruik van de lijst"
       tekst={gebruikVanDeLijst?.attributes?.Tekst}
-      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(gebruikVanDeLijst?.attributes?.foto?.data?.attributes, 'medium')}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(gebruikVanDeLijst?.attributes?.foto?.data?.attributes, 'default')}
       loading={loading}
     />
   )

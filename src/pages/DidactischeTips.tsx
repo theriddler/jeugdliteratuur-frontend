@@ -11,7 +11,7 @@ export const DidactischeTips = () => {
     <InfoPage
       titel="Didachite tips"
       tekst={didachiteTips?.attributes?.tekst}
-      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(didachiteTips?.attributes?.foto?.data?.attributes, 'medium')}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(didachiteTips?.attributes?.foto?.data?.attributes, 'default')}
       loading={loading}
     />
   )

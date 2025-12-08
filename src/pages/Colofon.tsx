@@ -11,7 +11,7 @@ export const Colofon = () => {
     <InfoPage
       titel="Colofon"
       tekst={colofon?.attributes?.tekst}
-      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(colofon?.attributes?.foto?.data?.attributes, 'medium')}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(colofon?.attributes?.foto?.data?.attributes, 'default')}
       loading={loading}
     />
   )

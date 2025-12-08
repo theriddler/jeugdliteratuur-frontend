@@ -11,7 +11,7 @@ export const OverHetProject = () => {
     <InfoPage
       titel="Over het project"
       tekst={overHetProject?.attributes?.Tekst}
-      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(overHetProject?.attributes?.foto?.data?.attributes, 'medium')}
+      fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(overHetProject?.attributes?.foto?.data?.attributes, 'default')}
       loading={loading}
     />
   )
