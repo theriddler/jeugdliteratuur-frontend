@@ -5,7 +5,7 @@ import { LemmaQuery, LemmataForAlleLemmasQuery, LemmataForSearchbarQuery, Lemmat
 export type LemmataByGroepQueryLemma = NonNullable<LemmataPicturesByGroepQuery[ 'lemmata' ]>[ 'data' ][ 0 ];
 export const LEMMATA_PICTURES_BY_GROEP = graphql(`
   query LemmataPicturesByGroep($niveauId: ID!) {
-    lemmata(filters: {niveau: {id: {eq: $niveauId}}}){
+    lemmata(filters: {niveau: {id: {eq: $niveauId}}}, pagination: {page: 1, pageSize: 500}){
       data{
         id
         attributes{
