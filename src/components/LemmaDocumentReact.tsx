@@ -552,7 +552,11 @@ const LemmaFeedbackForm = (props: {
             />
           </FormGroup>
           {isLoading
-            ? <Spinner />
+            ? (
+              <div className="d-flex w-100 justify-content-center">
+                <Spinner />
+              </div>
+            )
             : (
               <FormGroup>
                 <button
