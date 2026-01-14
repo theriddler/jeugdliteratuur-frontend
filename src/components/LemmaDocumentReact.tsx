@@ -1,14 +1,18 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import { IconStar, IconTag } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { IconChevronDown, IconChevronUp, IconStar, IconTag } from "@tabler/icons-react";
+import { generateClient } from "aws-amplify/api";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { NavigateFunction } from "react-router";
-import { Col, Row } from "reactstrap";
+import { Col, FormGroup, Input, Label, Row, Spinner } from "reactstrap";
+import { Schema } from "../../amplify/data/resource";
 import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { TagEntity, VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 import { FullPageSpinner } from "./FullPageSpinner";
+
+const client = generateClient<Schema>();
 
 const IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME = 'ignore-open-in-new-page'
 
@@ -253,6 +257,7 @@ export const LemmaDocumentReact = (props: {
               )}
             </section>
           )}
+          <LemmaFeedbackForm lemma={props.lemma} />
         </Col>
       </Row>
       <Row className="mt-0">
@@ -321,6 +326,7 @@ export const LemmaDocumentReact = (props: {
                 )}
               </section>
             )}
+            <LemmaFeedbackForm lemma={props.lemma} />
           </div>
           {attributes?.bronnen && (
             <section className="lemma-section-container gray">
@@ -391,5 +397,177 @@ const TagLink = (props: {
         {attributes?.titel}
       </div>
     </div>
+  )
+}
+
+const LemmaFeedbackForm = (props: {
+  lemma: LemmaQueryLemma | undefined,
+}) => {
+  const [ isOpen, setIsOpen ] = useState(false);
+  const toggleIsOpen = () => setIsOpen(p => !p);
+
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  const [ auteur, setAuteur ] = useState('');
+  const [ boek, setBoek ] = useState('');
+  const [ waarom, setWaarom ] = useState('');
+  const [ forOpstaptitels, setForOpstaptitels ] = useState(false);
+  const [ forParallelLezen, setForParallelLezen ] = useState(false);
+  const [ forVerderLezen, setForVerderLezen ] = useState(false);
+  const [ name, setName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ occupation, setOccupation ] = useState('');
+
+  const handleSubmit: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+
+    const lemmaTitle = props.lemma?.attributes?.titel;
+
+    setIsLoading(true)
+    const response = await client.mutations.sendBookRecommendation({
+      lemmaTitle,
+      auteur,
+      boek,
+      waarom,
+      forOpstaptitels,
+      forParallelLezen,
+      forVerderLezen,
+      name,
+      email,
+      occupation
+    });
+    setIsLoading(false)
+
+    if (!response.data?.id) {
+      alert('Error sending book recommendation!');
+      console.log(response)
+      return;
+    }
+
+    alert('Book recommendation submitted!')
+  }
+
+  return (
+    <section className="lemma-section-container green">
+      <div className="d-flex align-items-center gap-2" onClick={toggleIsOpen}>
+        <h5 className="clickable">
+          Heb je een suggestie
+        </h5>
+        {isOpen ? <IconChevronUp /> : <IconChevronDown />}
+      </div>
+      {isOpen && (
+        <div className="mt-3">
+          <FormGroup>
+            <Label for="formAuteur">Auteur</Label>
+            <Input
+              id="formAuteur"
+              name="formAuteur"
+              type="email"
+              value={auteur}
+              onChange={(e) => setAuteur(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="formBoek">Boek/Serie</Label>
+            <Input
+              id="formBoek"
+              name="formBoek"
+              type="text"
+              value={boek}
+              onChange={(e) => setBoek(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="formWaarom">Waarom?</Label>
+            <Input
+              id="formWaarom"
+              name="formWaarom"
+              type="textarea"
+              value={waarom}
+              onChange={(e) => setWaarom(e.target.value)}
+              style={{ height: '200px' }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              id="formForOpstaptitels"
+              name="formForOpstaptitels"
+              type="checkbox"
+              className="me-3"
+              checked={forOpstaptitels}
+              onChange={(e) => setForOpstaptitels(e.target.checked)}
+            />
+            <Label for="formForOpstaptitels">Opstaptitels</Label>
+          </FormGroup>
+          <FormGroup>
+            <Input
+              id="formForParallelLezen"
+              name="formForParallelLezen"
+              type="checkbox"
+              className="me-3"
+              checked={forParallelLezen}
+              onChange={(e) => setForParallelLezen(e.target.checked)}
+            />
+            <Label for="formForParallelLezen">Parallel Lezen</Label>
+          </FormGroup>
+          <FormGroup>
+            <Input
+              id="formForVerderLezen"
+              name="formForVerderLezen"
+              type="checkbox"
+              className="me-3"
+              checked={forVerderLezen}
+              onChange={(e) => setForVerderLezen(e.target.checked)}
+            />
+            <Label for="formForVerderLezen">Verder Lezen</Label>
+          </FormGroup>
+          <FormGroup>
+            <Label for="formName">Naam (optioneel)</Label>
+            <Input
+              id="formName"
+              name="formName"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="formEmail">Email (optioneel)</Label>
+            <Input
+              id="formEmail"
+              name="formEmail"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="formOccupation">Functie (optioneel)</Label>
+            <Input
+              id="formOccupation"
+              name="formOccupation"
+              type="text"
+              value={occupation}
+              onChange={(e) => setOccupation(e.target.value)}
+            />
+          </FormGroup>
+          {isLoading
+            ? <Spinner />
+            : (
+              <FormGroup>
+                <button
+                  id="formSubmit"
+                  name="formSubmit"
+                  className="pretty-button"
+                  onClick={handleSubmit}
+                >
+                  Verzenden
+                </button>
+              </FormGroup>
+            )
+          }
+        </div>
+      )}
+    </section>
   )
 }
