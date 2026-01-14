@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router";
 import { Col, Row } from "reactstrap";
 import { FullPageSpinner } from "../components/FullPageSpinner";
@@ -33,6 +34,15 @@ export const Level = () => {
     if (levelIndex === sortedLevels.length - 1) return undefined;
     return sortedLevels[ levelIndex + 1 ]
   }, [ levelIndex, sortedLevels ])
+
+  // plausible tracking
+  useEffect(() => {
+    if (!loadingLevel && level) {
+      // make custom Groep event
+      const groep_title = level?.attributes?.titel;
+      (window as any).plausible('Groep', { props: { Groep: groep_title } })
+    }
+  }, [ level, loadingLevel ])
 
   return (
     <div>

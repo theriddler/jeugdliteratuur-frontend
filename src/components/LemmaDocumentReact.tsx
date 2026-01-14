@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { IconChevronDown, IconChevronUp, IconStar, IconTag } from "@tabler/icons-react";
 import { generateClient } from "aws-amplify/api";
@@ -61,6 +62,9 @@ export const LemmaDocumentReact = (props: {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
+      // 5. Track on Plausible
+      (window as any).plausible('PDF', { props: { 'PDF': props.lemma?.attributes?.titel } })
     } catch (error) {
       console.error("PDF generation failed", error);
     } finally {
@@ -228,7 +232,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>⁠Opstaptitels</h5>
               {attributes?.opstaptitels?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} />
+                <LemmaInternalLink l={l} navigate={props.navigate} type="Opstaptitels" />
               ))}
               {attributes?.opstaptitels_extern && (
                 <BlocksRenderer content={attributes?.opstaptitels_extern} />
@@ -239,7 +243,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>Parallel lezen</h5>
               {attributes?.parallel_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} />
+                <LemmaInternalLink l={l} navigate={props.navigate} type="ParallelLezen" />
               ))}
               {attributes?.parallel_lezen_extern && (
                 <BlocksRenderer content={attributes?.parallel_lezen_extern} />
@@ -250,7 +254,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>Verder lezen</h5>
               {attributes?.verder_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} />
+                <LemmaInternalLink l={l} navigate={props.navigate} type="VerderLezen" />
               ))}
               {attributes?.verder_lezen_extern && (
                 <BlocksRenderer content={attributes?.verder_lezen_extern} />
@@ -297,7 +301,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section green-container">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} type="Opstaptitels" />
                 ))}
                 {attributes?.opstaptitels_extern && (
                   <BlocksRenderer content={attributes?.opstaptitels_extern} />
@@ -308,7 +312,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} type="ParallelLezen" />
                 ))}
                 {attributes?.parallel_lezen_extern && (
                   <BlocksRenderer content={attributes?.parallel_lezen_extern} />
@@ -319,7 +323,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} />
+                  <LemmaInternalLink l={l} navigate={props.navigate} type="VerderLezen" />
                 ))}
                 {attributes?.verder_lezen_extern && (
                   <BlocksRenderer content={attributes?.verder_lezen_extern} />
@@ -353,13 +357,22 @@ export const LemmaDocumentReact = (props: {
 
 const LemmaInternalLink = (props: {
   l: LemmaQueryLemma,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  type: 'Opstaptitels' | 'ParallelLezen' | 'VerderLezen'
 }) => {
   if (!props.l) return;
   const { id, attributes } = props.l;
 
+  const onClick = () => {
+    // keep track that an internal link was clicked
+    (window as any).plausible('DoorverwijzingAndereTitel', { props: { 'DoorverwijzingAndereTitel': props.type } })
+
+    // navigate to lemma
+    props.navigate(`/teksten/${id}`)
+  }
+
   return (
-    <div className={"lemma-internal-link d-flex gap-3 my-3"} onClick={() => props.navigate(`/teksten/${id}`)}>
+    <div className={"lemma-internal-link d-flex gap-3 my-3"} onClick={onClick}>
       <div>
         <div className="image-wrapper xs fixed">
           <img
