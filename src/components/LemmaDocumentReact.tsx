@@ -534,8 +534,8 @@ const LemmaFeedbackForm = (props: {
             />
             <Label for="formForVerderLezen">Verder Lezen</Label>
           </FormGroup>
-          <FormGroup>
-            <Label for="formName">Naam (optioneel)</Label>
+          <FormGroup className="mt-5">
+            <Label className="fst-italic" for="formName">Naam (optioneel)</Label>
             <Input
               id="formName"
               name="formName"
@@ -545,7 +545,7 @@ const LemmaFeedbackForm = (props: {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="formEmail">Email (optioneel)</Label>
+            <Label className="fst-italic" for="formEmail">Email (optioneel)</Label>
             <Input
               id="formEmail"
               name="formEmail"
@@ -555,7 +555,7 @@ const LemmaFeedbackForm = (props: {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="formOccupation">Functie (optioneel)</Label>
+            <Label className="fst-italic" for="formOccupation">Functie (optioneel)</Label>
             <Input
               id="formOccupation"
               name="formOccupation"
@@ -571,7 +571,7 @@ const LemmaFeedbackForm = (props: {
               </div>
             )
             : (
-              <FormGroup>
+              <FormGroup className="mt-5">
                 <button
                   id="formSubmit"
                   name="formSubmit"
