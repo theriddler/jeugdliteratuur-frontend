@@ -481,7 +481,7 @@ const LemmaFeedbackForm = (props: {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="formBoek">Boek/Serie</Label>
+            <Label for="formBoek">Boektitel</Label>
             <Input
               id="formBoek"
               name="formBoek"
