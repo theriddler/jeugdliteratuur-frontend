@@ -521,7 +521,7 @@ const LemmaFeedbackForm = (props: {
               checked={forParallelLezen}
               onChange={(e) => setForParallelLezen(e.target.checked)}
             />
-            <Label for="formForParallelLezen">Parallel Lezen</Label>
+            <Label for="formForParallelLezen">Parallel lezen</Label>
           </FormGroup>
           <FormGroup>
             <Input
@@ -532,7 +532,7 @@ const LemmaFeedbackForm = (props: {
               checked={forVerderLezen}
               onChange={(e) => setForVerderLezen(e.target.checked)}
             />
-            <Label for="formForVerderLezen">Verder Lezen</Label>
+            <Label for="formForVerderLezen">Verder lezen</Label>
           </FormGroup>
           <FormGroup className="mt-5">
             <Label className="fst-italic" for="formName">Naam (optioneel)</Label>
