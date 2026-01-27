@@ -491,7 +491,7 @@ const LemmaFeedbackForm = (props: {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="formWaarom">Waarom?</Label>
+            <Label for="formWaarom">Waarom raad je dit boek aan als passende titel bij dit boek?</Label>
             <Input
               id="formWaarom"
               name="formWaarom"
