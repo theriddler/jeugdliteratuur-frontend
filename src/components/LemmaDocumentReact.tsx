@@ -464,7 +464,7 @@ const LemmaFeedbackForm = (props: {
     <section className="lemma-section-container green">
       <div className="d-flex align-items-center gap-2" onClick={toggleIsOpen}>
         <h5 className="clickable">
-          Heb je een suggestie
+          Heb je een suggestie?
         </h5>
         {isOpen ? <IconChevronUp /> : <IconChevronDown />}
       </div>
