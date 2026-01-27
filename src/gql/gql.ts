@@ -28,6 +28,7 @@ type Documents = {
     "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.GebruikVanDeLijstDocument,
     "\n  query Voorlezen {\n    voorlezen {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": typeof types.VoorlezenDocument,
     "\n  query DidachiteTips {\n    didachiteTips {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.DidachiteTipsDocument,
+    "\n  query Selectiecriteria {\n    selectiecriteria {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": typeof types.SelectiecriteriaDocument,
 };
 const documents: Documents = {
     "\n  query LemmataPicturesByGroep($niveauId: ID!) {\n    lemmata(filters: {niveau: {id: {eq: $niveauId}}}, pagination: {page: 1, pageSize: 500}){\n      data{\n        id\n        attributes{\n          titel\n          korte_intro\n          auteur_voornaam\n          auter_achternaam\n          auteur_2_voornaam\n          auter_2_achternaam\n          jaar\n          afbeelding {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.LemmataPicturesByGroepDocument,
@@ -44,6 +45,7 @@ const documents: Documents = {
     "\n  query GebruikVanDeLijst {\n    gebruikVanDeLijst {\n      data{\n        id\n        attributes{\n          Tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GebruikVanDeLijstDocument,
     "\n  query Voorlezen {\n    voorlezen {\n      data{\n        id\n        attributes{\n          tekst\n        }\n      }\n    }\n  }\n": types.VoorlezenDocument,
     "\n  query DidachiteTips {\n    didachiteTips {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.DidachiteTipsDocument,
+    "\n  query Selectiecriteria {\n    selectiecriteria {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.SelectiecriteriaDocument,
 };
 
 /**
@@ -116,6 +118,10 @@ export function graphql(source: "\n  query Voorlezen {\n    voorlezen {\n      d
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query DidachiteTips {\n    didachiteTips {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query DidachiteTips {\n    didachiteTips {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Selectiecriteria {\n    selectiecriteria {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Selectiecriteria {\n    selectiecriteria {\n      data{\n        id\n        attributes{\n          tekst\n          foto {\n            data{\n              id\n              attributes{\n                formats\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

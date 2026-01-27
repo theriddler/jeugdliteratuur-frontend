@@ -441,3 +441,25 @@ export const DIDACTISCHE_TIPS = graphql(`
     }
   }
 `)
+
+export const SELECTIECRITERIA = graphql(`
+  query Selectiecriteria {
+    selectiecriteria {
+      data{
+        id
+        attributes{
+          tekst
+          foto {
+            data{
+              id
+              attributes{
+                formats
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)
