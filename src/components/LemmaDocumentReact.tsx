@@ -510,7 +510,7 @@ const LemmaFeedbackForm = (props: {
               checked={forOpstaptitels}
               onChange={(e) => setForOpstaptitels(e.target.checked)}
             />
-            <Label for="formForOpstaptitels">Opstaptitels</Label>
+            <Label for="formForOpstaptitels">Opstaptitel</Label>
           </FormGroup>
           <FormGroup>
             <Input
