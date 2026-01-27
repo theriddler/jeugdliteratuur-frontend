@@ -33,13 +33,13 @@ const Header = (props: {
                   <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                 </DropdownItem>
                 <DropdownItem>
+                  <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
+                </DropdownItem>
+                <DropdownItem>
                   <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -102,10 +102,13 @@ const Header = (props: {
                     <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                   </DropdownItem>
                   <DropdownItem onClick={toggleMobileNav}>
+                    <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
+                  </DropdownItem>
+                  <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                   </DropdownItem>
                   <DropdownItem onClick={toggleMobileNav}>
-                    <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
+                    <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
