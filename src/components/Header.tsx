@@ -33,6 +33,9 @@ const Header = (props: {
                   <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                 </DropdownItem>
                 <DropdownItem>
+                  <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
+                </DropdownItem>
+                <DropdownItem>
                   <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
                 </DropdownItem>
                 <DropdownItem>
@@ -100,6 +103,9 @@ const Header = (props: {
                 <DropdownMenu>
                   <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
+                  </DropdownItem>
+                  <DropdownItem onClick={toggleMobileNav}>
+                    <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
                   </DropdownItem>
                   <DropdownItem onClick={toggleMobileNav}>
                     <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>

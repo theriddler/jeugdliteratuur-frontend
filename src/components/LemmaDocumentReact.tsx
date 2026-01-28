@@ -3,7 +3,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { IconChevronDown, IconChevronUp, IconStar, IconTag } from "@tabler/icons-react";
 import { generateClient } from "aws-amplify/api";
 import { MouseEventHandler, useEffect, useState } from "react";
-import { NavigateFunction } from "react-router";
+import { Link, NavigateFunction } from "react-router";
 import { Col, FormGroup, Input, Label, Row, Spinner } from "reactstrap";
 import { Schema } from "../../amplify/data/resource";
 import { STERBOEKEN_SECONDARY } from "../App";
@@ -469,120 +469,130 @@ const LemmaFeedbackForm = (props: {
         {isOpen ? <IconChevronUp /> : <IconChevronDown />}
       </div>
       {isOpen && (
-        <div className="mt-3">
-          <FormGroup>
-            <Label for="formAuteur">Auteur</Label>
-            <Input
-              id="formAuteur"
-              name="formAuteur"
-              type="email"
-              value={auteur}
-              onChange={(e) => setAuteur(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="formBoek">Boektitel</Label>
-            <Input
-              id="formBoek"
-              name="formBoek"
-              type="text"
-              value={boek}
-              onChange={(e) => setBoek(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="formWaarom">Waarom raad je dit boek aan als passende titel bij dit boek?</Label>
-            <Input
-              id="formWaarom"
-              name="formWaarom"
-              type="textarea"
-              value={waarom}
-              onChange={(e) => setWaarom(e.target.value)}
-              style={{ height: '200px' }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              id="formForOpstaptitels"
-              name="formForOpstaptitels"
-              type="checkbox"
-              className="me-3"
-              checked={forOpstaptitels}
-              onChange={(e) => setForOpstaptitels(e.target.checked)}
-            />
-            <Label for="formForOpstaptitels">Opstaptitel</Label>
-          </FormGroup>
-          <FormGroup>
-            <Input
-              id="formForParallelLezen"
-              name="formForParallelLezen"
-              type="checkbox"
-              className="me-3"
-              checked={forParallelLezen}
-              onChange={(e) => setForParallelLezen(e.target.checked)}
-            />
-            <Label for="formForParallelLezen">Parallel lezen</Label>
-          </FormGroup>
-          <FormGroup>
-            <Input
-              id="formForVerderLezen"
-              name="formForVerderLezen"
-              type="checkbox"
-              className="me-3"
-              checked={forVerderLezen}
-              onChange={(e) => setForVerderLezen(e.target.checked)}
-            />
-            <Label for="formForVerderLezen">Verder lezen</Label>
-          </FormGroup>
-          <FormGroup className="mt-5">
-            <Label className="fst-italic" for="formName">Naam (optioneel)</Label>
-            <Input
-              id="formName"
-              name="formName"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="fst-italic" for="formEmail">Email (optioneel)</Label>
-            <Input
-              id="formEmail"
-              name="formEmail"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="fst-italic" for="formOccupation">Functie (optioneel)</Label>
-            <Input
-              id="formOccupation"
-              name="formOccupation"
-              type="text"
-              value={occupation}
-              onChange={(e) => setOccupation(e.target.value)}
-            />
-          </FormGroup>
-          {isLoading
-            ? (
-              <div className="d-flex w-100 justify-content-center">
-                <Spinner />
-              </div>
-            )
-            : (
-              <FormGroup className="mt-5">
-                <button
-                  id="formSubmit"
-                  name="formSubmit"
-                  className="pretty-button"
-                  onClick={handleSubmit}
-                >
-                  Verzenden
-                </button>
-              </FormGroup>
-            )
-          }
+        <div>
+
+          <div>
+            <p className="fst-italic">
+              Bekijk onze
+              <Link to='/selectiecriteria'> selectiecriteria </Link>
+              voor een geschikte titel.
+            </p>
+          </div>
+          <div className="mt-3">
+            <FormGroup>
+              <Label for="formAuteur">Auteur</Label>
+              <Input
+                id="formAuteur"
+                name="formAuteur"
+                type="email"
+                value={auteur}
+                onChange={(e) => setAuteur(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="formBoek">Boektitel</Label>
+              <Input
+                id="formBoek"
+                name="formBoek"
+                type="text"
+                value={boek}
+                onChange={(e) => setBoek(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="formWaarom">Waarom raad je dit boek aan als passende titel bij dit boek?</Label>
+              <Input
+                id="formWaarom"
+                name="formWaarom"
+                type="textarea"
+                value={waarom}
+                onChange={(e) => setWaarom(e.target.value)}
+                style={{ height: '200px' }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                id="formForOpstaptitels"
+                name="formForOpstaptitels"
+                type="checkbox"
+                className="me-3"
+                checked={forOpstaptitels}
+                onChange={(e) => setForOpstaptitels(e.target.checked)}
+              />
+              <Label for="formForOpstaptitels">Opstaptitel</Label>
+            </FormGroup>
+            <FormGroup>
+              <Input
+                id="formForParallelLezen"
+                name="formForParallelLezen"
+                type="checkbox"
+                className="me-3"
+                checked={forParallelLezen}
+                onChange={(e) => setForParallelLezen(e.target.checked)}
+              />
+              <Label for="formForParallelLezen">Parallel lezen</Label>
+            </FormGroup>
+            <FormGroup>
+              <Input
+                id="formForVerderLezen"
+                name="formForVerderLezen"
+                type="checkbox"
+                className="me-3"
+                checked={forVerderLezen}
+                onChange={(e) => setForVerderLezen(e.target.checked)}
+              />
+              <Label for="formForVerderLezen">Verder lezen</Label>
+            </FormGroup>
+            <FormGroup className="mt-5">
+              <Label className="fst-italic" for="formName">Naam (optioneel)</Label>
+              <Input
+                id="formName"
+                name="formName"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="fst-italic" for="formEmail">Email (optioneel)</Label>
+              <Input
+                id="formEmail"
+                name="formEmail"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label className="fst-italic" for="formOccupation">Functie (optioneel)</Label>
+              <Input
+                id="formOccupation"
+                name="formOccupation"
+                type="text"
+                value={occupation}
+                onChange={(e) => setOccupation(e.target.value)}
+              />
+            </FormGroup>
+            {isLoading
+              ? (
+                <div className="d-flex w-100 justify-content-center">
+                  <Spinner />
+                </div>
+              )
+              : (
+                <FormGroup className="mt-5">
+                  <button
+                    id="formSubmit"
+                    name="formSubmit"
+                    className="pretty-button"
+                    onClick={handleSubmit}
+                  >
+                    Verzenden
+                  </button>
+                </FormGroup>
+              )
+            }
+          </div>
         </div>
       )}
     </section>

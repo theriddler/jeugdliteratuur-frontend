@@ -17,6 +17,7 @@ import { Level } from "./pages/Level";
 import { OverHetProject } from "./pages/OverHetProject";
 import { Samenwerken } from "./pages/Samenwerken";
 import { TagPage } from "./pages/TagPage";
+import { Selectiecriteria } from "./pages/Selectiecriteria";
 
 export const STRAPI_BASE_URL = 'https://perfect-ducks-3ff901f65f.strapiapp.com'
 
@@ -42,6 +43,7 @@ function App () {
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
             <Route path='/close-reading' element={<DidactischeTips />} />
+            <Route path='/selectiecriteria' element={<Selectiecriteria />} />
 
             <Route path="/alle-teksten" element={<AllLemmas />} />
             <Route path="/alle-tags" element={<AllTags />} />
