@@ -12,30 +12,20 @@ import { TagEntity, VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 import { FullPageSpinner } from "./FullPageSpinner";
+import { IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME, useCleanAnchorLinks } from "../useCleanAnchorLinks";
 
 const client = generateClient<Schema>();
 
-const IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME = 'ignore-open-in-new-page'
+
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmaQueryLemma | undefined,
   voorlezen: VoorlezenEntityResponse[ 'data' ],
   navigate: NavigateFunction
 }) => {
-
-  // change all <a> links in fetched lemma to have target = '_blank'
-  // force open in a new tab
-  useEffect(() => {
-    if (!props.lemma) return;
-
-    const container = document.getElementById('lemma-container');
-    const links = container?.querySelectorAll('a');
-    for (const link of (links ?? [])) {
-      if (link.className.includes(IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME)) continue; // do not change target if we say not to
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
-    }
-  }, [ props.lemma ])
+  // clean anchor links whenever props.lemma is loaded
+  const cleanAnchorLinks = useCleanAnchorLinks();
+  useEffect(cleanAnchorLinks, [ cleanAnchorLinks, props.lemma ])
 
   // handle PDF download
   const [ isDownloading, setIsDownloading ] = useState(false);
@@ -70,6 +60,7 @@ export const LemmaDocumentReact = (props: {
       setIsDownloading(false);
     }
   };
+
 
   // null check
   if (!props.lemma || !props.voorlezen) return null;
@@ -165,13 +156,13 @@ export const LemmaDocumentReact = (props: {
               <BlocksRenderer content={attributes?.de_kern} />
             )}
             <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#het-verhaal">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#het-verhaal">
                 Het verhaal
               </a>
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#analyse">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#analyse">
                 Analyse en interpretatie
               </a>
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME}`} href="#didactische">
+              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#didactische">
                 Didactische vragen en lessuggesties
               </a>
             </div>
