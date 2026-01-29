@@ -288,7 +288,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-              <section className="lemma-section green-container">
+              <section className="lemma-section-container green">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
                   <LemmaInternalLink l={l} navigate={props.navigate} type="Opstaptitels" />
