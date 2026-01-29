@@ -24,17 +24,16 @@ export const LemmaDocumentReact = (props: {
 }) => {
 
   // change all <a> links in fetched lemma to have target = '_blank'
+  // force open in a new tab
   useEffect(() => {
     if (!props.lemma) return;
 
-    const targetDivs = document.getElementsByClassName('lemma-section-container');
-    for (const element of targetDivs) {
-      const links = element.querySelectorAll('a');
-      for (const link of links) {
-        if (link.className.includes(IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME)) return; // do not change target if we say not to
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-      }
+    const container = document.getElementById('lemma-container');
+    const links = container?.querySelectorAll('a');
+    for (const link of (links ?? [])) {
+      if (link.className.includes(IGNORE_OPEN_IN_NEW_PAGE_CLASSNAME)) continue; // do not change target if we say not to
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
     }
   }, [ props.lemma ])
 
@@ -80,7 +79,7 @@ export const LemmaDocumentReact = (props: {
   const { attributes: voorlezen } = props.voorlezen
 
   return (
-    <div className="lemma-container">
+    <div id='lemma-container' className="lemma-container">
       {isDownloading && <FullPageSpinner />}
       <Row className="align-items-center lemma-section-container">
         <Col xs={12} lg={8} className="mb-0">
