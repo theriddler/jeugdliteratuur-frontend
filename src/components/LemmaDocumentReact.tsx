@@ -443,7 +443,6 @@ const LemmaFeedbackForm = (props: {
 
     if (!response.data?.id) {
       alert('Error sending book recommendation!');
-      console.log(response)
       return;
     }
 

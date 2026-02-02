@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ImageWithCors = ({ element }: any) => {
   // ignore if we have class "hide-in-pdf"
-  console.log(Object.keys(element?.classList?.[ '_set' ] ?? {}))
   if (element?.classList?.[ '_set' ]?.has('hide-in-pdf')) return null;
 
   // get src
