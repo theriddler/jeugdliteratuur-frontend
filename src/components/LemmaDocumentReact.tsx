@@ -24,7 +24,7 @@ export const LemmaDocumentReact = (props: {
   navigate: NavigateFunction
 }) => {
   // clean anchor links whenever props.lemma is loaded
-  const cleanAnchorLinks = useCleanAnchorLinks();
+  const cleanAnchorLinks = useCleanAnchorLinks(props.navigate);
   useEffect(cleanAnchorLinks, [ cleanAnchorLinks, props.lemma ])
 
   // handle PDF download

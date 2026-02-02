@@ -1,7 +1,7 @@
 //
 
 import { useCallback } from "react";
-import { useNavigate } from "react-router";
+import { NavigateFunction } from "react-router";
 
 export const IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME = 'ignore-open-in-new-page'
 
@@ -10,9 +10,7 @@ export const IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME = 'ignore-open-in-new-page'
  * if the link is internal to the side "https://www.sterboeken.org" we use React navigate
  * @returns a cleanAnchorLinks hook
  */
-export const useCleanAnchorLinks = () => {
-  const navigate = useNavigate();
-
+export const useCleanAnchorLinks = (navigate: NavigateFunction) => {
   // change all <a> links in fetched lemma to have target = '_blank'
   // force open in a new tab
   const cleanAnchorLinks = useCallback(() => {

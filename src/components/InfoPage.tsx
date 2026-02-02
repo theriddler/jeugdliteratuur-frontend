@@ -3,6 +3,7 @@ import { Card, CardBody, Col, Row } from "reactstrap"
 import { FullPageSpinner } from "./FullPageSpinner"
 import { useCleanAnchorLinks } from "../useCleanAnchorLinks";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export const InfoPage = (props: {
   titel: string,
@@ -15,7 +16,8 @@ export const InfoPage = (props: {
 }) => {
 
   // clean anchor links when loading is done
-  const cleanAnchorLinks = useCleanAnchorLinks();
+  const navigate = useNavigate();
+  const cleanAnchorLinks = useCleanAnchorLinks(navigate);
   useEffect(cleanAnchorLinks, [ cleanAnchorLinks, props.loading ])
 
   if (props.loading) return <FullPageSpinner />
