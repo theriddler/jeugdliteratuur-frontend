@@ -4,6 +4,7 @@ import Html from "react-pdf-html";
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 import { LemmaDocumentReact } from "./LemmaDocumentReact";
+import { MemoryRouter } from "react-router";
 
 
 // Create styles
@@ -128,7 +129,9 @@ const LemmaHTML = (props: {
 }) => (
   <html>
     <body>
-      <LemmaDocumentReact lemma={props.lemma} voorlezen={props.voorlezen} navigate={() => { }} />
+      <MemoryRouter>
+        <LemmaDocumentReact lemma={props.lemma} voorlezen={props.voorlezen} />
+      </MemoryRouter>
     </body>
   </html>
 )

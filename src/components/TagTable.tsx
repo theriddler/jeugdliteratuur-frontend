@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { IconTag } from "@tabler/icons-react";
 import { useMemo } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
+import { Col, Row } from "reactstrap";
+import { TagEntity } from "../gql/graphql";
 import { TAGS_FOR_SEARCHBAR } from "../queries";
 import { FullPageSpinner } from "./FullPageSpinner";
-import { TagEntity } from "../gql/graphql";
-import { Col, Row } from "reactstrap";
 
 export const TagTable = () => {
 
@@ -48,15 +48,16 @@ export const TagTable = () => {
 const TagEntry = (props: {
   t: TagEntity | undefined
 }) => {
-  const navigate = useNavigate();
   return (
-    <div className="tag-entry" onClick={() => navigate(`/tag/${props.t?.id}`)}>
-      <div>
-        <IconTag />
+    <Link className="link-unstyled" to={`/tag/${props.t?.id}`}>
+      <div className="tag-entry">
+        <div>
+          <IconTag />
+        </div>
+        <div>
+          {props.t?.attributes?.titel}
+        </div>
       </div>
-      <div>
-        {props.t?.attributes?.titel}
-      </div>
-    </div>
+    </Link>
   )
 }

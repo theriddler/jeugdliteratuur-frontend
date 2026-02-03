@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client";
 import { useEffect, useMemo } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { LemmaDocumentReact } from "../components/LemmaDocumentReact";
 import { LEMMA, VOORLEZEN } from "../queries";
 
 export const Lemma = () => {
-  const navigate = useNavigate();
   const { lemmaId } = useParams();
 
   const { data: lemma, loading: loadingLemmata } = useQuery(LEMMA, { variables: { id: lemmaId ?? '' } });
@@ -41,7 +40,7 @@ export const Lemma = () => {
                 {levelData.attributes?.titel}
               </Link>
             )}
-            <LemmaDocumentReact lemma={lemma?.lemma?.data} voorlezen={voorlezen} navigate={navigate} />
+            <LemmaDocumentReact lemma={lemma?.lemma?.data} voorlezen={voorlezen} />
           </div>
         )
       }

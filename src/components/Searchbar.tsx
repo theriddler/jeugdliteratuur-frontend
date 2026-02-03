@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/client";
 import { IconTag } from "@tabler/icons-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { Input, Spinner } from "reactstrap";
 import { STERBOEKEN_SECONDARY } from "../App";
 import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma, TAGS_FOR_SEARCHBAR, TagsForSearchbarQueryTag } from "../queries";
@@ -110,65 +110,64 @@ const SearchbarLemmaSuggestion = (props: {
   search: string,
   closeMobileNav: () => void;
 }) => {
-  const navigate = useNavigate();
-
   const onClick = () => {
-    navigate(`/teksten/${props.l.id}`);
     props.closeMobileNav();
   }
 
   return (
-    <div className="searchbar-lemma-suggestion" onClick={onClick}>
-      <div className="image-wrapper fixed xs">
-        <img src={getOptimizedPhotoUrlFromPhotoEntry(props.l.attributes?.afbeelding?.data?.attributes)} />
-      </div>
-      <div>
-        <div className="text-secondary">
-          <span>
-            <HighlightedText
-              text={props.l.attributes?.auteur_voornaam}
-              highlight={props.search}
-            />
-          </span>
-          <span className="ms-1">
-            <HighlightedText
-              text={props.l.attributes?.auter_achternaam}
-              highlight={props.search}
-            />
-          </span>
+    <Link className="link-unstyled" to={`/teksten/${props.l.id}`}>
+      <div className="searchbar-lemma-suggestion" onClick={onClick}>
+        <div className="image-wrapper fixed xs">
+          <img src={getOptimizedPhotoUrlFromPhotoEntry(props.l.attributes?.afbeelding?.data?.attributes)} />
         </div>
-        {props.l.attributes?.auteur_2_voornaam && (
+        <div>
           <div className="text-secondary">
             <span>
               <HighlightedText
-                text={props.l.attributes?.auteur_2_voornaam}
+                text={props.l.attributes?.auteur_voornaam}
                 highlight={props.search}
               />
             </span>
             <span className="ms-1">
               <HighlightedText
-                text={props.l.attributes?.auter_2_achternaam}
+                text={props.l.attributes?.auter_achternaam}
                 highlight={props.search}
               />
             </span>
           </div>
-        )}
-        <div className="mt-1">
-          <span>
-            <HighlightedText
-              text={props.l.attributes?.titel}
-              highlight={props.search}
-            />
-          </span>
-          <span className="ms-1">
-            (<HighlightedText
-              text={props.l.attributes?.jaar}
-              highlight={props.search}
-            />)
-          </span>
+          {props.l.attributes?.auteur_2_voornaam && (
+            <div className="text-secondary">
+              <span>
+                <HighlightedText
+                  text={props.l.attributes?.auteur_2_voornaam}
+                  highlight={props.search}
+                />
+              </span>
+              <span className="ms-1">
+                <HighlightedText
+                  text={props.l.attributes?.auter_2_achternaam}
+                  highlight={props.search}
+                />
+              </span>
+            </div>
+          )}
+          <div className="mt-1">
+            <span>
+              <HighlightedText
+                text={props.l.attributes?.titel}
+                highlight={props.search}
+              />
+            </span>
+            <span className="ms-1">
+              (<HighlightedText
+                text={props.l.attributes?.jaar}
+                highlight={props.search}
+              />)
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -177,24 +176,22 @@ const SearchbarTagSuggestion = (props: {
   search: string,
   closeMobileNav: () => void;
 }) => {
-  const navigate = useNavigate();
-
   const onClick = () => {
-    navigate(`/tag/${props.t.id}`);
     props.closeMobileNav();
   }
 
   return (
-    <div className="searchbar-lemma-suggestion" onClick={onClick}>
-      <div className="d-flex align-items-center justify-content-center">
-        <IconTag color={STERBOEKEN_SECONDARY} />
+    <Link className="link-unstyled" to={`/tag/${props.t.id}`}>
+      <div className="searchbar-lemma-suggestion" onClick={onClick}>
+        <div className="d-flex align-items-center justify-content-center">
+          <IconTag color={STERBOEKEN_SECONDARY} />
+        </div>
+        <div>
+          {props.t.attributes?.titel}
+        </div>
       </div>
-      <div>
-        {props.t.attributes?.titel}
-      </div>
-    </div>
+    </Link>
   )
-
 }
 
 const HighlightedText = (props: {

@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink } from "react-router";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { LEMMATA_FOR_ALLE_LEMMAS, LemmataForAlleLemmasQueryLemma } from "../queries";
 import { LemmaSortType } from "../types";
@@ -54,70 +54,71 @@ const LemmaTableRow = (props: {
   l: LemmataForAlleLemmasQueryLemma,
   sortType: LemmaSortType
 }) => {
-  const navigate = useNavigate();
   const { id, attributes } = props.l;
 
   return (
-    <tr onClick={() => navigate(`/teksten/${id}`)}>
-      {props.sortType === LemmaSortType.BY_GROUP && (
-        <>
-          <td>
-            {attributes?.niveau?.data?.attributes?.titel}
-          </td>
-          <td>
-            <div>
-              {attributes?.auter_achternaam}
-            </div>
-            {attributes?.auter_2_achternaam && (
+    <Link className="link-unstyled" to={`/teksten/${id}`}>
+      <tr>
+        {props.sortType === LemmaSortType.BY_GROUP && (
+          <>
+            <td>
+              {attributes?.niveau?.data?.attributes?.titel}
+            </td>
+            <td>
               <div>
-                {attributes?.auter_2_achternaam}
+                {attributes?.auter_achternaam}
               </div>
-            )}
-          </td>
-          <td>
-            <div>
-              {attributes?.auteur_voornaam}
-            </div>
-            {attributes?.auteur_2_voornaam && (
+              {attributes?.auter_2_achternaam && (
+                <div>
+                  {attributes?.auter_2_achternaam}
+                </div>
+              )}
+            </td>
+            <td>
               <div>
-                {attributes?.auteur_2_voornaam}
+                {attributes?.auteur_voornaam}
               </div>
-            )}
-          </td>
-        </>
-      )}
-      {props.sortType === LemmaSortType.BY_NAME && (
-        <>
-          <td>
-            <div>
-              {attributes?.auter_achternaam}
-            </div>
-            {attributes?.auter_2_achternaam && (
+              {attributes?.auteur_2_voornaam && (
+                <div>
+                  {attributes?.auteur_2_voornaam}
+                </div>
+              )}
+            </td>
+          </>
+        )}
+        {props.sortType === LemmaSortType.BY_NAME && (
+          <>
+            <td>
               <div>
-                {attributes?.auter_2_achternaam}
+                {attributes?.auter_achternaam}
               </div>
-            )}
-          </td>
-          <td>
-            <div>
-              {attributes?.auteur_voornaam}
-            </div>
-            {attributes?.auteur_2_voornaam && (
+              {attributes?.auter_2_achternaam && (
+                <div>
+                  {attributes?.auter_2_achternaam}
+                </div>
+              )}
+            </td>
+            <td>
               <div>
-                {attributes?.auteur_2_voornaam}
+                {attributes?.auteur_voornaam}
               </div>
-            )}
-          </td>
-          <td>
-            {attributes?.niveau?.data?.attributes?.titel}
-          </td>
-        </>
-      )}
-      <td>
-        <NavLink to={`/teksten/${id}`}>
-          {attributes?.titel}
-        </NavLink>
-      </td>
-    </tr>
+              {attributes?.auteur_2_voornaam && (
+                <div>
+                  {attributes?.auteur_2_voornaam}
+                </div>
+              )}
+            </td>
+            <td>
+              {attributes?.niveau?.data?.attributes?.titel}
+            </td>
+          </>
+        )}
+        <td>
+          <NavLink to={`/teksten/${id}`}>
+            {attributes?.titel}
+          </NavLink>
+        </td>
+      </tr>
+    </Link >
   )
 }

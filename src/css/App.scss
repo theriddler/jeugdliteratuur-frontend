@@ -280,3 +280,10 @@
     transition: all 0.2s;
   }
 }
+
+a.link-unstyled {
+  text-decoration: none !important; /* Removes underline */
+  color: inherit !important;       /* Takes the color of the parent text */
+  cursor: pointer !important;      /* Keeps the "hand" icon on hover */
+  display: contents !important;    /* Optional: Makes the link container "invisible" to layout */
+}

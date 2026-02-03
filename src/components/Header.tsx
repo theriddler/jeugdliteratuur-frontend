@@ -1,6 +1,6 @@
 import { IconMenu2, IconStar } from "@tabler/icons-react";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
 import { STERBOEKEN_SECONDARY } from "../App";
 import logo96 from '../assets/logo-96.png';
@@ -136,20 +136,20 @@ const Header = (props: {
 }
 
 const HeaderLogo = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className="app-header-brand" onClick={() => navigate('/')}>
-      <img
-        alt='logo'
-        src={logo96}
-        width={48}
-        height={48}
-      />
-      <div>
-        STERBOEKEN
+    <Link className="link-unstyled" to='/'>
+      <div className="app-header-brand">
+        <img
+          alt='logo'
+          src={logo96}
+          width={48}
+          height={48}
+        />
+        <div>
+          STERBOEKEN
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

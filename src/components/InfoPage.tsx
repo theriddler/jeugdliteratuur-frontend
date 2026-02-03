@@ -1,9 +1,8 @@
-import { BlocksRenderer } from "@strapi/blocks-react-renderer"
-import { Card, CardBody, Col, Row } from "reactstrap"
-import { FullPageSpinner } from "./FullPageSpinner"
-import { useCleanAnchorLinks } from "../useCleanAnchorLinks";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Card, CardBody, Col, Row } from "reactstrap";
+import { useCleanAnchorLinks } from "../useCleanAnchorLinks";
+import { FullPageSpinner } from "./FullPageSpinner";
 
 export const InfoPage = (props: {
   titel: string,
@@ -16,8 +15,7 @@ export const InfoPage = (props: {
 }) => {
 
   // clean anchor links when loading is done
-  const navigate = useNavigate();
-  const cleanAnchorLinks = useCleanAnchorLinks(navigate);
+  const cleanAnchorLinks = useCleanAnchorLinks();
   useEffect(cleanAnchorLinks, [ cleanAnchorLinks, props.loading ])
 
   if (props.loading) return <FullPageSpinner />

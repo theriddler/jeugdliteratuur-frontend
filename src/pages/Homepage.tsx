@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { IconStar } from "@tabler/icons-react";
 import { useMemo } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { Card, CardBody, Col, Row, Spinner } from "reactstrap";
 import { STERBOEKEN_PRIMARY, STERBOEKEN_SECONDARY } from "../App";
 import { FullPageSpinner } from "../components/FullPageSpinner";
@@ -74,7 +74,6 @@ const HomepageGroup = (props: {
   id: string | undefined | null;
   attributes: Niveau | undefined | null;
 }) => {
-  const navigate = useNavigate();
   const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
   const firstThreeLemmas = [ ...(data?.lemmata?.data ?? []) ]
@@ -82,7 +81,7 @@ const HomepageGroup = (props: {
     ?.slice(0, 3);
 
   return (
-    <div onClick={() => navigate(`/groep/${props.id}`)}>
+    <Link className="link-unstyled" to={`/groep/${props.id}`}>
       <Card className="card-hover">
         <CardBody className="mt-0">
           <div className="d-flex align-items-center gap-2 mb-3">
@@ -107,6 +106,6 @@ const HomepageGroup = (props: {
           </div>
         </CardBody>
       </Card>
-    </div>
+    </Link>
   )
 }

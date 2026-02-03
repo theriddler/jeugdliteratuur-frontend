@@ -3,28 +3,26 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { IconChevronDown, IconChevronUp, IconStar, IconTag } from "@tabler/icons-react";
 import { generateClient } from "aws-amplify/api";
 import { MouseEventHandler, useEffect, useState } from "react";
-import { Link, NavigateFunction } from "react-router";
+import { Link } from "react-router";
 import { Col, FormGroup, Input, Label, Row, Spinner } from "reactstrap";
 import { Schema } from "../../amplify/data/resource";
 import { STERBOEKEN_SECONDARY } from "../App";
 import arrow from '../assets/arrow.png';
 import { TagEntity, VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
+import { IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME, useCleanAnchorLinks } from "../useCleanAnchorLinks";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 import { FullPageSpinner } from "./FullPageSpinner";
-import { IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME, useCleanAnchorLinks } from "../useCleanAnchorLinks";
 
 const client = generateClient<Schema>();
-
 
 
 export const LemmaDocumentReact = (props: {
   lemma: LemmaQueryLemma | undefined,
   voorlezen: VoorlezenEntityResponse[ 'data' ],
-  navigate: NavigateFunction
 }) => {
   // clean anchor links whenever props.lemma is loaded
-  const cleanAnchorLinks = useCleanAnchorLinks(props.navigate);
+  const cleanAnchorLinks = useCleanAnchorLinks();
   useEffect(cleanAnchorLinks, [ cleanAnchorLinks, props.lemma ])
 
   // handle PDF download
@@ -213,7 +211,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>Tags</h5>
               {attributes?.tags?.data.map(t => (
-                <TagLink t={t} navigate={props.navigate} />
+                <TagLink t={t} />
               ))}
             </section>
           )}
@@ -222,7 +220,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>⁠Opstaptitels</h5>
               {attributes?.opstaptitels?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} type="Opstaptitels" />
+                <LemmaInternalLink l={l} type="Opstaptitels" />
               ))}
               {attributes?.opstaptitels_extern && (
                 <BlocksRenderer content={attributes?.opstaptitels_extern} />
@@ -233,7 +231,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>Parallel lezen</h5>
               {attributes?.parallel_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} type="ParallelLezen" />
+                <LemmaInternalLink l={l} type="ParallelLezen" />
               ))}
               {attributes?.parallel_lezen_extern && (
                 <BlocksRenderer content={attributes?.parallel_lezen_extern} />
@@ -244,7 +242,7 @@ export const LemmaDocumentReact = (props: {
             <section className="lemma-section-container green">
               <h5>Verder lezen</h5>
               {attributes?.verder_lezens?.data.map(l => (
-                <LemmaInternalLink l={l} navigate={props.navigate} type="VerderLezen" />
+                <LemmaInternalLink l={l} type="VerderLezen" />
               ))}
               {attributes?.verder_lezen_extern && (
                 <BlocksRenderer content={attributes?.verder_lezen_extern} />
@@ -283,7 +281,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>Tags</h5>
                 {attributes?.tags?.data.map(t => (
-                  <TagLink t={t} navigate={props.navigate} />
+                  <TagLink t={t} />
                 ))}
               </section>
             )}
@@ -291,7 +289,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} type="Opstaptitels" />
+                  <LemmaInternalLink l={l} type="Opstaptitels" />
                 ))}
                 {attributes?.opstaptitels_extern && (
                   <BlocksRenderer content={attributes?.opstaptitels_extern} />
@@ -302,7 +300,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} type="ParallelLezen" />
+                  <LemmaInternalLink l={l} type="ParallelLezen" />
                 ))}
                 {attributes?.parallel_lezen_extern && (
                   <BlocksRenderer content={attributes?.parallel_lezen_extern} />
@@ -313,7 +311,7 @@ export const LemmaDocumentReact = (props: {
               <section className="lemma-section-container green">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
-                  <LemmaInternalLink l={l} navigate={props.navigate} type="VerderLezen" />
+                  <LemmaInternalLink l={l} type="VerderLezen" />
                 ))}
                 {attributes?.verder_lezen_extern && (
                   <BlocksRenderer content={attributes?.verder_lezen_extern} />
@@ -347,7 +345,6 @@ export const LemmaDocumentReact = (props: {
 
 const LemmaInternalLink = (props: {
   l: LemmaQueryLemma,
-  navigate: NavigateFunction,
   type: 'Opstaptitels' | 'ParallelLezen' | 'VerderLezen'
 }) => {
   if (!props.l) return;
@@ -356,50 +353,50 @@ const LemmaInternalLink = (props: {
   const onClick = () => {
     // keep track that an internal link was clicked
     (window as any).plausible('DoorverwijzingAndereTitel', { props: { 'DoorverwijzingAndereTitel': props.type } })
-
-    // navigate to lemma
-    props.navigate(`/teksten/${id}`)
   }
 
   return (
-    <div className={"lemma-internal-link d-flex gap-3 my-3"} onClick={onClick}>
-      <div>
-        <div className="image-wrapper xs fixed">
-          <img
-            className="hide-in-pdf ignore-default-lemma-section-container-format"
-            src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes, 'thumbnail')}
-          />
-        </div>
-      </div>
-      <div className="d-flex flex-column justify-content-center gap-1">
-        <div className="text-secondary">{attributes?.auteur_voornaam} {attributes?.auter_achternaam} </div>
-        {attributes?.auteur_2_voornaam && (
-          <div className="text-secondary">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam} </div>
-        )}
+    <Link className="link-unstyled" to={`/teksten/${id}`}>
+      <div className={"lemma-internal-link d-flex gap-3 my-3"} onClick={onClick}>
         <div>
-          {attributes?.titel}
+          <div className="image-wrapper xs fixed">
+            <img
+              className="hide-in-pdf ignore-default-lemma-section-container-format"
+              src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes, 'thumbnail')}
+            />
+          </div>
+        </div>
+        <div className="d-flex flex-column justify-content-center gap-1">
+          <div className="text-secondary">{attributes?.auteur_voornaam} {attributes?.auter_achternaam} </div>
+          {attributes?.auteur_2_voornaam && (
+            <div className="text-secondary">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam} </div>
+          )}
+          <div>
+            {attributes?.titel}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
 const TagLink = (props: {
   t: Partial<TagEntity>,
-  navigate: NavigateFunction
 }) => {
   if (!props.t) return;
   const { id, attributes } = props.t;
 
   return (
-    <div className="lemma-internal-link w-100 d-flex align-items-center gap-3 my-2" onClick={() => props.navigate(`/tag/${id}`)}>
-      <div>
-        <IconTag />
+    <Link className="link-unstyled" to={`/tag/${id}`}>
+      <div className="lemma-internal-link w-100 d-flex align-items-center gap-3 my-2">
+        <div>
+          <IconTag />
+        </div>
+        <div>
+          {attributes?.titel}
+        </div>
       </div>
-      <div>
-        {attributes?.titel}
-      </div>
-    </div>
+    </Link>
   )
 }
 
