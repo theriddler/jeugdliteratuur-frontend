@@ -6,6 +6,7 @@ import { FullPageSpinner } from "./FullPageSpinner";
 
 export const InfoPage = (props: {
   titel: string,
+  titleRightElement?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tekst: any,
   fotoUrl: string | undefined,
@@ -24,9 +25,16 @@ export const InfoPage = (props: {
     <>
       <Row>
         <Col xs={12} lg={props.fotoReplacementTitle ? 8 : 12}>
-          <h4 className="mb-3">
-            {props.titel}
-          </h4>
+          <div className="my-1 d-flex align-items-center justify-content-between">
+            <h4 className="mb-0">
+              {props.titel}
+            </h4>
+            {props.titleRightElement && (
+              <div>
+                {props.titleRightElement}
+              </div>
+            )}
+          </div>
         </Col>
         {props.fotoReplacementTitle && (
           <Col xs={12} lg={4}>

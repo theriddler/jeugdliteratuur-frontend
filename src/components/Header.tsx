@@ -4,8 +4,6 @@ import { Link, NavLink } from "react-router";
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledDropdown } from 'reactstrap';
 import { STERBOEKEN_SECONDARY } from "../App";
 import logo96 from '../assets/logo-96.png';
-import partner_logo_1 from '../assets/partner_logo_1.jpg';
-import partner_logo_2 from '../assets/partner_logo_2.png';
 import { Searchbar } from "./Searchbar";
 
 const Header = (props: {
@@ -52,20 +50,10 @@ const Header = (props: {
           <HeaderLogo />
         </Col>
         <Col xs={4} className="mb-0 mt-1 d-flex flex-column justify-content-between gap-3">
-          <div className="ps-4 d-flex justify-content-end gap-3">
+          <div className="ps-4 pe-3 d-flex justify-content-end gap-3">
             <div>
               <Searchbar placeholder="Zoek een lemma of tag" closeMobileNav={() => setMobileNavIsOpen(false)} />
             </div>
-            <a target="_blank" href="https://www.kb.nl/">
-              <div className="image-wrapper partner-logo">
-                <img src={partner_logo_2} />
-              </div>
-            </a>
-            <a target="_blank" href="https://www.lezen.nl/">
-              <div className="image-wrapper partner-logo">
-                <img src={partner_logo_1} />
-              </div>
-            </a>
           </div>
           <div className="d-flex justify-content-end gap-1">
             <div className="app-header-link-container">
