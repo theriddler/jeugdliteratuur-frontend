@@ -70,15 +70,22 @@ const HomepageGroupList = () => {
   )
 }
 
+// Visible count: xl = 3, lg = 2, below lg = 6
+const getResponsiveVisibilityClass = (index: number) => {
+  if (index < 2) return '';
+  if (index === 2) return 'd-lg-none d-xl-block';
+  return 'd-lg-none';
+}
+
 const HomepageGroup = (props: {
   id: string | undefined | null;
   attributes: Niveau | undefined | null;
 }) => {
   const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
-  const firstThreeLemmas = [ ...(data?.lemmata?.data ?? []) ]
+  const firstLemmas = [ ...(data?.lemmata?.data ?? []) ]
     ?.sort(() => Math.random() > 0.5 ? 1 : -1)
-    ?.slice(0, 3);
+    ?.slice(0, 6);
 
   return (
     <Link className="link-unstyled" to={`/groep/${props.id}`}>
@@ -91,13 +98,15 @@ const HomepageGroup = (props: {
             </div>
           </div>
           <div className="d-flex gap-2 justify-content-center">
-            {loading && [ 1, 2, 3 ].map(() => (
+            {loading && [ 0, 1, 2, 3, 4, 5 ].map(i => (
+              <div key={i} className={getResponsiveVisibilityClass(i)}>
               <div className="image-wrapper level-group d-flex flex-1 h-100 w-100 align-items-center justify-content-center border-1">
                 <IconStar color={STERBOEKEN_SECONDARY} />
+                </div>
               </div>
             ))}
-            {firstThreeLemmas?.map(l => (
-              <div>
+            {firstLemmas?.map((l, i) => (
+              <div key={l.id} className={getResponsiveVisibilityClass(i)}>
                 <div className="image-wrapper level-group">
                   <img src={getOptimizedPhotoUrlFromPhotoEntry(l.attributes?.afbeelding?.data?.attributes)} />
                 </div>
