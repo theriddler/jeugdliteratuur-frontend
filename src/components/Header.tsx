@@ -27,19 +27,19 @@ const Header = (props: {
             <UncontrolledDropdown>
               <DropdownToggle className="app-nav-link">Gebruik</DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>
+                <DropdownItem tag="div">
                   <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem tag="div">
                   <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem tag="div">
                   <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem tag="div">
                   <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem tag="div">
                   <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
                 </DropdownItem>
               </DropdownMenu>
@@ -89,19 +89,19 @@ const Header = (props: {
               <UncontrolledDropdown>
                 <DropdownToggle className="app-nav-link w-100 text-start">Gebruik</DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={toggleMobileNav}>
+                  <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/gebruik-van-de-lijst" className="app-nav-link">Gebruik van de lijst</NavLink>
                   </DropdownItem>
-                  <DropdownItem onClick={toggleMobileNav}>
+                  <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
                   </DropdownItem>
-                  <DropdownItem onClick={toggleMobileNav}>
+                  <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
                   </DropdownItem>
-                  <DropdownItem onClick={toggleMobileNav}>
+                  <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
                   </DropdownItem>
-                  <DropdownItem onClick={toggleMobileNav}>
+                  <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/alle-tags" className="app-nav-link">Alle tags</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
