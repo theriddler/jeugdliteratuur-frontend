@@ -22,6 +22,34 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export type Agenda = {
+  __typename?: 'Agenda';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  foto?: Maybe<UploadFileEntityResponse>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  tekstVoorDeHomepage?: Maybe<Scalars['JSON']['output']>;
+  tekstVoorDePagina?: Maybe<Scalars['JSON']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AgendaEntity = {
+  __typename?: 'AgendaEntity';
+  attributes?: Maybe<Agenda>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type AgendaEntityResponse = {
+  __typename?: 'AgendaEntityResponse';
+  data?: Maybe<AgendaEntity>;
+};
+
+export type AgendaInput = {
+  foto?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  tekstVoorDeHomepage?: InputMaybe<Scalars['JSON']['input']>;
+  tekstVoorDePagina?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
@@ -181,7 +209,7 @@ export type GebruikVanDeLijstInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-export type GenericMorph = Colofon | DidachiteTips | GebruikVanDeLijst | I18NLocale | Inleiding | Lemma | Niveau | OverHetProject | Samenwerken | Selectiecriteria | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Voorlezen;
+export type GenericMorph = Agenda | Colofon | DidachiteTips | GebruikVanDeLijst | I18NLocale | Inleiding | Lemma | Niveau | OverHetProject | Samenwerken | Selectiecriteria | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Voorlezen;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -488,6 +516,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteAgenda?: Maybe<AgendaEntityResponse>;
   deleteColofon?: Maybe<ColofonEntityResponse>;
   deleteDidachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   deleteGebruikVanDeLijst?: Maybe<GebruikVanDeLijstEntityResponse>;
@@ -516,6 +545,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAgenda?: Maybe<AgendaEntityResponse>;
   updateColofon?: Maybe<ColofonEntityResponse>;
   updateDidachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
@@ -652,6 +682,11 @@ export type MutationResetPasswordArgs = {
   code: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateAgendaArgs = {
+  data: AgendaInput;
 };
 
 
@@ -854,6 +889,7 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query';
+  agenda?: Maybe<AgendaEntityResponse>;
   colofon?: Maybe<ColofonEntityResponse>;
   didachiteTips?: Maybe<DidachiteTipsEntityResponse>;
   gebruikVanDeLijst?: Maybe<GebruikVanDeLijstEntityResponse>;
@@ -879,6 +915,11 @@ export type Query = {
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
   voorlezen?: Maybe<VoorlezenEntityResponse>;
+};
+
+
+export type QueryAgendaArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
@@ -1630,6 +1671,11 @@ export type VoorlezenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type VoorlezenQuery = { __typename?: 'Query', voorlezen?: { __typename?: 'VoorlezenEntityResponse', data?: { __typename?: 'VoorlezenEntity', id?: string | null, attributes?: { __typename?: 'Voorlezen', tekst?: any | null } | null } | null } | null };
 
+export type AgendaQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AgendaQuery = { __typename?: 'Query', agenda?: { __typename?: 'AgendaEntityResponse', data?: { __typename?: 'AgendaEntity', id?: string | null, attributes?: { __typename?: 'Agenda', tekstVoorDeHomepage?: any | null, tekstVoorDePagina?: any | null, foto?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', formats?: any | null, url: string } | null } | null } | null } | null } | null } | null };
+
 export type DidachiteTipsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1654,5 +1700,6 @@ export const SamenwerkenDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const ColofonDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colofon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ColofonQuery, ColofonQueryVariables>;
 export const GebruikVanDeLijstDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gebruikVanDeLijst"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GebruikVanDeLijstQuery, GebruikVanDeLijstQueryVariables>;
 export const VoorlezenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Voorlezen"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voorlezen"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}}]}}]}}]}}]}}]} as unknown as DocumentNode<VoorlezenQuery, VoorlezenQueryVariables>;
+export const AgendaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Agenda"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"agenda"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekstVoorDeHomepage"}},{"kind":"Field","name":{"kind":"Name","value":"tekstVoorDePagina"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<AgendaQuery, AgendaQueryVariables>;
 export const DidachiteTipsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DidachiteTips"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"didachiteTips"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DidachiteTipsQuery, DidachiteTipsQueryVariables>;
 export const SelectiecriteriaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Selectiecriteria"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"selectiecriteria"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tekst"}},{"kind":"Field","name":{"kind":"Name","value":"foto"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"formats"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SelectiecriteriaQuery, SelectiecriteriaQueryVariables>;

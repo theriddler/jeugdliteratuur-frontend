@@ -420,6 +420,29 @@ export const VOORLEZEN = graphql(`
   }
 `)
 
+export const AGENDA = graphql(`
+  query Agenda {
+    agenda {
+      data{
+        id
+        attributes{
+          tekstVoorDeHomepage
+          tekstVoorDePagina
+          foto {
+            data{
+              id
+              attributes{
+                formats
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`)
+
 export const DIDACTISCHE_TIPS = graphql(`
   query DidachiteTips {
     didachiteTips {
