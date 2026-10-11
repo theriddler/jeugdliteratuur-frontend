@@ -44,7 +44,7 @@ export const LemmaTable = (props: {
         </tr>
       </thead>
       <tbody>
-        {sortedLemmas?.map(l => <LemmaTableRow l={l} sortType={props.sortType} />)}
+        {sortedLemmas?.map(l => <LemmaTableRow key={l.id} l={l} sortType={props.sortType} />)}
       </tbody>
     </table>
   )

@@ -9,11 +9,18 @@
 .searchbar-input{
   font-size: 11px !important;
   margin-right: 16px !important; // account for font clipping in chrome
+
+  &:focus{
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(226, 169, 58, 0.35);
+  }
 }
 
 .searchbar-dropdown {
   position: absolute;
   border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lift);
   z-index: 100;
   max-height: 250px;
   overflow: scroll;
@@ -39,5 +46,14 @@
   background-color: white;
   &:hover{
     background-color: var(--secondary-color);
+
+    .searchbar-tag-icon{
+      color: white;
+    }
   }
+}
+
+.searchbar-tag-icon{
+  color: var(--secondary-color);
+  transition: color 0.3s;
 }

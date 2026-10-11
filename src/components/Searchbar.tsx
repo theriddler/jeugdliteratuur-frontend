@@ -3,7 +3,6 @@ import { IconTag } from "@tabler/icons-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import { Input, Spinner } from "reactstrap";
-import { STERBOEKEN_SECONDARY } from "../App";
 import { LEMMATA_FOR_SEARCHBAR, LemmataForSearchbarQueryLemma, TAGS_FOR_SEARCHBAR, TagsForSearchbarQueryTag } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
@@ -184,7 +183,7 @@ const SearchbarTagSuggestion = (props: {
     <Link className="link-unstyled" to={`/tag/${props.t.id}`}>
       <div className="searchbar-lemma-suggestion" onClick={onClick}>
         <div className="d-flex align-items-center justify-content-center">
-          <IconTag color={STERBOEKEN_SECONDARY} />
+          <IconTag className="searchbar-tag-icon" />
         </div>
         <div>
           {props.t.attributes?.titel}

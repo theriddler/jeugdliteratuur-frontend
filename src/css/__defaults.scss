@@ -17,6 +17,8 @@ $dark: #2C2C2C;
   --sidebar-width: 180px;
   --bs-link-color-rgb: #5A847B;
   --border-radius: 8px;
+  --shadow-soft: 0 2px 8px rgba(94, 39, 80, 0.08);
+  --shadow-lift: 0 6px 16px rgba(94, 39, 80, 0.16);
 }
 
 body {
@@ -109,6 +111,12 @@ table{
     // border-bottom: 1px solid var(--secondary-color);
     background-color: white;
     transition: 0.2s all;
+  }
+
+  // LemmaTable wraps each <tr> in an <a>, so rows are never siblings.
+  // :where() keeps specificity low so the row hover below still wins.
+  :where(tr:nth-child(even), a:nth-child(even) > tr) td{
+    background-color: #FFF8EA;
   }
 
   tr:hover{
