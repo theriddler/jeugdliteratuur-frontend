@@ -14,14 +14,14 @@ export const Colofon = () => {
       titel="Colofon"
       titleRightElement={
         <div className="d-flex gap-3 align-items-center">
-          <a target="_blank" href="https://www.kb.nl/">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.kb.nl/">
             <div className="image-wrapper partner-logo">
-              <img src={partner_logo_2} />
+              <img src={partner_logo_2} alt="Koninklijke Bibliotheek" />
             </div>
           </a>
-          <a target="_blank" href="https://www.lezen.nl/">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.lezen.nl/">
             <div className="image-wrapper partner-logo">
-              <img src={partner_logo_1} />
+              <img src={partner_logo_1} alt="Stichting Lezen" />
             </div>
           </a>
         </div>

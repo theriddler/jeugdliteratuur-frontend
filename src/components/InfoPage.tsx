@@ -62,7 +62,7 @@ export const InfoPage = (props: {
         {props.fotoUrl && (
           <Col xs={12} lg={4}>
             <div className="image-wrapper info-page">
-              <img src={props.fotoUrl} />
+              <img src={props.fotoUrl} alt="" />
             </div>
           </Col>
         )}

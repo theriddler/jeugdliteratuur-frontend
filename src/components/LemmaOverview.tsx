@@ -44,7 +44,7 @@ export const LemmaOverview = (props: {
             </div>
             <div className="d-flex justify-content-center">
               <div className="image-wrapper lemma-overview">
-                <img src={imageUrl} />
+                <img src={imageUrl} alt={attributes?.titel ?? ''} />
               </div>
             </div>
             <div>

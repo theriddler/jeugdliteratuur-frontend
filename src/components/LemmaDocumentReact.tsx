@@ -118,7 +118,7 @@ export const LemmaDocumentReact = (props: {
               <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
                 <div>Dit boek lenen?</div>
                 <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
-                  <img src={arrow} width={42} height={42} className="hide-in-pdf ignore-default-lemma-section-container-format" />
+                  <img src={arrow} alt="" width={42} height={42} className="hide-in-pdf ignore-default-lemma-section-container-format" />
                 </div>
               </div>
               <a

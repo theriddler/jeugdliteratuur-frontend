@@ -118,7 +118,7 @@ const SearchbarLemmaSuggestion = (props: {
     <Link className="link-unstyled" to={`/teksten/${props.l.id}`}>
       <div className="searchbar-lemma-suggestion" onClick={onClick}>
         <div className="image-wrapper fixed xs">
-          <img src={getOptimizedPhotoUrlFromPhotoEntry(props.l.attributes?.afbeelding?.data?.attributes)} />
+          <img src={getOptimizedPhotoUrlFromPhotoEntry(props.l.attributes?.afbeelding?.data?.attributes)} alt="" />
         </div>
         <div>
           <div className="text-secondary">
