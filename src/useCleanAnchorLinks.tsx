@@ -26,6 +26,7 @@ export const useCleanAnchorLinks = () => {
       const sterboekenUrlString = 'https://www.sterboeken.org'
       if (link.href.includes(sterboekenUrlString)) {
         link.onclick = (e) => {
+          if (e.ctrlKey || e.metaKey) return; // let the browser open it in a new tab (target=_blank)
           e.preventDefault(); // ignore opening with <a>
           navigate(link.href.replace(sterboekenUrlString, '')) // convert to a react navigate
         }
