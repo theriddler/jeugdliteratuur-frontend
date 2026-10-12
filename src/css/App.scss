@@ -78,10 +78,19 @@
   .row{
     margin: 0;
   }
+
+  // Layout: spacing between stacked cards
+  .lemma-card{
+    margin: 16px 0;
+  }
+  // Top-level cards sit outside any Col, so inset them by the Col gutter to align with cards inside Cols
+  > .lemma-card{
+    margin-inline: calc(var(--bs-gutter-x, 1.5rem) * .5);
+  }
 }
 
-.lemma-section-container{
-  margin: 16px 0 !important;
+// Visuals: bordered card
+.lemma-card{
   padding: 16px;
   border-radius: var(--border-radius);
   background-color: white;
@@ -91,7 +100,7 @@
   &.green{ border-color: var(--success-color);}
   &.gray{ border-color: lightgray;}
 
-  img:not(.ignore-default-lemma-section-container-format){
+  img:not(.ignore-default-lemma-card-format){
     width: 80%;
     height: 80%;
     margin-left: 10%;

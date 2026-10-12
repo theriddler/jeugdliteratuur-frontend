@@ -70,136 +70,140 @@ export const LemmaDocumentReact = (props: {
   return (
     <div id='lemma-container' className="lemma-container">
       {isDownloading && <FullPageSpinner />}
-      <Row className="align-items-center lemma-section-container">
-        <Col xs={12} lg={8} className="mb-0">
-          <div className="only-show-in-pdf pdf-header">
-            <h3>STERBOEKEN</h3>
-            <div>sterboeken.org</div>
-          </div>
-          <hr className="only-show-in-pdf my-3" />
-          <div className="d-flex gap-2">
-            <IconStar className="align-self-start" color={STERBOEKEN_SECONDARY} />
-            <div>
-              <h3 className="d-inline">{attributes?.titel} ({attributes?.jaar})</h3>
+      <div className="lemma-card">
+        <Row className="align-items-center">
+          <Col xs={12} lg={8} className="mb-0">
+            <div className="only-show-in-pdf pdf-header">
+              <h3>STERBOEKEN</h3>
+              <div>sterboeken.org</div>
             </div>
-          </div>
-          <div className="d-flex gap-2 mt-2">
-            <IconStar className="align-self-start" color='transparent' />
-            <div className="text-secondary text-nowrap">
-              <div className="fs-6">{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
-              {attributes?.auteur_2_voornaam && (
-                <div className="fs-6">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
-              )}
-              {attributes?.vertaald_door_voornaam && (
-                <div className="fw-lightest">
-                  <em>
-                    Vertaald door {attributes.vertaald_door_voornaam} {attributes.vertaald_door_achternaam}
-                  </em>
-                </div>
-              )}
+            <hr className="only-show-in-pdf my-3" />
+            <div className="d-flex gap-2">
+              <IconStar className="align-self-start" color={STERBOEKEN_SECONDARY} />
+              <div>
+                <h3 className="d-inline">{attributes?.titel} ({attributes?.jaar})</h3>
+              </div>
             </div>
-          </div>
-        </Col>
+            <div className="d-flex gap-2 mt-2">
+              <IconStar className="align-self-start" color='transparent' />
+              <div className="text-secondary text-nowrap">
+                <div className="fs-6">{attributes?.auteur_voornaam} {attributes?.auter_achternaam}</div>
+                {attributes?.auteur_2_voornaam && (
+                  <div className="fs-6">{attributes?.auteur_2_voornaam} {attributes?.auter_2_achternaam}</div>
+                )}
+                {attributes?.vertaald_door_voornaam && (
+                  <div className="fw-lightest">
+                    <em>
+                      Vertaald door {attributes.vertaald_door_voornaam} {attributes.vertaald_door_achternaam}
+                    </em>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Col>
 
-        {/* Only show on Mobile + PDF */}
-        <Col xs={12} lg={4} className="d-block d-lg-none pt-4 py-lg-0">
-          <div className="d-flex justify-content-center">
-            <div className="image-wrapper lemma-header">
-              <img
-                className="hide-in-pdf ignore-default-lemma-section-container-format"
-                src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
-              />
+          {/* Only show on Mobile + PDF */}
+          <Col xs={12} lg={4} className="d-block d-lg-none pt-4 py-lg-0">
+            <div className="d-flex justify-content-center">
+              <div className="image-wrapper lemma-header">
+                <img
+                  className="hide-in-pdf ignore-default-lemma-card-format"
+                  src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
+                />
+              </div>
             </div>
-          </div>
-        </Col>
-        <Col xs={12} lg={4} className="mb-0">
-          <div className="hide-in-pdf">
-            <div className="d-flex justify-content-center align-items-center gap-2">
-              <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
-                <div>Dit boek lenen?</div>
-                <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
-                  <img src={arrow} alt="" width={42} height={42} className="hide-in-pdf ignore-default-lemma-section-container-format" />
+          </Col>
+          <Col xs={12} lg={4} className="mb-0">
+            <div className="hide-in-pdf">
+              <div className="d-flex justify-content-center align-items-center gap-2">
+                <div className="align-self-start text-nowrap hide-in-pdf" style={{ fontSize: '11px' }}>
+                  <div>Dit boek lenen?</div>
+                  <div className="d-flex justify-content-end hide-in-pdf" style={{ transform: 'rotateX(180deg)' }}>
+                    <img src={arrow} alt="" width={42} height={42} className="hide-in-pdf ignore-default-lemma-card-format" />
+                  </div>
+                </div>
+                <a
+                  className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf"
+                  href={attributes?.link_naar_jeugdbibliotheek ?? "https://www.jeugdbibliotheek.nl/"}
+                  target="_blank"
+                >
+                  Naar de Jeugdbibliotheek
+                </a>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      <div className="lemma-card">
+        <Row>
+          <Col xs={12} lg={8}>
+            <section>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <h5>In het kort</h5>
+                </div>
+                <div>
+                  <div className=" hide-in-pdf">
+                    <span
+                      className="pretty-button text-nowrap"
+                      onClick={handlePDFDownload}
+                    >
+                      Download PDF
+                    </span>
+                  </div>
                 </div>
               </div>
-              <a
-                className="text-nowrap mt-2 align-self-end pretty-button library-orange hide-in-pdf"
-                href={attributes?.link_naar_jeugdbibliotheek ?? "https://www.jeugdbibliotheek.nl/"}
-                target="_blank"
-              >
-                Naar de Jeugdbibliotheek
-              </a>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <Row className="lemma-section-container mt-3">
-        <Col xs={12} lg={8}>
-          <section>
-            <div className="d-flex justify-content-between">
-              <div>
-                <h5>In het kort</h5>
+              {attributes?.de_kern && (
+                <BlocksRenderer content={attributes?.de_kern} />
+              )}
+              <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
+                <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#het-verhaal">
+                  Het verhaal
+                </a>
+                <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#analyse">
+                  Analyse en interpretatie
+                </a>
+                <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#didactische">
+                  Didactische vragen en lessuggesties
+                </a>
               </div>
-              <div>
-                <div className=" hide-in-pdf">
-                  <span
-                    className="pretty-button text-nowrap"
-                    onClick={handlePDFDownload}
-                  >
-                    Download PDF
-                  </span>
-                </div>
+            </section>
+          </Col>
+          {/* Only show on Desktop */}
+          <Col xs={12} lg={4} className="d-none d-lg-block">
+            <div className="h-100 d-flex justify-content-center align-items-center">
+              <div className="image-wrapper lemma-header">
+                <img
+                  className="hide-in-pdf ignore-default-lemma-card-format"
+                  src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
+                />
               </div>
             </div>
-            {attributes?.de_kern && (
-              <BlocksRenderer content={attributes?.de_kern} />
-            )}
-            <div className="mt-3 gap-3 d-flex justify-content-start align-items-center">
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#het-verhaal">
-                Het verhaal
-              </a>
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#analyse">
-                Analyse en interpretatie
-              </a>
-              <a className={`hide-in-pdf pretty-button text-nowrap ${IGNORE_ANCHOR_LINK_SENTRY_CLASSNAME}`} href="#didactische">
-                Didactische vragen en lessuggesties
-              </a>
-            </div>
-          </section>
-        </Col>
-        {/* Only show on Desktop */}
-        <Col xs={12} lg={4} className="d-none d-lg-block">
-          <div className="h-100 d-flex justify-content-center align-items-center">
-            <div className="image-wrapper lemma-header">
-              <img
-                className="hide-in-pdf ignore-default-lemma-section-container-format"
-                src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes)}
-              />
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <Row className="mt-3">
+          </Col>
+        </Row>
+      </div>
+      <Row>
         <Col xs={12} lg={8}>
           {attributes?.doelgroep && (
-            <section className="lemma-section-container">
+            <section className="lemma-card">
               <h5>Doelgroep</h5>
               <BlocksRenderer content={attributes?.doelgroep} />
             </section>
           )}
           {attributes?.motieven && (
-            <section className="lemma-section-container">
+            <section className="lemma-card">
               <h5>Motieven</h5>
               <BlocksRenderer content={attributes?.motieven} />
             </section>
           )}
           {attributes?.het_verhaal && (
-            <section id="het-verhaal" className="lemma-section-container">
+            <section id="het-verhaal" className="lemma-card">
               <h5>Het verhaal</h5>
               <BlocksRenderer content={attributes?.het_verhaal} />
             </section>
           )}
           {attributes?.analyse && (
-            <section id="analyse" className="lemma-section-container">
+            <section id="analyse" className="lemma-card">
               <h5>Analyse en interpretatie</h5>
               <BlocksRenderer content={attributes?.analyse} />
             </section>
@@ -208,7 +212,7 @@ export const LemmaDocumentReact = (props: {
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {(attributes?.tags?.data?.length ?? 0) > 0 && (
-            <section className="lemma-section-container green">
+            <section className="lemma-card green">
               <h5>Tags</h5>
               {attributes?.tags?.data.map(t => (
                 <TagLink t={t} />
@@ -217,7 +221,7 @@ export const LemmaDocumentReact = (props: {
           )}
 
           {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-            <section className="lemma-section-container green">
+            <section className="lemma-card green">
               <h5>⁠Opstaptitels</h5>
               {attributes?.opstaptitels?.data.map(l => (
                 <LemmaInternalLink l={l} type="Opstaptitels" />
@@ -228,7 +232,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
-            <section className="lemma-section-container green">
+            <section className="lemma-card green">
               <h5>Parallel lezen</h5>
               {attributes?.parallel_lezens?.data.map(l => (
                 <LemmaInternalLink l={l} type="ParallelLezen" />
@@ -239,7 +243,7 @@ export const LemmaDocumentReact = (props: {
             </section>
           )}
           {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
-            <section className="lemma-section-container green">
+            <section className="lemma-card green">
               <h5>Verder lezen</h5>
               {attributes?.verder_lezens?.data.map(l => (
                 <LemmaInternalLink l={l} type="VerderLezen" />
@@ -257,20 +261,20 @@ export const LemmaDocumentReact = (props: {
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
             {voorlezen && (
-              <section className="lemma-section-container green">
+              <section className="lemma-card green">
                 <h5>Voorlezen</h5>
                 <BlocksRenderer content={voorlezen?.tekst} />
               </section>
             )}
           </div>
           {attributes?.lessuggesties && (
-            <section id="didactische" className="lemma-section-container">
+            <section id="didactische" className="lemma-card">
               <h5>Didactische vragen en lessuggesties</h5>
               <BlocksRenderer content={attributes?.lessuggesties} />
             </section>
           )}
           {attributes?.kerndoelen && (
-            <section className="lemma-section-container gray">
+            <section className="lemma-card gray">
               <h5>Kerndoelen Nederlands</h5>
               <BlocksRenderer content={attributes?.kerndoelen} />
             </section>
@@ -278,7 +282,7 @@ export const LemmaDocumentReact = (props: {
           {/* Only show in Mobile + PDF */}
           <div className="d-block d-lg-none">
             {(attributes?.tags?.data?.length ?? 0) > 0 && (
-              <section className="lemma-section-container green">
+              <section className="lemma-card green">
                 <h5>Tags</h5>
                 {attributes?.tags?.data.map(t => (
                   <TagLink t={t} />
@@ -286,7 +290,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.opstaptitels?.data?.length ?? 0) > 0 || attributes?.opstaptitels_extern) && (
-              <section className="lemma-section-container green">
+              <section className="lemma-card green">
                 <h5>⁠Opstaptitels</h5>
                 {attributes?.opstaptitels?.data.map(l => (
                   <LemmaInternalLink l={l} type="Opstaptitels" />
@@ -297,7 +301,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.parallel_lezens?.data?.length ?? 0) > 0 || attributes?.parallel_lezen_extern) && (
-              <section className="lemma-section-container green">
+              <section className="lemma-card green">
                 <h5>Parallel lezen</h5>
                 {attributes?.parallel_lezens?.data.map(l => (
                   <LemmaInternalLink l={l} type="ParallelLezen" />
@@ -308,7 +312,7 @@ export const LemmaDocumentReact = (props: {
               </section>
             )}
             {((attributes?.verder_lezens?.data?.length ?? 0) > 0 || attributes?.verder_lezen_extern) && (
-              <section className="lemma-section-container green">
+              <section className="lemma-card green">
                 <h5>Verder lezen</h5>
                 {attributes?.verder_lezens?.data.map(l => (
                   <LemmaInternalLink l={l} type="VerderLezen" />
@@ -321,7 +325,7 @@ export const LemmaDocumentReact = (props: {
             <LemmaFeedbackForm lemma={props.lemma} />
           </div>
           {attributes?.bronnen && (
-            <section className="lemma-section-container gray">
+            <section className="lemma-card gray">
               <h5>Vindplaatsen en bronnen</h5>
               {attributes?.bronnen && (
                 <BlocksRenderer content={attributes?.bronnen} />
@@ -332,7 +336,7 @@ export const LemmaDocumentReact = (props: {
         {/* Only show in Desktop */}
         <Col xs={12} lg={4} className="hide-in-pdf d-none d-lg-block">
           {voorlezen && (
-            <section className="lemma-section-container green">
+            <section className="lemma-card green">
               <h5>Voorlezen</h5>
               <BlocksRenderer content={voorlezen?.tekst} />
             </section>
@@ -361,7 +365,7 @@ const LemmaInternalLink = (props: {
         <div>
           <div className="image-wrapper xs fixed">
             <img
-              className="hide-in-pdf ignore-default-lemma-section-container-format"
+              className="hide-in-pdf ignore-default-lemma-card-format"
               src={getOptimizedPhotoUrlFromPhotoEntry(attributes?.afbeelding?.data?.attributes, 'thumbnail')}
             />
           </div>
@@ -447,7 +451,7 @@ const LemmaFeedbackForm = (props: {
   }
 
   return (
-    <section className="lemma-section-container green">
+    <section className="hide-in-pdf  lemma-card green">
       <div className="d-flex align-items-center gap-2" onClick={toggleIsOpen}>
         <h5 className="clickable">
           Heb je een suggestie?
