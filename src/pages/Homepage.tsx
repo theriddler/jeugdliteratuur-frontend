@@ -32,12 +32,12 @@ export const Homepage = () => {
           <div className="app-hero">
             <Row>
               <Col xs={12} lg={7}>
-          {tekst && (
-            <BlocksRenderer content={tekst} />
-          )}
-          <div className="mt-3 d-flex gap-3 justify-content-end">
-            <Link className="pretty-button" to='/over-het-project'>Over het project</Link>
-          </div>
+                {tekst && (
+                  <BlocksRenderer content={tekst} />
+                )}
+                <div className="mt-3 d-flex gap-3 justify-content-end">
+                  <Link className="pretty-button" to='/over-het-project'>Over het project</Link>
+                </div>
               </Col>
               <Col xs={12} lg={5} className="py-3 py-lg-0">
                 <div className="image-wrapper hero-img">
@@ -82,12 +82,18 @@ const HomepageGroupList = () => {
   )
 }
 
-// Visible count: xl = 3, lg = 2, below lg = 6
-const getResponsiveVisibilityClass = (index: number) => {
-  if (index < 2) return '';
-  if (index === 2) return 'd-lg-none d-xl-block';
-  return 'd-lg-none';
-}
+// Visible count: lg = 2, xl = 3, sm and below = 4, md = 6,
+const VISIBILITY_CLASSES = [
+  '',
+  '',
+  'd-lg-none d-xl-block',
+  'd-block d-lg-none',
+  'd-none d-md-block d-lg-none',
+  'd-none d-md-block d-lg-none',
+];
+
+const getResponsiveVisibilityClass = (index: number) =>
+  VISIBILITY_CLASSES[ index ] ?? '';
 
 const HomepageGroup = (props: {
   id: string | undefined | null;
@@ -95,9 +101,9 @@ const HomepageGroup = (props: {
 }) => {
   const { data, loading } = useQuery(LEMMATA_PICTURES_BY_GROEP, { variables: { niveauId: props.id ?? '' } });
 
-  const firstLemmas = [ ...(data?.lemmata?.data ?? []) ]
-    ?.sort(() => Math.random() > 0.5 ? 1 : -1)
-    ?.slice(0, 6);
+  const firstLemmas = useMemo(() => [ ...(data?.lemmata?.data ?? []) ]
+    .sort(() => Math.random() > 0.5 ? 1 : -1)
+    .slice(0, 6), [ data?.lemmata?.data ]);
 
   return (
     <Link className="link-unstyled" to={`/groep/${props.id}`}>
@@ -112,15 +118,15 @@ const HomepageGroup = (props: {
           <div className="d-flex gap-2 justify-content-center">
             {loading && [ 0, 1, 2, 3, 4, 5 ].map(i => (
               <div key={i} className={getResponsiveVisibilityClass(i)}>
-              <div className="image-wrapper level-group d-flex flex-1 h-100 w-100 align-items-center justify-content-center border-1">
-                <IconStar color={STERBOEKEN_SECONDARY} />
+                <div className="image-wrapper level-group d-flex flex-1 h-100 w-100 align-items-center justify-content-center border-1">
+                  <IconStar color={STERBOEKEN_SECONDARY} />
                 </div>
               </div>
             ))}
             {firstLemmas?.map((l, i) => (
               <div key={l.id} className={getResponsiveVisibilityClass(i)}>
                 <div className="image-wrapper level-group">
-                  <img src={getOptimizedPhotoUrlFromPhotoEntry(l.attributes?.afbeelding?.data?.attributes)} />
+                  <img src={getOptimizedPhotoUrlFromPhotoEntry(l.attributes?.afbeelding?.data?.attributes)} alt={l.attributes?.titel ?? ''} />
                 </div>
               </div>
             ))}
