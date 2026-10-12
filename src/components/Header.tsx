@@ -34,7 +34,7 @@ const Header = (props: {
                   <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
                 </DropdownItem>
                 <DropdownItem tag="div">
-                  <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
+                  <NavLink to="/verdiepend-lezen" className="app-nav-link">Verdiepend lezen</NavLink>
                 </DropdownItem>
                 <DropdownItem tag="div">
                   <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>
@@ -99,7 +99,7 @@ const Header = (props: {
                     <NavLink to="/selectiecriteria" className="app-nav-link">Selectiecriteria</NavLink>
                   </DropdownItem>
                   <DropdownItem tag="div" onClick={toggleMobileNav}>
-                    <NavLink to="/close-reading" className="app-nav-link">Close reading</NavLink>
+                    <NavLink to="/verdiepend-lezen" className="app-nav-link">Verdiepend lezen</NavLink>
                   </DropdownItem>
                   <DropdownItem tag="div" onClick={toggleMobileNav}>
                     <NavLink to="/alle-teksten" className="app-nav-link">Alle teksten</NavLink>

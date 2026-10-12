@@ -3,13 +3,13 @@ import { InfoPage } from "../components/InfoPage";
 import { DIDACTISCHE_TIPS } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
-export const DidactischeTips = () => {
+export const VerdiependLezen = () => {
   const { data, loading } = useQuery(DIDACTISCHE_TIPS);
   const didachiteTips = data?.didachiteTips?.data;
 
   return (
     <InfoPage
-      titel="Close reading"
+      titel="Verdiepend lezen"
       tekst={didachiteTips?.attributes?.tekst}
       fotoUrl={getOptimizedPhotoUrlFromPhotoEntry(didachiteTips?.attributes?.foto?.data?.attributes, 'default')}
       loading={loading}

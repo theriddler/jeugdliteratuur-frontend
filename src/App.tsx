@@ -9,7 +9,7 @@ import './css/sidebar.scss';
 import { AllLemmas } from "./pages/AllLemmas";
 import { AllTags } from "./pages/AllTags";
 import { Colofon } from "./pages/Colofon";
-import { DidactischeTips } from "./pages/DidactischeTips";
+import { VerdiependLezen } from "./pages/VerdiependLezen";
 import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
@@ -44,7 +44,7 @@ function App () {
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
             <Route path="/leesclubs" element={<Leesclubs />} />
-            <Route path='/close-reading' element={<DidactischeTips />} />
+            <Route path='/verdiepend-lezen' element={<VerdiependLezen />} />
             <Route path='/selectiecriteria' element={<Selectiecriteria />} />
 
             <Route path="/alle-teksten" element={<AllLemmas />} />
