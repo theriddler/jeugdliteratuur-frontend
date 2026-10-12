@@ -56,7 +56,7 @@ export const Level = () => {
         </Col>
         <Col xs={6}>
           <div className="w-100 d-flex justify-content-center">
-            <h4>{level?.attributes?.titel}</h4>
+            <h4 className="mb-0">{level?.attributes?.titel}</h4>
             <div>
               {level?.attributes?.beschrijving}
             </div>

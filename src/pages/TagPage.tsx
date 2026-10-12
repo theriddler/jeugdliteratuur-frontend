@@ -28,7 +28,7 @@ export const TagPage = () => {
       <Row className="align-items-center">
         <Col xs={12}>
           <div className="w-100 d-flex justify-content-center">
-            <h4>{attributes?.titel}</h4>
+            <h4 className="mb-0">{attributes?.titel}</h4>
             <div>
               {attributes?.beschrijving}
             </div>

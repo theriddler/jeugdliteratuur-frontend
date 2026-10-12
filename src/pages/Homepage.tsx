@@ -24,7 +24,7 @@ export const Homepage = () => {
     <>
       <Row>
         <Col xs={12}>
-          <h3>Welkom</h3>
+          <h3 className="mb-0">Welkom</h3>
         </Col>
       </Row>
       <Row>
