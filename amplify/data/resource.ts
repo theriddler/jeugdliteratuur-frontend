@@ -12,7 +12,7 @@ const schema = a.schema({
       comment: a.string(),
       // files: a.string(),
     })
-    .authorization((allow) => [ allow.publicApiKey().to([ 'create' ]) ]),
+    .authorization((allow) => [ allow.guest().to([ 'create' ]) ]),
 
   sendFeedback: a
     .mutation()
@@ -24,7 +24,7 @@ const schema = a.schema({
       // files: a.string(),
     })
     .returns(a.ref('Feedback'))
-    .authorization((allow) => [ allow.publicApiKey() ])
+    .authorization((allow) => [ allow.guest() ])
     .handler(a.handler.function(sendFeedbackHandler)),
 
   BookRecommendation: a
@@ -41,7 +41,7 @@ const schema = a.schema({
       email: a.string(),
       // files: a.string(),
     })
-    .authorization((allow) => [ allow.publicApiKey().to([ 'create' ]) ]),
+    .authorization((allow) => [ allow.guest().to([ 'create' ]) ]),
 
   sendBookRecommendation: a
     .mutation()
@@ -58,7 +58,7 @@ const schema = a.schema({
       email: a.string(),
     })
     .returns(a.ref('BookRecommendation'))
-    .authorization((allow) => [ allow.publicApiKey() ])
+    .authorization((allow) => [ allow.guest() ])
     .handler(a.handler.function(sendBookRecommendationHandler))
 })
   .authorization(allow => [
@@ -71,10 +71,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
-    // API Key is used for a.allow.public() rules
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
+    // Guest access via the Cognito identity pool's unauthenticated role (allow.guest())
+    defaultAuthorizationMode: "identityPool",
   },
 });
