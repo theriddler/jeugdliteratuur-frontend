@@ -1,10 +1,10 @@
 import { Document, Image, Page, StyleSheet, View } from "@react-pdf/renderer";
 import ReactDOMServer from "react-dom/server";
 import Html from "react-pdf-html";
+import { MemoryRouter } from "react-router";
 import { VoorlezenEntityResponse } from "../gql/graphql";
 import { LemmaQueryLemma } from "../queries";
 import { LemmaDocumentReact } from "./LemmaDocumentReact";
-import { MemoryRouter } from "react-router";
 
 
 // Create styles
@@ -37,13 +37,6 @@ const stylesheet = {
     width: '100%',
     height: '200px'
   },
-  [ '.hide-in-pdf' ]: {
-    position: 'fixed',
-    top: 0,
-    display: 'none',
-    color: 'transparent',
-    opacity: 0
-  },
   [ '.pdf-header' ]: {
     display: 'flex',
     flexDirection: 'row',
@@ -64,18 +57,10 @@ const UnbreakableView = ({ children }: { children: React.ReactNode }) => (
     {children}
   </View>
 );
-const styles = StyleSheet.create({
-  header: {
-    height: 16 // for fixed header
-  }
-})
 
 // intercepts every <img> tag found in  HTML
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ImageWithCors = ({ element }: any) => {
-  // ignore if we have class "hide-in-pdf"
-  if (element?.classList?.[ '_set' ]?.has('hide-in-pdf')) return null;
-
   // get src
   const src = element?.attrs?.src;
   if (!src) return null;
@@ -89,12 +74,23 @@ const ImageWithCors = ({ element }: any) => {
   );
 };
 
+const styles = StyleSheet.create({
+  header: {
+    height: 16 // for fixed header
+  }
+})
+
 export const LemmaDocument = (props: {
   lemma: LemmaQueryLemma,
   voorlezen: VoorlezenEntityResponse[ 'data' ]
 }) => {
   if (!props.lemma) return null;
   let html = ReactDOMServer.renderToStaticMarkup(<LemmaHTML lemma={props.lemma} voorlezen={props.voorlezen} />)
+
+  // display:none nodes keep layout top 0, which makes react-pdf treat the parent as unsplittable
+  const parsed = new DOMParser().parseFromString(html, 'text/html');
+  parsed.querySelectorAll('.hide-in-pdf').forEach(el => el.remove());
+  html = parsed.documentElement.outerHTML;
 
   // clean svg's from here
   html = html.replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, '');
