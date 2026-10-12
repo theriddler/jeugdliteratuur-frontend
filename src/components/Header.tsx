@@ -45,6 +45,9 @@ const Header = (props: {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
+          <div className="app-header-link-container">
+            <NavLink to="/leesclubs" className="app-nav-link">Leesclubs</NavLink>
+          </div>
         </Col>
         <Col xs={4} className='mb-0 d-flex justify-content-center'>
           <HeaderLogo />
@@ -106,6 +109,9 @@ const Header = (props: {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
+            </div>
+            <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
+              <NavLink to="/leesclubs" className="app-nav-link">Leesclubs</NavLink>
             </div>
             <div className="app-mobile-offcanvas-link-container" onClick={toggleMobileNav}>
               <NavLink to="/over-het-project" className="app-nav-link">Over het project</NavLink>

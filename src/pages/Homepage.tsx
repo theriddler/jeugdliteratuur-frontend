@@ -8,7 +8,7 @@ import { STERBOEKEN_PRIMARY, STERBOEKEN_SECONDARY } from "../App";
 import { FullPageSpinner } from "../components/FullPageSpinner";
 import { sortNievauWithKinderFirst } from "../funcs/sortNievauWithKinderFirst";
 import { Niveau } from "../gql/graphql";
-import { INTRODUCTION, LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
+import { AGENDA, INTRODUCTION, LEMMATA_PICTURES_BY_GROEP, LEVELS } from "../queries";
 import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 
 export const Homepage = () => {
@@ -17,6 +17,9 @@ export const Homepage = () => {
   const inleiding = data?.inleiding?.data;
   const { tekst, foto } = inleiding?.attributes ?? {};
 
+  const { data: agendaData } = useQuery(AGENDA);
+  const leesclubTekst = agendaData?.agenda?.data?.attributes?.tekstVoorDeHomepage;
+
   return loading ? <FullPageSpinner /> : (
     <>
       <Row>
@@ -24,23 +27,32 @@ export const Homepage = () => {
           <h3>Welkom</h3>
         </Col>
       </Row>
-      <Row className="app-hero">
-        {loading && <Spinner />}
-        <Col xs={12} lg={8}>
-          {/* <Card>
-            <CardBody> */}
+      <Row>
+        <Col xs={12} lg={8} className="hero-col">
+          <div className="app-hero">
+            <Row>
+              <Col xs={12} lg={7}>
           {tekst && (
             <BlocksRenderer content={tekst} />
           )}
           <div className="mt-3 d-flex gap-3 justify-content-end">
             <Link className="pretty-button" to='/over-het-project'>Over het project</Link>
           </div>
-          {/* </CardBody>
-          </Card> */}
+              </Col>
+              <Col xs={12} lg={5} className="py-3 py-lg-0">
+                <div className="image-wrapper hero-img">
+                  <img src={getOptimizedPhotoUrlFromPhotoEntry(foto?.data?.attributes, 'medium')} alt="" />
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Col>
-        <Col xs={12} lg={4} className="py-3 py-lg-0">
-          <div className="image-wrapper hero-img">
-            <img src={getOptimizedPhotoUrlFromPhotoEntry(foto?.data?.attributes, 'medium')} />
+        <Col xs={12} lg={4} className="hero-col">
+          <div className="app-hero app-hero-leesclub">
+            {leesclubTekst && <BlocksRenderer content={leesclubTekst} />}
+            <div className="mt-auto d-flex justify-content-end">
+              <Link className="pretty-button" to='/leesclubs'>Bekijk de agenda van de leesclubs</Link>
+            </div>
           </div>
         </Col>
       </Row>

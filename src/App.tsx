@@ -13,6 +13,7 @@ import { DidactischeTips } from "./pages/DidactischeTips";
 import { GebruikVanDeLijst } from "./pages/GebruikVanDeLijst";
 import { Homepage } from "./pages/Homepage";
 import { Lemma } from "./pages/Lemma";
+import { Leesclubs } from "./pages/Leesclubs";
 import { Level } from "./pages/Level";
 import { OverHetProject } from "./pages/OverHetProject";
 import { Samenwerken } from "./pages/Samenwerken";
@@ -42,6 +43,7 @@ function App () {
             <Route path="/feedback" element={<Samenwerken />} />
             <Route path="/colofon" element={<Colofon />} />
             <Route path="/gebruik-van-de-lijst" element={<GebruikVanDeLijst />} />
+            <Route path="/leesclubs" element={<Leesclubs />} />
             <Route path='/close-reading' element={<DidactischeTips />} />
             <Route path='/selectiecriteria' element={<Selectiecriteria />} />
 
