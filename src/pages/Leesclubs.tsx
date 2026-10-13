@@ -6,8 +6,7 @@ import { getOptimizedPhotoUrlFromPhotoEntry } from "../utils";
 export const Leesclubs = () => {
   const { data, loading } = useQuery(AGENDA);
   const tekst = data?.agenda?.data?.attributes?.tekstVoorDePagina;
-  const fotoAttributes = data?.agenda?.data?.attributes?.foto?.data?.attributes
-  console.log(data)
+  const fotoAttributes = data?.agenda?.data?.attributes?.tekstVoorDePagina;
 
   return (
     <InfoPage

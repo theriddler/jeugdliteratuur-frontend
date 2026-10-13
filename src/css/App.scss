@@ -134,6 +134,22 @@
     height: 100%;
   }
 
+  // Fills the space left over in the column without contributing to its height (the img is absolutely
+  // positioned), so the column never grows past its sibling; min-height only kicks in as a worst case.
+  &.leesclub-img {
+    position: relative;
+    flex: 1 1 0;
+    min-height: 100px;
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   &.level-group {
     width: 100px;
     height: 160px;

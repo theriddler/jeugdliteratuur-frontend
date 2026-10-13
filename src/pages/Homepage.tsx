@@ -19,6 +19,8 @@ export const Homepage = () => {
 
   const { data: agendaData } = useQuery(AGENDA);
   const leesclubTekst = agendaData?.agenda?.data?.attributes?.tekstVoorDeHomepage;
+  const leesclubFotoAttributes = agendaData?.agenda?.data?.attributes?.fotoVoorDeHomepage?.data?.attributes;
+  const leesclubFotoUrl = getOptimizedPhotoUrlFromPhotoEntry(leesclubFotoAttributes, 'default')
 
   return loading ? <FullPageSpinner /> : (
     <>
@@ -50,7 +52,12 @@ export const Homepage = () => {
         <Col xs={12} lg={4} className="hero-col">
           <div className="app-hero app-hero-leesclub">
             {leesclubTekst && <BlocksRenderer content={leesclubTekst} />}
-            <div className="mt-auto d-flex justify-content-end">
+            {leesclubFotoUrl && (
+              <div className="image-wrapper leesclub-img">
+                <img src={leesclubFotoUrl} alt="" />
+              </div>
+            )}
+            <div className={`${leesclubFotoUrl ? 'mt-3' : 'mt-auto'} d-flex justify-content-end`}>
               <Link className="pretty-button" to='/leesclubs'>Bekijk de agenda van de leesclubs</Link>
             </div>
           </div>

@@ -428,7 +428,16 @@ export const AGENDA = graphql(`
         attributes{
           tekstVoorDeHomepage
           tekstVoorDePagina
-          foto {
+          fotoVoorDeHomepage {
+            data{
+              id
+              attributes{
+                formats
+                url
+              }
+            }
+          }
+          fotoVoorDePagina {
             data{
               id
               attributes{
