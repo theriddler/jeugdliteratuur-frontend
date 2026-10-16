@@ -7,6 +7,8 @@ const client = generateClient<Schema>();
 
 export const FeeedbackForm = () => {
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ isSubmitted, setIsSubmitted ] = useState(false);
+  const [ hasFailed, setHasFailed ] = useState(false);
   const [ name, setName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ occupation, setOccupation ] = useState('');
@@ -16,20 +18,33 @@ export const FeeedbackForm = () => {
     e.preventDefault();
 
     setIsLoading(true);
-    const response = await client.mutations.sendFeedback({
-      name,
-      email,
-      occupation,
-      comment
-    });
-    setIsLoading(false);
+    setHasFailed(false);
+    try {
+      const response = await client.mutations.sendFeedback({
+        name,
+        email,
+        occupation,
+        comment
+      });
 
-    if (!response.data?.id) {
-      alert('Error sending feedback!');
-      return;
+      if (response.data?.id) {
+        setIsSubmitted(true);
+      } else {
+        setHasFailed(true);
+      }
+    } catch {
+      setHasFailed(true);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    alert('Feedback submitted!')
+  if (isSubmitted) {
+    return (
+      <div className="feedback-form-container">
+        <p className="mb-0">Feedback verzonden</p>
+      </div>
+    );
   }
 
   return (
@@ -103,6 +118,9 @@ export const FeeedbackForm = () => {
             </FormGroup>
           )
         }
+        {hasFailed && (
+          <p className="text-danger mt-3 mb-0">Feedback verzenden mislukt</p>
+        )}
       </Form>
     </div>
   )

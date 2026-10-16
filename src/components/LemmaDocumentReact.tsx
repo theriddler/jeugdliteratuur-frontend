@@ -411,6 +411,8 @@ const LemmaFeedbackForm = (props: {
   const toggleIsOpen = () => setIsOpen(p => !p);
 
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ isSubmitted, setIsSubmitted ] = useState(false);
+  const [ hasFailed, setHasFailed ] = useState(false);
 
   const [ auteur, setAuteur ] = useState('');
   const [ boek, setBoek ] = useState('');
@@ -427,27 +429,40 @@ const LemmaFeedbackForm = (props: {
 
     const lemmaTitle = props.lemma?.attributes?.titel;
 
-    setIsLoading(true)
-    const response = await client.mutations.sendBookRecommendation({
-      lemmaTitle,
-      auteur,
-      boek,
-      waarom,
-      forOpstaptitels,
-      forParallelLezen,
-      forVerderLezen,
-      name,
-      email,
-      occupation
-    });
-    setIsLoading(false)
+    setIsLoading(true);
+    setHasFailed(false);
+    try {
+      const response = await client.mutations.sendBookRecommendation({
+        lemmaTitle,
+        auteur,
+        boek,
+        waarom,
+        forOpstaptitels,
+        forParallelLezen,
+        forVerderLezen,
+        name,
+        email,
+        occupation
+      });
 
-    if (!response.data?.id) {
-      alert('Error sending book recommendation!');
-      return;
+      if (response.data?.id) {
+        setIsSubmitted(true);
+      } else {
+        setHasFailed(true);
+      }
+    } catch {
+      setHasFailed(true);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    alert('Book recommendation submitted!')
+  if (isSubmitted) {
+    return (
+      <section className="hide-in-pdf  lemma-card green">
+        <p className="mb-0">Feedback verzonden</p>
+      </section>
+    );
   }
 
   return (
@@ -582,6 +597,9 @@ const LemmaFeedbackForm = (props: {
                 </FormGroup>
               )
             }
+            {hasFailed && (
+              <p className="text-danger mt-3 mb-0">Feedback verzenden mislukt</p>
+            )}
           </div>
         </div>
       )}
